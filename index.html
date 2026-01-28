@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Semrush Keyword Research Methodology — 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a2e; line-height: 1.6; background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --orange: #FF642D;
+      --orange-hover: #e8561f;
+      --dark: #0e1b2e;
+      --navy: #141e30;
+      --navy-light: #1c2942;
+      --text: #1a1a2e;
+      --text-2: #555b6e;
+      --text-3: #8892a4;
+      --bg-light: #f6f7f9;
+      --border: #e2e5ea;
+      --green: #0ead69;
+      --green-light: #e6f9f0;
+      --blue: #3b82f6;
+      --blue-light: #eff6ff;
+      --yellow: #f59e0b;
+      --yellow-light: #fef9e7;
+      --red: #ef4444;
+      --red-light: #fef2f2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+      --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
+      --max-w: 1200px;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(14,27,46,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon {
+      width: 32px; height: 32px; background: var(--orange); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 18px; height: 18px; }
+    .nav-logo-text { font-weight: 800; font-size: 18px; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: white; }
+    .nav-cta {
+      background: var(--orange) !important; color: white !important;
+      padding: 8px 20px; border-radius: 8px; font-weight: 600; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange-hover) !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(165deg, #0e1b2e 0%, #141e30 40%, #1a2744 100%);
+      padding: 140px 40px 100px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,100,45,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; position: relative;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,100,45,0.12); border: 1px solid rgba(255,100,45,0.25);
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; }
+    .hero-badge-text {
+      font-size: 12px; font-weight: 700; color: var(--orange);
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 52px; font-weight: 900; color: white;
+      line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 24px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--orange), #ff8c5a);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.65);
+      margin-bottom: 36px; max-width: 520px;
+    }
+    .hero-ctas { display: flex; gap: 16px; margin-bottom: 40px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: white; padding: 14px 28px; border-radius: 10px;
+      font-weight: 700; font-size: 15px; transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--orange-hover); transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(255,100,45,0.35);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08); color: white; padding: 14px 28px; border-radius: 10px;
+      font-weight: 600; font-size: 15px; border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.2s; cursor: pointer;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+    .hero-proof {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.4); font-size: 13px;
+    }
+    .hero-proof-avatars { display: flex; }
+    .hero-proof-avatar {
+      width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--dark);
+      margin-left: -8px; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: white;
+    }
+    .hero-proof-avatar:first-child { margin-left: 0; }
+
+    /* Video */
+    .hero-video {
+      position: relative; border-radius: var(--r-lg); overflow: hidden;
+      aspect-ratio: 16/9; background: linear-gradient(135deg, #1c2942 0%, #243352 100%);
+      border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow-xl);
+      cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .hero-video:hover { transform: scale(1.02); box-shadow: 0 25px 70px rgba(0,0,0,0.3); }
+    .hero-video-content {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .play-button {
+      width: 72px; height: 72px; background: var(--orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; box-shadow: 0 4px 30px rgba(255,100,45,0.4); transition: transform 0.2s;
+    }
+    .hero-video:hover .play-button { transform: scale(1.1); }
+    .play-button svg { width: 28px; height: 28px; margin-left: 3px; }
+    .hero-video-label {
+      color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .hero-video-title { color: white; font-size: 16px; font-weight: 600; text-align: center; }
+    .hero-video-duration {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(0,0,0,0.6); color: white; padding: 4px 10px;
+      border-radius: 6px; font-size: 12px; font-weight: 600;
+    }
+
+    /* SECTIONS */
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 36px; font-weight: 800; letter-spacing: -0.8px;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 17px; color: var(--text-2); max-width: 640px;
+      margin-bottom: 48px; line-height: 1.7;
+    }
+
+    /* WHAT YOU GET */
+    .what-you-get { padding: 80px 40px; background: #fff; }
+    .what-you-get-inner { max-width: var(--max-w); margin: 0 auto; }
+    .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .deliverable-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 36px 32px; transition: all 0.25s; position: relative; overflow: hidden;
+    }
+    .deliverable-card:hover {
+      border-color: transparent; box-shadow: var(--shadow-lg); transform: translateY(-4px);
+    }
+    .deliverable-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+    }
+    .deliverable-icon.green { background: rgba(14,173,105,0.1); }
+    .deliverable-icon.blue { background: rgba(59,130,246,0.1); }
+    .deliverable-icon.orange { background: rgba(255,100,45,0.1); }
+    .deliverable-card h3 {
+      font-size: 20px; font-weight: 700; color: var(--text);
+      margin-bottom: 12px; letter-spacing: -0.3px;
+    }
+    .deliverable-card p { font-size: 15px; color: var(--text-2); line-height: 1.65; }
+    .deliverable-tag {
+      display: inline-block; margin-top: 20px; padding: 4px 12px;
+      border-radius: 100px; font-size: 12px; font-weight: 600;
+    }
+    .tag-framework { background: var(--green-light); color: var(--green); }
+    .tag-download { background: var(--blue-light); color: var(--blue); }
+    .tag-companion { background: var(--yellow-light); color: var(--yellow); }
+
+    /* METHODOLOGY */
+    .methodology { padding: 80px 40px; background: var(--bg-light); }
+    .methodology-inner { max-width: var(--max-w); margin: 0 auto; }
+    .methodology-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 48px; position: relative;
+    }
+    .methodology-step { text-align: center; padding: 0 24px; position: relative; }
+    .methodology-step:not(:last-child)::after {
+      content: ''; position: absolute; top: 28px; right: -16px;
+      width: 32px; height: 2px; background: var(--border);
+    }
+    .step-number {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 900; margin: 0 auto 20px; color: white;
+    }
+    .step-number.s1 { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .step-number.s2 { background: linear-gradient(135deg, var(--orange), #ff8c5a); }
+    .step-number.s3 { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+    .step-number.s4 { background: linear-gradient(135deg, var(--green), #34d399); }
+    .methodology-step h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .methodology-step p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+    /* TEMPLATE */
+    .template-section { padding: 80px 40px; background: #fff; }
+    .template-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      background: linear-gradient(135deg, #0e1b2e 0%, #1c2942 100%);
+      border-radius: var(--r-xl); padding: 56px 64px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .template-content h2 {
+      font-size: 32px; font-weight: 800; color: white;
+      letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2;
+    }
+    .template-content p {
+      font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 28px;
+    }
+    .template-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .template-feature {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; color: rgba(255,255,255,0.75); font-weight: 500;
+    }
+    .template-feature-check {
+      width: 20px; height: 20px; background: rgba(14,173,105,0.2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .template-feature-check svg { width: 12px; height: 12px; }
+    .template-preview {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--r-lg); padding: 24px;
+    }
+    .template-preview-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .template-preview-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .template-preview-filename { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500; }
+    .template-mini-table { width: 100%; border-collapse: collapse; }
+    .template-mini-table th {
+      text-align: left; padding: 8px 10px; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px; color: rgba(255,255,255,0.35);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .template-mini-table td {
+      padding: 10px; font-size: 12px; color: rgba(255,255,255,0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .mini-score {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 20px; border-radius: 4px; font-size: 11px; font-weight: 700;
+    }
+    .mini-score.high { background: rgba(14,173,105,0.2); color: #4ade80; }
+    .mini-score.med { background: rgba(245,158,11,0.2); color: #fbbf24; }
+
+    /* GUIDE */
+    .guide-preview { padding: 80px 40px; background: var(--bg-light); }
+    .guide-preview-inner { max-width: 800px; margin: 0 auto; }
+    .guide-toc {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 36px 40px; margin-bottom: 56px;
+    }
+    .guide-toc h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 20px; }
+    .toc-items { display: flex; flex-direction: column; }
+    .toc-item {
+      display: flex; align-items: center; gap: 14px; padding: 12px 0;
+      border-bottom: 1px solid #f0f1f3; cursor: pointer; transition: all 0.2s;
+    }
+    .toc-item:last-child { border-bottom: none; }
+    .toc-item:hover { padding-left: 8px; }
+    .toc-number {
+      width: 32px; height: 32px; border-radius: 8px; background: var(--bg-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--text-2); flex-shrink: 0;
+    }
+    .toc-item:hover .toc-number { background: rgba(255,100,45,0.1); color: var(--orange); }
+    .toc-text { font-size: 15px; font-weight: 600; color: var(--text); }
+    .toc-text span { font-weight: 400; color: var(--text-2); font-size: 13px; margin-left: 8px; }
+
+    /* Guide article */
+    .guide-article { max-width: 800px; margin: 0 auto; }
+    .guide-article .section-divider { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .section-divider-line { height: 1px; flex: 1; background: var(--border); }
+    .section-divider-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--text-3); white-space: nowrap;
+    }
+    .guide-article h2 {
+      font-size: 32px; font-weight: 800; color: var(--text);
+      letter-spacing: -0.5px; margin-bottom: 24px; line-height: 1.2;
+    }
+    .guide-article p { font-size: 17px; color: var(--text-2); line-height: 1.8; margin-bottom: 24px; }
+    .guide-article p strong { color: var(--text); font-weight: 700; }
+    .guide-callout {
+      background: linear-gradient(135deg, #0e1b2e 0%, #1c2942 100%);
+      border-radius: var(--r-lg); padding: 32px 36px; margin: 36px 0;
+    }
+    .guide-callout p {
+      font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 0;
+      line-height: 1.7; font-weight: 500;
+    }
+    .guide-callout .callout-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--orange); margin-bottom: 12px; display: block;
+    }
+    .guide-screenshot {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 24px; margin: 32px 0;
+    }
+    .guide-screenshot-placeholder {
+      background: var(--bg-light); border-radius: var(--r-md); height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-3); font-size: 14px; font-weight: 500;
+    }
+    .guide-screenshot-caption {
+      margin-top: 12px; font-size: 13px; color: var(--text-3); text-align: center;
+    }
+    .guide-continue-fade {
+      position: relative; height: 200px; margin-top: 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .guide-continue-fade::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100px;
+      background: linear-gradient(to bottom, transparent, var(--bg-light));
+    }
+    .continue-reading-btn {
+      position: relative; z-index: 1; background: #fff;
+      border: 2px solid var(--border); padding: 14px 32px; border-radius: 12px;
+      font-size: 15px; font-weight: 700; color: var(--text);
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s;
+    }
+    .continue-reading-btn:hover {
+      border-color: var(--orange); color: var(--orange); box-shadow: var(--shadow-md);
+    }
+
+    /* KEYWORD TOOL (companion) */
+    .tool-section { padding: 80px 40px; background: #fff; }
+    .tool-section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .tool-container {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-md);
+    }
+    .tool-input-area {
+      padding: 32px 48px; background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 12px; align-items: center;
+    }
+    .tool-input {
+      flex: 1; padding: 14px 20px; border: 2px solid var(--border);
+      border-radius: 10px; font-size: 15px; font-family: 'Inter', sans-serif;
+      background: white; color: var(--text); transition: border-color 0.2s; outline: none;
+    }
+    .tool-input:focus { border-color: var(--orange); }
+    .tool-input::placeholder { color: var(--text-3); }
+    .tool-analyze-btn {
+      background: var(--orange); color: white; padding: 14px 32px; border: none;
+      border-radius: 10px; font-size: 15px; font-weight: 700;
+      font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .tool-analyze-btn:hover {
+      background: var(--orange-hover); transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(255,100,45,0.3);
+    }
+    .tool-limit-note {
+      padding: 12px 48px 16px; background: #fafbfc; font-size: 13px;
+      color: var(--text-3); border-bottom: 1px solid var(--border);
+    }
+    .tool-results { padding: 40px 48px; }
+    .tool-results-keyword { font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 32px; }
+    .tool-results-keyword span { color: var(--orange); }
+    .tool-metrics-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px;
+    }
+    .tool-metric { background: var(--bg-light); border-radius: var(--r-md); padding: 20px; }
+    .tool-metric-label {
+      font-size: 12px; font-weight: 600; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
+    }
+    .tool-metric-value { font-size: 28px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+    .tool-metric-sub { font-size: 13px; color: var(--text-2); margin-top: 4px; }
+    .metric-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 100px;
+      font-size: 12px; font-weight: 700;
+    }
+    .badge-commercial { background: #fff3e0; color: #e65100; }
+    .badge-high { background: var(--green-light); color: var(--green); }
+    .badge-medium { background: var(--yellow-light); color: #b45309; }
+    .badge-low { background: var(--red-light); color: var(--red); }
+    .tool-ideas-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+    }
+    .tool-ideas-header h3 { font-size: 17px; font-weight: 700; color: var(--text); }
+    .tool-ideas-header a { font-size: 13px; color: var(--orange); font-weight: 600; }
+    .tool-table { width: 100%; border-collapse: collapse; }
+    .tool-table thead th {
+      text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-3);
+      border-bottom: 2px solid var(--border);
+    }
+    .tool-table tbody td {
+      padding: 14px 16px; font-size: 14px; color: var(--text);
+      border-bottom: 1px solid #f0f1f3;
+    }
+    .tool-table tbody tr:hover { background: #fafbfc; }
+    .keyword-link { color: var(--blue); font-weight: 600; }
+    .kd-indicator { display: inline-flex; align-items: center; gap: 6px; }
+    .kd-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .kd-easy { background: var(--green); }
+    .kd-medium { background: var(--yellow); }
+    .kd-hard { background: var(--orange); }
+    .tool-upgrade-bar {
+      margin-top: 32px; background: linear-gradient(135deg, #fff7ed, #fff1e4);
+      border: 1px solid rgba(255,100,45,0.2); border-radius: var(--r-md);
+      padding: 20px 28px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .tool-upgrade-bar p { font-size: 14px; color: var(--text); font-weight: 500; }
+    .tool-upgrade-bar p strong { font-weight: 700; }
+    .upgrade-btn {
+      background: var(--orange); color: white; padding: 10px 24px; border-radius: 8px;
+      font-weight: 700; font-size: 14px; white-space: nowrap; border: none;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .upgrade-btn:hover { background: var(--orange-hover); }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      padding: 80px 40px;
+      background: linear-gradient(165deg, #0e1b2e 0%, #141e30 40%, #1a2744 100%);
+      text-align: center;
+    }
+    .bottom-cta-inner { max-width: 640px; margin: 0 auto; }
+    .bottom-cta h2 {
+      font-size: 36px; font-weight: 800; color: white;
+      letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2;
+    }
+    .bottom-cta p {
+      font-size: 17px; color: rgba(255,255,255,0.55); margin-bottom: 36px; line-height: 1.7;
+    }
+    .bottom-cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-share {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+      padding: 14px 28px; border-radius: 10px; font-weight: 600; font-size: 15px;
+      border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s; cursor: pointer;
+    }
+    .btn-share:hover { background: rgba(255,255,255,0.12); color: white; border-color: rgba(255,255,255,0.2); }
+
+    .footer { padding: 32px 40px; background: #0a1423; text-align: center; }
+    .footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
+
+    .mockup-banner {
+      position: fixed; bottom: 20px; right: 20px; background: #1a1a2e; color: white;
+      padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600;
+      box-shadow: var(--shadow-xl); z-index: 9999; border: 1px solid rgba(255,255,255,0.1);
+    }
+    .mockup-banner span { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L20 7V17L12 22L4 17V7L12 2Z" fill="white" opacity="0.9"/></svg>
+        </div>
+        <span class="nav-logo-text">Semrush</span>
+      </div>
+      <div class="nav-links">
+        <a href="#methodology">Methodology</a>
+        <a href="#template">Template</a>
+        <a href="#guide">Guide</a>
+        <a href="#tool">Keyword Tool</a>
+        <a href="#" class="nav-cta">Start Free Trial</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span class="hero-badge-text">The Semrush Keyword Research Methodology</span>
+        </div>
+
+        <h1>Stop Finding Keywords.<br><span>Start Qualifying Them.</span></h1>
+
+        <p class="hero-subtitle">
+          A free methodology, template, and keyword tool for building a short list of keywords worth your time &mdash; whether you're working for clients, a team, or yourself.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#guide" class="btn-primary">
+            Read the Methodology
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#template" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            Download Template
+          </a>
+        </div>
+
+        <div class="hero-proof">
+          <div class="hero-proof-avatars">
+            <div class="hero-proof-avatar" style="background: #3b82f6;">SM</div>
+            <div class="hero-proof-avatar" style="background: #8b5cf6;">KI</div>
+            <div class="hero-proof-avatar" style="background: var(--green);">LM</div>
+            <div class="hero-proof-avatar" style="background: #e65100;">FA</div>
+            <div class="hero-proof-avatar" style="background: var(--orange);">+12</div>
+          </div>
+          Built with Sergio, Kevin Indig, and Semrush's SEO team
+        </div>
+      </div>
+
+      <div class="hero-video">
+        <div class="hero-video-content">
+          <div class="play-button">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="hero-video-label">2-minute intro</div>
+          <div class="hero-video-title">How to get the most out of this resource</div>
+        </div>
+        <div class="hero-video-duration">2:12</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU'LL WALK AWAY WITH -->
+  <section class="what-you-get">
+    <div class="what-you-get-inner">
+      <div class="section-label">What you'll walk away with</div>
+      <div class="section-title">A methodology, a template, and a tool</div>
+      <div class="section-subtitle">
+        Everything here is free. We built it because we believe the best way to show what Semrush can do is to help you get results before you spend a dollar. Our only ask: actually use it.
+      </div>
+
+      <div class="deliverables-grid">
+        <!-- 1. Methodology — the core IP -->
+        <div class="deliverable-card">
+          <div class="deliverable-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M8 8l8 8M16 8l-8 8" stroke="#0ead69" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>The Methodology</h3>
+          <p>Four steps: generate, qualify, prioritize, map. A complete process for going from a blank slate to a short list of keywords you've actually thought through. Works with any SEO tool.</p>
+          <span class="deliverable-tag tag-framework">Step-by-step &middot; Run it quarterly</span>
+        </div>
+
+        <!-- 2. Template — makes it actionable -->
+        <div class="deliverable-card">
+          <div class="deliverable-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 17H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v1M13 21h6a2 2 0 002-2v-6a2 2 0 00-2-2h-6a2 2 0 00-2 2v6a2 2 0 002 2z" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Qualification Spreadsheet</h3>
+          <p>Not a keyword tracker. A decision-making framework. Score every keyword by business fit, competitive reality, and what it'll take to win. Show up to your next meeting with a list you can stand behind.</p>
+          <span class="deliverable-tag tag-download">Download &middot; Google Sheets + Excel</span>
+        </div>
+
+        <!-- 3. Tool — companion -->
+        <div class="deliverable-card">
+          <div class="deliverable-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="#FF642D" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Free Keyword Tool</h3>
+          <p>Research and pressure-test keywords as you work through the methodology. Real Semrush data &mdash; volume, difficulty, intent &mdash; without leaving the page.</p>
+          <span class="deliverable-tag tag-companion">Companion &middot; 3 free lookups/day</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY OVERVIEW -->
+  <section class="methodology" id="methodology">
+    <div class="methodology-inner">
+      <div class="section-label">The methodology</div>
+      <div class="section-title">Four steps. One qualified list.</div>
+      <div class="section-subtitle">
+        Each step builds on the last. By the end, you won't have a spreadsheet of possibilities. You'll have a short list of decisions.
+      </div>
+
+      <div class="methodology-steps">
+        <div class="methodology-step">
+          <div class="step-number s1">1</div>
+          <h3>Generate</h3>
+          <p>Cast a wide net. Tools, competitors, customer conversations, search patterns. Capture demand signals from everywhere that matters.</p>
+        </div>
+        <div class="methodology-step">
+          <div class="step-number s2">2</div>
+          <h3>Qualify</h3>
+          <p>This is where most guides fail you. Score every keyword by business impact, click potential, and competitive reality. Then cut. Ruthlessly.</p>
+        </div>
+        <div class="methodology-step">
+          <div class="step-number s3">3</div>
+          <h3>Prioritize</h3>
+          <p>Rank what survived by effort vs. expected value. Factor in what you already rank for, your capacity, and what you can realistically ship.</p>
+        </div>
+        <div class="methodology-step">
+          <div class="step-number s4">4</div>
+          <h3>Map</h3>
+          <p>Assign each keyword to a page &mdash; existing or new. Cluster by intent. Identify gaps. Build a plan you can actually execute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATE DOWNLOAD -->
+  <section class="template-section" id="template">
+    <div class="template-inner">
+      <div class="template-content">
+        <div class="section-label" style="color: rgba(255,255,255,0.5);">Free download</div>
+        <h2>The Keyword Qualification Spreadsheet</h2>
+        <p>
+          This helps you score keywords by what actually matters &mdash; business fit, realistic competition, and what it'll take to win. Every keyword gets a score. Every score tells you whether to commit or move on.
+        </p>
+        <div class="template-features">
+          <div class="template-feature">
+            <div class="template-feature-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#0ead69" stroke-width="2" stroke-linecap="round"/></svg></div>
+            Business impact scoring
+          </div>
+          <div class="template-feature">
+            <div class="template-feature-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#0ead69" stroke-width="2" stroke-linecap="round"/></svg></div>
+            Click vs. answer potential
+          </div>
+          <div class="template-feature">
+            <div class="template-feature-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#0ead69" stroke-width="2" stroke-linecap="round"/></svg></div>
+            Resource cost calculator
+          </div>
+          <div class="template-feature">
+            <div class="template-feature-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#0ead69" stroke-width="2" stroke-linecap="round"/></svg></div>
+            Priority ranking formula
+          </div>
+        </div>
+        <a href="#" class="btn-primary" style="display: inline-flex;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12h12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          Download Free Template
+        </a>
+      </div>
+
+      <div class="template-preview">
+        <div class="template-preview-header">
+          <div class="template-preview-dot" style="background: #ff5f57;"></div>
+          <div class="template-preview-dot" style="background: #febc2e;"></div>
+          <div class="template-preview-dot" style="background: #28c840;"></div>
+          <span class="template-preview-filename">keyword-qualification-template.xlsx</span>
+        </div>
+        <table class="template-mini-table">
+          <thead><tr><th>Keyword</th><th>Volume</th><th>Biz Score</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td>email marketing software</td><td>22.2K</td><td><span class="mini-score high">78</span></td><td style="color: #4ade80; font-weight: 700;">P1</td></tr>
+            <tr><td>best email marketing tools</td><td>14.8K</td><td><span class="mini-score high">82</span></td><td style="color: #4ade80; font-weight: 700;">P1</td></tr>
+            <tr><td>email marketing for SMB</td><td>6.2K</td><td><span class="mini-score high">74</span></td><td style="color: #fbbf24; font-weight: 700;">P2</td></tr>
+            <tr><td>what is email marketing</td><td>18.1K</td><td><span class="mini-score med">41</span></td><td style="color: rgba(255,255,255,0.3); font-weight: 700;">P3</td></tr>
+            <tr><td>email drip campaigns</td><td>4.4K</td><td><span class="mini-score high">69</span></td><td style="color: #fbbf24; font-weight: 700;">P2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDE -->
+  <section class="guide-preview" id="guide">
+    <div class="guide-preview-inner">
+      <div class="section-label" style="text-align: center;">The full guide</div>
+      <div class="section-title" style="text-align: center; margin-bottom: 12px;">The Keyword Research Methodology</div>
+      <p style="text-align: center; color: var(--text-2); font-size: 16px; margin-bottom: 48px; max-width: 560px; margin-left: auto; margin-right: auto;">
+        How to find and qualify the keywords that drive business results &mdash; not just traffic. Works with any SEO tool.
+      </p>
+
+      <div class="guide-toc">
+        <h3>In this guide</h3>
+        <div class="toc-items">
+          <div class="toc-item"><div class="toc-number">01</div><div class="toc-text">The Qualification Mindset <span>Why lists aren't strategies</span></div></div>
+          <div class="toc-item"><div class="toc-number">02</div><div class="toc-text">Generate: Capturing Demand Signals <span>Tools, competitors, conversations</span></div></div>
+          <div class="toc-item"><div class="toc-number">03</div><div class="toc-text">Qualify: The Business Impact Filter <span>Scoring what matters</span></div></div>
+          <div class="toc-item"><div class="toc-number">04</div><div class="toc-text">Prioritize: Sequencing the Work <span>Effort vs. expected value</span></div></div>
+          <div class="toc-item"><div class="toc-number">05</div><div class="toc-text">Map: From Keywords to Pages <span>Clustering, gaps, and planning</span></div></div>
+          <div class="toc-item"><div class="toc-number">06</div><div class="toc-text">The AI-Era Lens <span>What's changed and what hasn't</span></div></div>
+          <div class="toc-item"><div class="toc-number">07</div><div class="toc-text">Running This Quarterly <span>Keeping your strategy alive</span></div></div>
+        </div>
+      </div>
+
+      <!-- Chapter 1 — Lens Method approach -->
+      <div class="guide-article">
+        <div class="section-divider">
+          <span class="section-divider-label">Chapter 01</span>
+          <div class="section-divider-line"></div>
+        </div>
+
+        <h2>The Qualification Mindset</h2>
+
+        <p>Finding keywords has never been the hard part. Semrush's database has over 26 billion of them. Google's autocomplete will hand you fifty before you finish typing. ChatGPT will generate a hundred in thirty seconds. Any SEO with a free trial and a Tuesday afternoon can build a spreadsheet of 300 keyword ideas.</p>
+
+        <p><strong>The hard part is deciding which ones are actually worth your time.</strong></p>
+
+        <p>Every keyword you go after costs something. Maybe that's a content budget and a writer's week. Maybe it's your own hours on a Saturday morning because you're building this thing yourself. Maybe it's convincing your team to bet on one direction instead of another. Whatever the cost, spending it on the wrong keywords is how quarters disappear.</p>
+
+        <p>This is a pattern that shows up at every scale. Teams managing keyword strategies across thousands of accounts see it constantly: the failure mode isn't picking the wrong keywords. It's picking too many of the right-ish ones. Two hundred targets with no prioritization produces a content plan that's a mile wide and an inch deep. Six months later, everything ranks between positions 15 and 40 &mdash; visible enough to feel like progress, too far back to drive anything.</p>
+
+        <div class="guide-callout">
+          <span class="callout-label">The core idea</span>
+          <p>Keyword research isn't a discovery process. It's a qualification process. The distinction between generating a list and qualifying a list is what separates keyword research that produces traffic from keyword research that produces revenue.</p>
+        </div>
+
+        <p>Most guides skip this entirely. They'll show you fourteen ways to find keyword ideas &mdash; Google autocomplete, competitor analysis, Reddit mining, Amazon reviews, People Also Ask, and on and on. Useful inputs, all of them. And this guide will cover them thoroughly, because casting a wide net matters. But generating inputs isn't the destination. The destination is making decisions with those inputs. Deciding which keywords are worth your investment, which ones match how your audience actually searches in 2026, and which ones you can realistically compete for given where you are right now.</p>
+
+        <p>That's doubly true in the current search environment. Informational queries that used to drive reliable traffic are increasingly answered directly by AI features in the SERP &mdash; a reader gets what they need without clicking anything. The practitioners who've done this across companies of every size &mdash; from solo sites to enterprise programs &mdash; report the same shift: the keywords that still drive business outcomes tend to be the ones with clear intent and high click potential. The ones where a searcher is making a decision, not just gathering background.</p>
+
+        <p>That doesn't mean informational content is dead. It means you need to be deliberate about why you're creating it. Brand awareness and topical authority are valid goals &mdash; but they're different bets than demand capture, and they should be scored differently.</p>
+
+        <div class="guide-screenshot">
+          <div class="guide-screenshot-placeholder">
+            [ Screenshot: The Keyword Qualification Spreadsheet — showing how a keyword moves through the scoring process, with business fit, click potential, competitive difficulty, and resource cost columns producing a final priority ranking ]
+          </div>
+          <div class="guide-screenshot-caption">The qualification template in action &mdash; scoring keywords across four dimensions</div>
+        </div>
+
+        <p>This methodology is built around a simple standard: <strong>you should be able to stand behind every keyword on your list.</strong> Not just to yourself, but to a client, a manager, or the person staring back at you when you're deciding how to spend your own limited time. And that case should go beyond "it has high search volume." It should include why this keyword represents a real opportunity, what it'll take to compete, and what you'd realistically expect in return.</p>
+
+        <p>The four steps that follow &mdash; generate, qualify, prioritize, map &mdash; are the process for getting there. We'll go deep on each one, including the tools and tactics for generating keyword ideas comprehensively. But everything traces back to this premise: the value of keyword research isn't measured by the length of the list you produce. It's measured by the quality of the decisions you make with it.</p>
+
+        <div class="guide-continue-fade">
+          <button class="continue-reading-btn">Continue to Chapter 2: Generate &darr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEYWORD TOOL (companion) -->
+  <section class="tool-section" id="tool">
+    <div class="tool-section-inner">
+      <div class="section-label">Companion tool</div>
+      <div class="section-title" style="margin-bottom: 8px;">Research keywords as you go</div>
+      <div class="section-subtitle">
+        Use this alongside the methodology to look up real data on any keyword. Volume, difficulty, intent &mdash; powered by Semrush.
+      </div>
+
+      <div class="tool-container">
+        <div class="tool-input-area">
+          <input type="text" class="tool-input" placeholder="Enter a keyword (e.g., email marketing software)" value="email marketing software">
+          <button class="tool-analyze-btn">Look Up Keyword</button>
+        </div>
+        <div class="tool-limit-note">2 of 3 free lookups remaining today &middot; <a href="#" style="color: var(--orange); font-weight: 600;">Need unlimited? Start free trial</a></div>
+
+        <div class="tool-results">
+          <div class="tool-results-keyword">Results for: <span>email marketing software</span></div>
+
+          <div class="tool-metrics-grid">
+            <div class="tool-metric">
+              <div class="tool-metric-label">Search Volume</div>
+              <div class="tool-metric-value">22.2K</div>
+              <div class="tool-metric-sub">Monthly (US)</div>
+            </div>
+            <div class="tool-metric">
+              <div class="tool-metric-label">Keyword Difficulty</div>
+              <div class="tool-metric-value">67%</div>
+              <div class="tool-metric-sub"><span class="metric-badge badge-medium">Hard</span></div>
+            </div>
+            <div class="tool-metric">
+              <div class="tool-metric-label">Intent</div>
+              <div class="tool-metric-value" style="font-size: 22px; padding-top: 4px;">Commercial</div>
+              <div class="tool-metric-sub"><span class="metric-badge badge-commercial">Investigation</span></div>
+            </div>
+            <div class="tool-metric">
+              <div class="tool-metric-label">CPC</div>
+              <div class="tool-metric-value">$4.20</div>
+              <div class="tool-metric-sub">Avg. cost per click</div>
+            </div>
+          </div>
+
+          <div class="tool-ideas-header">
+            <h3>Related Keywords</h3>
+            <a href="#">View all in Semrush &rarr;</a>
+          </div>
+
+          <table class="tool-table">
+            <thead>
+              <tr><th>Keyword</th><th>Volume</th><th>KD%</th><th>Intent</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="keyword-link">best email marketing software</span></td>
+                <td>14.8K</td>
+                <td><span class="kd-indicator"><span class="kd-dot kd-hard"></span> 61%</span></td>
+                <td><span class="metric-badge badge-commercial">Commercial</span></td>
+              </tr>
+              <tr>
+                <td><span class="keyword-link">email marketing software for small business</span></td>
+                <td>6.2K</td>
+                <td><span class="kd-indicator"><span class="kd-dot kd-medium"></span> 42%</span></td>
+                <td><span class="metric-badge badge-commercial">Commercial</span></td>
+              </tr>
+              <tr>
+                <td><span class="keyword-link">free email marketing tools</span></td>
+                <td>9.9K</td>
+                <td><span class="kd-indicator"><span class="kd-dot kd-medium"></span> 45%</span></td>
+                <td><span class="metric-badge badge-commercial">Commercial</span></td>
+              </tr>
+              <tr>
+                <td><span class="keyword-link">email marketing platforms comparison</span></td>
+                <td>3.1K</td>
+                <td><span class="kd-indicator"><span class="kd-dot kd-medium"></span> 38%</span></td>
+                <td><span class="metric-badge badge-commercial">Commercial</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tool-upgrade-bar">
+            <p><strong>Need to research your full keyword list?</strong> Semrush gives you unlimited lookups plus competitor gap analysis, keyword clustering, and more.</p>
+            <button class="upgrade-btn">Start 14-Day Free Trial</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <div class="bottom-cta-inner">
+      <h2>Ready to build a keyword list<br>you can stand behind?</h2>
+      <p>
+        Start with the methodology and template above. When you need to go deeper, Semrush gives you everything in this process &mdash; at scale.
+      </p>
+      <div class="bottom-cta-buttons">
+        <a href="#guide" class="btn-primary">
+          Back to the Methodology
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 14V6M4 9l4-4 4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="btn-secondary">Start 14-Day Free Trial</a>
+        <a href="#" class="btn-share">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8v5a1 1 0 001 1h6a1 1 0 001-1V8M11 4L8 1 5 4M8 1v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Share This Page
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 Semrush. The Keyword Research Methodology.</p>
+  </footer>
+
+  <div class="mockup-banner">
+    <span>MOCKUP</span> &mdash; Landing Page Concept v3
+  </div>
+
+</body>
+</html>
