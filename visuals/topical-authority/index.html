@@ -118,8 +118,8 @@
         }
 
         .reputation-card .card-badge {
-            background: rgba(77, 212, 196, 0.3);
-            color: #4DD4C4;
+            background: rgba(77, 212, 196, 0.5);
+            color: #fff;
         }
 
         .card-header-text {
@@ -1168,58 +1168,57 @@
         </div>
 
         <!-- ============================================
-             CONCEPT 5: The Hiring Manager Frame (Revised)
+             CONCEPT 5: The Weighting Frame (Revised)
              ============================================ -->
 
         <div class="concept-section" style="border-bottom: none;">
             <div class="concept-label">Concept 5</div>
-            <div class="concept-title">The Uncomfortable Truth: AI Might Never Read Your Resume</div>
+            <div class="concept-title">How AI Actually Weighs Authority</div>
 
             <div class="hiring-frame">
                 <div class="hiring-header">
                     <div class="hiring-title">When someone asks AI "Who's the authority on [topic]?"</div>
-                    <div class="hiring-subtitle">AI doesn't follow a polite hiring process</div>
+                    <div class="hiring-subtitle">AI synthesizes all signals simultaneously — but not equally</div>
                 </div>
 
-                <div class="hiring-process">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <div class="step-icon">📞</div>
-                        <div class="step-title">Calls your references first</div>
-                        <div class="step-description">
-                            Checks Reddit, reviews, affiliates, community.<br>
-                            "What does everyone say about them?"
-                        </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+                    <div style="background: rgba(91, 159, 219, 0.1); border: 1px solid rgba(91, 159, 219, 0.3); border-radius: 12px; padding: 25px; text-align: center;">
+                        <div style="font-size: 36px; margin-bottom: 12px;">📄</div>
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #8BC4F0;">Your Resume</div>
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Website, YouTube, owned content</div>
+                        <div style="background: rgba(91, 159, 219, 0.3); height: 8px; border-radius: 4px; width: 40%; margin: 0 auto;"></div>
+                        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">One source</div>
                     </div>
-
-                    <div class="process-arrow">→</div>
-
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <div class="step-icon">📄</div>
-                        <div class="step-title">Maybe reads your resume</div>
-                        <div class="step-description">
-                            Might check your website. Might not.<br>
-                            "Does this match what I already heard?"
-                        </div>
+                    <div style="background: rgba(77, 212, 196, 0.1); border: 2px solid rgba(77, 212, 196, 0.5); border-radius: 12px; padding: 25px; text-align: center;">
+                        <div style="font-size: 36px; margin-bottom: 12px;">🌐</div>
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #4DD4C4;">Your Reputation</div>
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Reddit, reviews, affiliates, community</div>
+                        <div style="background: rgba(77, 212, 196, 0.5); height: 8px; border-radius: 4px; width: 90%; margin: 0 auto;"></div>
+                        <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">Thousands of sources</div>
                     </div>
+                </div>
 
-                    <div class="process-arrow">→</div>
-
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <div class="step-icon">🎯</div>
-                        <div class="step-title">Forms an opinion</div>
-                        <div class="step-description">
-                            Based primarily on reputation signals.<br>
-                            "Who does the internet trust on this?"
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 10px;">Why reputation often dominates</div>
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: #4DD4C4;">Volume</div>
+                            <div style="font-size: 12px; color: rgba(255,255,255,0.5);">More mentions = stronger signal</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: #4DD4C4;">Diversity</div>
+                            <div style="font-size: 12px; color: rgba(255,255,255,0.5);">Multiple source types = more credible</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: #4DD4C4;">Context</div>
+                            <div style="font-size: 12px; color: rgba(255,255,255,0.5);">Others position you vs. alternatives</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="hiring-verdict">
                     <div class="verdict-question">The uncomfortable truth:</div>
-                    <div class="verdict-answer">"AI might recommend your competitor based on reputation alone —<br>without ever reading your carefully crafted pillar page."</div>
+                    <div class="verdict-answer">"If your reputation signal is strong enough,<br>AI might not need to check your resume at all."</div>
                 </div>
             </div>
         </div>
