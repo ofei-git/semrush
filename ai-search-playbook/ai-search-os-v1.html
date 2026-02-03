@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Operating System | Semrush</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            color: #FF642D;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .header-nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header-nav a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 80px 24px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 100, 45, 0.15);
+            color: #FF642D;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 100, 45, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 700px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FF642D;
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #FF642D;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #e55a28;
+        }
+
+        .btn-secondary {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            color: #fff;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 20px 24px;
+        }
+
+        .progress-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar-container {
+            width: 200px;
+            height: 8px;
+            background: #e5e5e5;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(90deg, #FF642D, #FF8F6B);
+            border-radius: 100px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .progress-text strong {
+            color: #1a1a1a;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Part Section */
+        .part {
+            margin-bottom: 60px;
+        }
+
+        .part-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
+        .part-info {
+            flex: 1;
+        }
+
+        .part-number {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FF642D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .part-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+
+        .part-description {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .part-meta {
+            text-align: right;
+        }
+
+        .part-count {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Module Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        /* Module Card */
+        .module-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card:hover {
+            border-color: #FF642D;
+            box-shadow: 0 4px 20px rgba(255, 100, 45, 0.1);
+        }
+
+        .module-card.coming-soon {
+            opacity: 0.7;
+            background: #f8f8f8;
+        }
+
+        .module-card.coming-soon:hover {
+            border-color: #ccc;
+            box-shadow: none;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .module-number {
+            font-size: 13px;
+            font-weight: 600;
+            color: #999;
+        }
+
+        .module-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        .module-status.available {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .module-status.coming-soon {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .module-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .module-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .module-footer {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-deliverable {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .module-deliverable svg {
+            color: #FF642D;
+        }
+
+        .module-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FF642D;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .module-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Coming Soon CTA */
+        .coming-soon-cta {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .notify-btn {
+            width: 100%;
+            padding: 10px 16px;
+            background: #f5f5f5;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .notify-btn:hover {
+            background: #eee;
+            color: #1a1a1a;
+        }
+
+        /* Agency Track */
+        .agency-track {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border: 2px solid #e5e5e5;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .agency-track .part-header {
+            border-bottom-color: #ddd;
+        }
+
+        .agency-badge {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        /* Email Capture Section */
+        .email-capture {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 60px 24px;
+            margin-top: 80px;
+            border-radius: 16px;
+        }
+
+        .email-capture-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .email-capture h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .email-capture p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .email-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .email-form button {
+            padding: 14px 24px;
+            background: #FF642D;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .email-form button:hover {
+            background: #e55a28;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            border-top: 1px solid #e5e5e5;
+            padding: 40px 24px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Semrush</div>
+            <nav class="header-nav">
+                <a href="#">Tools</a>
+                <a href="#">Resources</a>
+                <a href="#">Academy</a>
+                <a href="#">Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Free Resource</div>
+            <h1>The AI Search Operating System</h1>
+            <p class="hero-subtitle">The complete playbook for visibility in the age of AI search. Strategy, templates, and step-by-step execution — everything consultants charge thousands for, free.</p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">20</span>
+                    <span class="hero-stat-label">Modules</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">12+</span>
+                    <span class="hero-stat-label">Templates & Frameworks</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">5</span>
+                    <span class="hero-stat-label">Parts</span>
+                </div>
+            </div>
+
+            <div class="hero-cta">
+                <a href="#part-1" class="btn-primary">Start Learning</a>
+                <a href="#" class="btn-secondary">
+                    Download Full Syllabus
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section (optional - for returning users) -->
+    <section class="progress-section">
+        <div class="progress-content">
+            <div class="progress-info">
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <span class="progress-text"><strong>7 of 20</strong> modules available</span>
+            </div>
+            <span class="progress-text" style="color: #FF642D;">New modules added monthly</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Part 1: The Landscape -->
+        <section class="part" id="part-1">
+            <div class="part-header">
+                <div class="part-info">
+                    <div class="part-number">Part 1</div>
+                    <h2 class="part-title">The Landscape</h2>
+                    <p class="part-description">Why this matters and what's actually changed</p>
+                </div>
+                <div class="part-meta">
+                    <span class="part-count">3 modules</span>
+                </div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 1</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">The AI Search Shift</h3>
+                    <p class="module-description">What's fundamentally different about how people find information now. The decline of blue links, the rise of AI-generated answers.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Landscape Overview
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 2</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">How AI Search Platforms Work</h3>
+                    <p class="module-description">A practitioner's guide to LLMs, RAG, and source selection. Enough to make smart decisions, not academic theory.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Platform Comparison
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 3</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">The Search Everywhere Revolution</h3>
+                    <p class="module-description">Search is dispersing across Google, social, Reddit, YouTube, marketplaces, and LLMs. Understanding where your audience searches now.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Platform Mapping
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 2: Core Deliverables -->
+        <section class="part" id="part-2">
+            <div class="part-header">
+                <div class="part-info">
+                    <div class="part-number">Part 2</div>
+                    <h2 class="part-title">The Core Deliverables</h2>
+                    <p class="part-description">The eight strategic artifacts that define an AI search engagement</p>
+                </div>
+                <div class="part-meta">
+                    <span class="part-count">8 modules</span>
+                </div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 4</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">AI Search Visibility Audit</h3>
+                    <p class="module-description">Where does your brand appear in AI-generated responses? Establish your baseline and identify immediate opportunities.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Visibility Scorecard
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 5</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">Audience Research & Segmentation</h3>
+                    <p class="module-description">Understanding who you're trying to reach before mapping their queries. Jobs-to-be-done and platform preferences.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Audience Profile Framework
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 6</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">Keyword Portfolio</h3>
+                    <p class="module-description">Mapping seed queries to synthetic queries. Building the complete map of how your audience asks questions across platforms.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Keyword Matrix Template
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 7</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">AI Search Technical Audit</h3>
+                    <p class="module-description">Technical and structural issues blocking visibility. What's preventing your content from being retrieved or cited correctly?</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 8</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Omnimedia Content Audit</h3>
+                    <p class="module-description">Beyond text — video, tables, images. Understanding the entire information landscape AI systems pull from.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 9</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Omnimedia Content Plan</h3>
+                    <p class="module-description">Strategic expansion including where video and other formats matter most. Your content creation roadmap.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 10</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">AI Search Measurement Plan</h3>
+                    <p class="module-description">Defining which metrics matter and how you'll demonstrate impact when traditional rankings are just part of the picture.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 11</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">AI Search Strategic Roadmap</h3>
+                    <p class="module-description">Executive synthesis that turns insights into actionable decisions. Where all the deliverables come together.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 3: Execution -->
+        <section class="part" id="part-3">
+            <div class="part-header">
+                <div class="part-info">
+                    <div class="part-number">Part 3</div>
+                    <h2 class="part-title">Execution</h2>
+                    <p class="part-description">Actually doing the work</p>
+                </div>
+                <div class="part-meta">
+                    <span class="part-count">4 modules</span>
+                </div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 12</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Creating AI-Optimized Content</h3>
+                    <p class="module-description">How to write, structure, and format content that AI systems want to retrieve and cite. The production playbook.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 13</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Technical Implementation</h3>
+                    <p class="module-description">Schema markup, site structure, and internal linking — the on-site technical foundation for AI visibility.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 14</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Entity & Knowledge Graph Optimization</h3>
+                    <p class="module-description">Building your brand's presence in the knowledge layer that AI systems draw from. Wikipedia, Wikidata, and entity authority.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 15</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">LLM Seeding & Third-Party Visibility</h3>
+                    <p class="module-description">Active strategies for generating mentions and coverage across platforms that LLMs reference. Digital PR for the AI era — building consensus signals.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 4: Measurement -->
+        <section class="part" id="part-4">
+            <div class="part-header">
+                <div class="part-info">
+                    <div class="part-number">Part 4</div>
+                    <h2 class="part-title">Measurement & Iteration</h2>
+                    <p class="part-description">Proving it works and improving over time</p>
+                </div>
+                <div class="part-meta">
+                    <span class="part-count">2 modules</span>
+                </div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 16</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Tracking, Reporting & Attribution</h3>
+                    <p class="module-description">Setting up tracking infrastructure and building reports that demonstrate impact. Proving ROI when clicks aren't the signal.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 17</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">The Optimization Loop</h3>
+                    <p class="module-description">Ongoing optimization based on performance data. The maintenance rhythm that keeps AI search visibility growing.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 5: Scaling -->
+        <section class="part" id="part-5">
+            <div class="part-header">
+                <div class="part-info">
+                    <div class="part-number">Part 5</div>
+                    <h2 class="part-title">Scaling & Operations</h2>
+                    <p class="part-description">Making it sustainable</p>
+                </div>
+                <div class="part-meta">
+                    <span class="part-count">3 modules</span>
+                </div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 18</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Building Your AI Search Process</h3>
+                    <p class="module-description">SOPs, workflows, and operational infrastructure. Moving from one-off projects to repeatable systems.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 19</span>
+                        <span class="module-status available">Available</span>
+                    </div>
+                    <h3 class="module-title">Team Structure & Skills</h3>
+                    <p class="module-description">Who does what on an AI search team? Skills needed, role definitions, and building capability internally.</p>
+                    <div class="module-footer">
+                        <span class="module-deliverable">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Team Building Assistant
+                        </span>
+                        <a href="#" class="module-link">
+                            Start Module
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module 20</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Creator & Affiliate Partnerships</h3>
+                    <p class="module-description">Extending reach through creator collaborations and affiliate relationships. Building partnerships that drive AI visibility.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agency Track -->
+        <section class="agency-track">
+            <div class="part-header">
+                <div class="part-info">
+                    <div class="part-number">Bonus</div>
+                    <h2 class="part-title">The Agency Track <span class="agency-badge">For Consultants</span></h2>
+                    <p class="part-description">Selling and delivering AI search services to clients</p>
+                </div>
+                <div class="part-meta">
+                    <span class="part-count">3 modules</span>
+                </div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module A1</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Selling AI Search Services</h3>
+                    <p class="module-description">Discovery call scripts, qualification frameworks, and how to scope AI search engagements. Pricing models and packaging.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module A2</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Proposals & Engagement Structure</h3>
+                    <p class="module-description">Proposal templates with deliverables and timelines. Structuring engagements from audit through ongoing optimization.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-number">Module A3</span>
+                        <span class="module-status coming-soon">Coming Soon</span>
+                    </div>
+                    <h3 class="module-title">Client Management & Communication</h3>
+                    <p class="module-description">Reporting dashboards, QBR presentations, and stakeholder communication. Keeping clients informed and demonstrating value.</p>
+                    <div class="coming-soon-cta">
+                        <button class="notify-btn">Notify me when available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Capture -->
+        <section class="email-capture">
+            <div class="email-capture-content">
+                <h2>Stay Updated</h2>
+                <p>Get notified when new modules drop. No spam — just updates on new content and templates.</p>
+                <form class="email-form">
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <span class="footer-text">© 2026 Semrush. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
