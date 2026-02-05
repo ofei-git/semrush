@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Search Operating System | Semrush</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFFFF;
+            color: #191C1F;
+            line-height: 1.6;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #E8E8E8;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo svg {
+            height: 28px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header-nav a:hover {
+            color: #191C1F;
+        }
+
+        .header-cta {
+            background: #8B5CF6;
+            color: #fff !important;
+            padding: 10px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .header-cta:hover {
+            background: #7C3AED;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: #FFFFFF;
+            padding: 80px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Geometric stripe decoration — mint-to-lavender diagonal bars */
+        .hero-stripes {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 340px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stripe {
+            position: absolute;
+            border-radius: 24px;
+            transform: rotate(-35deg);
+            transform-origin: center;
+        }
+
+        .hero-stripes .stripe:nth-child(1) {
+            width: 520px;
+            height: 85px;
+            top: -40px;
+            right: -140px;
+            background: rgba(168, 230, 207, 0.45);
+        }
+
+        .hero-stripes .stripe:nth-child(2) {
+            width: 460px;
+            height: 48px;
+            top: 55px;
+            right: -90px;
+            background: rgba(168, 230, 207, 0.28);
+        }
+
+        .hero-stripes .stripe:nth-child(3) {
+            width: 400px;
+            height: 72px;
+            top: 115px;
+            right: -50px;
+            background: rgba(182, 212, 240, 0.30);
+        }
+
+        .hero-stripes .stripe:nth-child(4) {
+            width: 340px;
+            height: 55px;
+            top: 195px;
+            right: -10px;
+            background: rgba(196, 181, 255, 0.25);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-left {
+            max-width: 560px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #191C1F;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .value-stack {
+            margin-bottom: 32px;
+        }
+
+        .value-stack-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 15px;
+            color: #191C1F;
+        }
+
+        .value-stack-item .check {
+            width: 22px;
+            height: 22px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .value-stack-item .check svg {
+            width: 12px;
+            height: 12px;
+            color: #2E7D32;
+        }
+
+        .value-stack-closer {
+            margin-top: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #191C1F;
+        }
+
+        .hero-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 440px;
+        }
+
+        .hero-form-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hero-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid #E8E8E8;
+            border-radius: 100px;
+            font-size: 15px;
+            font-family: inherit;
+            color: #191C1F;
+            background: #FFFFFF;
+        }
+
+        .hero-form input[type="email"]::placeholder {
+            color: #999;
+        }
+
+        .hero-form input[type="email"]:focus {
+            outline: none;
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .hero-form button {
+            padding: 14px 28px;
+            background: #8B5CF6;
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 15px;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .hero-form button:hover {
+            background: #7C3AED;
+        }
+
+        /* Trial checkbox — bundled signup */
+        .trial-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            padding: 4px 0;
+        }
+
+        .trial-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #8B5CF6;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .trial-checkbox .checkbox-note {
+            color: #888;
+        }
+
+        /* Video placeholder */
+        .hero-right {
+            position: relative;
+        }
+
+        .video-placeholder {
+            background: #F5F5F5;
+            border: 1px solid #E8E8E8;
+            border-radius: 16px;
+            aspect-ratio: 16/10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .video-placeholder:hover {
+            border-color: #CCC;
+            background: #F0F0F0;
+        }
+
+        .play-button {
+            width: 64px;
+            height: 64px;
+            background: #8B5CF6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .play-button svg {
+            width: 24px;
+            height: 24px;
+            color: #fff;
+            margin-left: 3px;
+        }
+
+        .video-placeholder-text {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* ==================== TRUST BAR ==================== */
+        .trust-bar {
+            background: #FFFFFF;
+            border-top: 1px solid #E8E8E8;
+            border-bottom: 1px solid #E8E8E8;
+            padding: 32px 24px;
+        }
+
+        .trust-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-bar-label {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .trust-names {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .trust-person {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trust-avatar {
+            width: 36px;
+            height: 36px;
+            background: #F0F0F0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .trust-person-info {
+            text-align: left;
+        }
+
+        .trust-person-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #191C1F;
+        }
+
+        .trust-person-role {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ==================== EXECUTIVE QUOTE ==================== */
+        .executive-quote {
+            background: #F8F6FF;
+            padding: 60px 24px;
+        }
+
+        .executive-quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-mark {
+            font-size: 64px;
+            line-height: 1;
+            color: #8B5CF6;
+            opacity: 0.20;
+            margin-bottom: -10px;
+        }
+
+        .quote-text {
+            font-size: 22px;
+            line-height: 1.6;
+            color: #191C1F;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .quote-attribution {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .quote-avatar {
+            width: 48px;
+            height: 48px;
+            background: #F0F0F0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .quote-info {
+            text-align: left;
+        }
+
+        .quote-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #191C1F;
+        }
+
+        .quote-title {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ==================== PROGRESS INDICATOR ==================== */
+        .progress-section {
+            background: #fff;
+            padding: 20px 24px;
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        .progress-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar-container {
+            width: 200px;
+            height: 6px;
+            background: #E8E8E8;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(90deg, #10B981, #34D399);
+            border-radius: 100px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .progress-text strong {
+            color: #191C1F;
+        }
+
+        .progress-new {
+            font-size: 13px;
+            color: #059669;
+            font-weight: 500;
+        }
+
+        /* ==================== GUIDE SECTIONS ==================== */
+        .guide-section {
+            padding: 60px 24px;
+        }
+
+        .guide-section.alt-bg {
+            background: #F8F6FF;
+        }
+
+        .guide-section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #191C1F;
+            margin-bottom: 8px;
+        }
+
+        .section-description {
+            font-size: 16px;
+            color: #555;
+            max-width: 600px;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        /* ==================== GUIDE CARDS ==================== */
+        .guide-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #E8E8E8;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .guide-card:hover {
+            border-color: #8B5CF6;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+        }
+
+        .guide-card.coming-soon {
+            opacity: 0.65;
+            background: #F8F8F8;
+        }
+
+        .guide-card.coming-soon:hover {
+            border-color: #ccc;
+            box-shadow: none;
+        }
+
+        .guide-card-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 12px;
+        }
+
+        .guide-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        .guide-status.available {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .guide-status.coming-soon {
+            background: #F0EBFF;
+            color: #8B5CF6;
+        }
+
+        .guide-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #191C1F;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .guide-description {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .guide-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guide-deliverable {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .guide-deliverable svg {
+            color: #059669;
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .guide-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8B5CF6;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: gap 0.2s;
+        }
+
+        .guide-link:hover {
+            gap: 8px;
+        }
+
+        .notify-cta {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        .notify-btn {
+            width: 100%;
+            padding: 10px 16px;
+            background: #F5F5F5;
+            border: 1px solid #E8E8E8;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #555;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .notify-btn:hover {
+            background: #F0EBFF;
+            border-color: #E8E0FF;
+            color: #8B5CF6;
+        }
+
+        /* ==================== AGENCY TRACK ==================== */
+        .agency-section {
+            padding: 60px 24px;
+            background: #FFFFFF;
+        }
+
+        .agency-section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .agency-banner {
+            background: linear-gradient(135deg, #1C0D3B 0%, #2A1558 100%);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .agency-header {
+            margin-bottom: 32px;
+        }
+
+        .agency-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .agency-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .agency-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .agency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .agency-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .agency-card .guide-title {
+            color: #fff;
+        }
+
+        .agency-card .guide-description {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .agency-card .notify-cta {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .agency-card .notify-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .agency-card .notify-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ==================== SPECIALIZED TRACKS ==================== */
+        .tracks-section {
+            padding: 60px 24px;
+            background: #F8F6FF;
+        }
+
+        .tracks-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 32px;
+        }
+
+        .track-group-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        .track-item {
+            background: #fff;
+            border: 1px solid #E8E8E8;
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .track-item:hover {
+            border-color: #ccc;
+        }
+
+        .track-item-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .track-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .track-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .track-icon.youtube { background: #FEE2E2; }
+        .track-icon.reddit { background: #FFF3E0; }
+        .track-icon.ecommerce { background: #E8F5E9; }
+        .track-icon.saas { background: #E3F2FD; }
+        .track-icon.local { background: #F3E5F5; }
+
+        .track-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #191C1F;
+        }
+
+        .track-item-subtitle {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .track-notify {
+            font-size: 12px;
+            font-weight: 600;
+            color: #8B5CF6;
+            background: #F0EBFF;
+            padding: 6px 14px;
+            border-radius: 100px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .track-notify:hover {
+            background: #E8E0FF;
+        }
+
+        /* ==================== BOTTOM CTA ==================== */
+        .bottom-cta {
+            background: linear-gradient(135deg, #1C0D3B 0%, #2A1558 100%);
+            padding: 80px 24px;
+        }
+
+        .bottom-cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .bottom-cta h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bottom-cta p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .bottom-form {
+            display: flex;
+            gap: 10px;
+            max-width: 440px;
+            margin: 0 auto 12px;
+        }
+
+        .bottom-form input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .bottom-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .bottom-form input:focus {
+            outline: none;
+            border-color: #8B5CF6;
+        }
+
+        .bottom-form button {
+            padding: 14px 28px;
+            background: #8B5CF6;
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 15px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .bottom-form button:hover {
+            background: #7C3AED;
+        }
+
+        .bottom-trial-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .bottom-trial-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #8B5CF6;
+            cursor: pointer;
+        }
+
+        /* ==================== TRUST METRICS ==================== */
+        .trust-metrics {
+            background: #FFFFFF;
+            padding: 60px 24px;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        .trust-metrics-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .trust-metrics-label {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 32px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .metric-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #191C1F;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .awards-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            padding-top: 32px;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        .award-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .award-icon {
+            width: 48px;
+            height: 48px;
+            background: #F5F5F5;
+            border: 1px solid #E8E8E8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .award-icon svg {
+            width: 22px;
+            height: 22px;
+            color: #888;
+        }
+
+        .award-text {
+            font-size: 10px;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            max-width: 90px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E8E8E8;
+            padding: 32px 24px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #191C1F;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-stripes {
+                width: 300px;
+                height: 200px;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .bottom-form {
+                flex-direction: column;
+            }
+
+            .hero-form-row {
+                flex-direction: column;
+            }
+
+            .trust-names {
+                gap: 24px;
+            }
+
+            .agency-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .awards-row {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <div class="header-content">
+            <a class="logo" href="#">
+                <svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="12" r="7" fill="#191C1F"/>
+                    <circle cx="10" cy="12" r="3" fill="#fff"/>
+                    <text x="24" y="18" font-family="Inter, sans-serif" font-weight="800" font-size="18" fill="#191C1F">SEMRUSH</text>
+                </svg>
+            </a>
+            <nav class="header-nav">
+                <a href="#">Tools</a>
+                <a href="#">Resources</a>
+                <a href="#">Academy</a>
+                <a href="#">Pricing</a>
+                <a href="#" class="header-cta">Try free</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <!-- Geometric stripe decoration -->
+        <div class="hero-stripes" aria-hidden="true">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1>The AI Search Operating System</h1>
+                <p class="hero-subtitle">The complete playbook for winning visibility in AI search — built with insights from leading search practitioners and the teams behind Semrush.</p>
+
+                <div class="value-stack">
+                    <div class="value-stack-item">
+                        <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+                        <span>12+ ready-to-use templates, frameworks, and checklists — delivered instantly</span>
+                    </div>
+                    <div class="value-stack-item">
+                        <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+                        <span>20+ in-depth guides delivered to your inbox as they publish</span>
+                    </div>
+                    <div class="value-stack-item">
+                        <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+                        <span>Industry-specific playbooks for e-commerce, SaaS, and local</span>
+                    </div>
+                    <div class="value-stack-item">
+                        <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+                        <span>Platform guides for YouTube, Reddit, and beyond</span>
+                    </div>
+                    <p class="value-stack-closer">Everything agencies charge $5,000+ for — yours free.</p>
+                </div>
+
+                <form class="hero-form">
+                    <div class="hero-form-row">
+                        <input type="email" placeholder="Enter your email address">
+                        <button type="submit">Get instant access</button>
+                    </div>
+                    <label class="trial-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Also start a free Semrush trial <span class="checkbox-note">— no credit card required</span></span>
+                    </label>
+                </form>
+            </div>
+
+            <div class="hero-right">
+                <div class="video-placeholder">
+                    <div class="play-button">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <span class="video-placeholder-text">Watch: What's inside the AI Search OS (2 min)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRUST BAR ==================== -->
+    <section class="trust-bar">
+        <div class="trust-bar-content">
+            <p class="trust-bar-label">Built with insights from leading AI search practitioners</p>
+            <div class="trust-names">
+                <div class="trust-person">
+                    <div class="trust-avatar">DP</div>
+                    <div class="trust-person-info">
+                        <div class="trust-person-name">Dan Petrovic</div>
+                        <div class="trust-person-role">DEJAN</div>
+                    </div>
+                </div>
+                <div class="trust-person">
+                    <div class="trust-avatar">KI</div>
+                    <div class="trust-person-info">
+                        <div class="trust-person-name">Kevin Indig</div>
+                        <div class="trust-person-role">Growth Memo</div>
+                    </div>
+                </div>
+                <div class="trust-person">
+                    <div class="trust-avatar">MK</div>
+                    <div class="trust-person-info">
+                        <div class="trust-person-name">Mike King</div>
+                        <div class="trust-person-role">iPullRank</div>
+                    </div>
+                </div>
+                <div class="trust-person">
+                    <div class="trust-avatar">+</div>
+                    <div class="trust-person-info">
+                        <div class="trust-person-name" style="color: #888;">More contributors</div>
+                        <div class="trust-person-role">Coming soon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== EXECUTIVE QUOTE ==================== -->
+    <section class="executive-quote">
+        <div class="executive-quote-content">
+            <div class="quote-mark">&ldquo;</div>
+            <p class="quote-text">The marketers who master AI search first will have an unfair advantage for years. We built this so you can be one of them.</p>
+            <div class="quote-attribution">
+                <div class="quote-avatar">AW</div>
+                <div class="quote-info">
+                    <div class="quote-name">Andrew Warden</div>
+                    <div class="quote-title">CMO, Semrush</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROGRESS INDICATOR ==================== -->
+    <section class="progress-section">
+        <div class="progress-content">
+            <div class="progress-info">
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <span class="progress-text"><strong>7 of 23</strong> guides available</span>
+            </div>
+            <span class="progress-new">New guides added monthly</span>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION: Understanding AI Search ==================== -->
+    <section class="guide-section">
+        <div class="guide-section-content">
+            <div class="section-header">
+                <h2 class="section-title">Understanding AI Search</h2>
+                <p class="section-description">What's changed, how it works, and why it matters for your business.</p>
+            </div>
+
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <span class="guide-status available">Available</span>
+                    </div>
+                    <h3 class="guide-title">The AI Search Shift</h3>
+                    <p class="guide-description">What's fundamentally different about how people find information now. The decline of blue links, the rise of AI-generated answers, and what it means for your traffic.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+                            Landscape Overview
+                        </span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <span class="guide-status available">Available</span>
+                    </div>
+                    <h3 class="guide-title">How AI Search Platforms Work</h3>
+                    <p class="guide-description">A practitioner's guide to LLMs, RAG, and source selection. Enough to make smart optimization decisions, not academic theory.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+                            Platform Comparison
+                        </span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <span class="guide-status available">Available</span>
+                    </div>
+                    <h3 class="guide-title">The Search Everywhere Revolution</h3>
+                    <p class="guide-description">Search is dispersing across Google, social, Reddit, YouTube, marketplaces, and LLMs. Understanding where your audience actually searches now.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+                            Platform Mapping
+                        </span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION: Building Your Strategy ==================== -->
+    <section class="guide-section alt-bg">
+        <div class="guide-section-content">
+            <div class="section-header">
+                <h2 class="section-title">Building Your Strategy</h2>
+                <p class="section-description">The strategic foundations and deliverables that define an AI search engagement.</p>
+            </div>
+
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-card-header"><span class="guide-status available">Available</span></div>
+                    <h3 class="guide-title">AI Search Visibility Audit</h3>
+                    <p class="guide-description">Where does your brand appear in AI-generated responses? Establish your baseline and identify immediate opportunities.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg> Visibility Scorecard</span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header"><span class="guide-status available">Available</span></div>
+                    <h3 class="guide-title">Audience Research &amp; Segmentation</h3>
+                    <p class="guide-description">Understanding who you're trying to reach before mapping their queries. Jobs-to-be-done, platform preferences, and search behavior.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg> Audience Profile Framework</span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header"><span class="guide-status available">Available</span></div>
+                    <h3 class="guide-title">Keyword Portfolio</h3>
+                    <p class="guide-description">Mapping seed queries to synthetic queries. Building the complete map of how your audience asks questions across platforms.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg> Keyword Matrix Template</span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">AI Search Technical Audit</h3>
+                    <p class="guide-description">Technical and structural issues blocking visibility. What's preventing your content from being retrieved or cited by AI systems.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Omnimedia Content Audit</h3>
+                    <p class="guide-description">Beyond text — video, tables, images. Understanding the entire information landscape AI systems pull from.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Omnimedia Content Plan</h3>
+                    <p class="guide-description">Strategic content expansion including where video and other formats matter most. Your complete content creation roadmap.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">AI Search Measurement Plan</h3>
+                    <p class="guide-description">Defining which metrics matter and how you'll demonstrate impact when traditional rankings are just part of the picture.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">AI Search Strategic Roadmap</h3>
+                    <p class="guide-description">Executive synthesis that turns audit insights into actionable decisions. Where all the deliverables come together into a plan.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION: Execution & Implementation ==================== -->
+    <section class="guide-section">
+        <div class="guide-section-content">
+            <div class="section-header">
+                <h2 class="section-title">Execution &amp; Implementation</h2>
+                <p class="section-description">Turning strategy into action — the hands-on work that drives AI search visibility.</p>
+            </div>
+
+            <div class="guides-grid">
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Creating AI-Optimized Content</h3>
+                    <p class="guide-description">How to write, structure, and format content that AI systems want to retrieve and cite. The production playbook.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Technical Implementation</h3>
+                    <p class="guide-description">Schema markup, site structure, and internal linking — the on-site technical foundation for AI visibility.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Entity &amp; Knowledge Graph Optimization</h3>
+                    <p class="guide-description">Building your brand's presence in the knowledge layer that AI systems draw from. Wikipedia, Wikidata, and entity authority.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">LLM Seeding &amp; Third-Party Visibility</h3>
+                    <p class="guide-description">Active strategies for generating mentions across platforms that LLMs reference. Digital PR for the AI era — building consensus signals.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION: Measurement & Growth ==================== -->
+    <section class="guide-section alt-bg">
+        <div class="guide-section-content">
+            <div class="section-header">
+                <h2 class="section-title">Measurement &amp; Growth</h2>
+                <p class="section-description">Proving impact, building systems, and scaling what works.</p>
+            </div>
+
+            <div class="guides-grid">
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Tracking, Reporting &amp; Attribution</h3>
+                    <p class="guide-description">Setting up tracking infrastructure and building reports that demonstrate impact. Proving ROI when clicks aren't the only signal.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">The Optimization Loop</h3>
+                    <p class="guide-description">Ongoing optimization based on performance data. The maintenance rhythm that keeps AI search visibility growing.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Building Your AI Search Process</h3>
+                    <p class="guide-description">SOPs, workflows, and operational infrastructure. Moving from one-off projects to repeatable, scalable systems.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header"><span class="guide-status available">Available</span></div>
+                    <h3 class="guide-title">Team Structure &amp; Skills</h3>
+                    <p class="guide-description">Who does what on an AI search team? Skills needed, role definitions, and building capability internally or through partners.</p>
+                    <div class="guide-footer">
+                        <span class="guide-deliverable"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1"/></svg> Team Building Guide</span>
+                        <a href="#" class="guide-link">Start guide <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="guide-card coming-soon">
+                    <div class="guide-card-header"><span class="guide-status coming-soon">Coming Soon</span></div>
+                    <h3 class="guide-title">Creator &amp; Affiliate Partnerships</h3>
+                    <p class="guide-description">Extending reach through creator collaborations and affiliate relationships. Building partnerships that amplify AI visibility.</p>
+                    <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== AGENCY TRACK ==================== -->
+    <section class="agency-section">
+        <div class="agency-section-content">
+            <div class="agency-banner">
+                <div class="agency-header">
+                    <div class="agency-badge">For Agencies &amp; Consultants</div>
+                    <h2 class="agency-title">Sell, scope, and deliver AI search services</h2>
+                    <p class="agency-description">Everything you need to add AI search optimization to your service offering — from discovery calls to QBR presentations.</p>
+                </div>
+
+                <div class="agency-grid">
+                    <div class="agency-card">
+                        <h3 class="guide-title">Selling AI Search Services</h3>
+                        <p class="guide-description">Discovery call scripts, qualification frameworks, and how to scope AI search engagements. Pricing models and packaging.</p>
+                        <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                    </div>
+                    <div class="agency-card">
+                        <h3 class="guide-title">Proposals &amp; Engagement Structure</h3>
+                        <p class="guide-description">Proposal templates with deliverables and timelines. Structuring engagements from audit through ongoing optimization.</p>
+                        <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                    </div>
+                    <div class="agency-card">
+                        <h3 class="guide-title">Client Management &amp; Reporting</h3>
+                        <p class="guide-description">Reporting dashboards, QBR presentations, and stakeholder communication. Keeping clients informed and demonstrating value.</p>
+                        <div class="notify-cta"><button class="notify-btn">Notify me when available</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SPECIALIZED TRACKS ==================== -->
+    <section class="tracks-section">
+        <div class="tracks-content">
+            <div class="section-header">
+                <h2 class="section-title">Specialized Tracks</h2>
+                <p class="section-description">Applied playbooks tailored to your platform and industry. Learn the system above, then execute with these.</p>
+            </div>
+
+            <div class="tracks-grid">
+                <div>
+                    <p class="track-group-label">By Platform</p>
+                    <div class="track-item">
+                        <div class="track-item-left">
+                            <div class="track-icon youtube">
+                                <svg viewBox="0 0 24 24" fill="#DC2626"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                            <div>
+                                <div class="track-item-title">YouTube for AI Search</div>
+                                <div class="track-item-subtitle">Video optimization for AI citations</div>
+                            </div>
+                        </div>
+                        <button class="track-notify">Notify me</button>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-item-left">
+                            <div class="track-icon reddit">
+                                <svg viewBox="0 0 24 24" fill="#EA580C"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="track-item-title">Reddit Visibility Strategy</div>
+                                <div class="track-item-subtitle">Building presence where LLMs train</div>
+                            </div>
+                        </div>
+                        <button class="track-notify">Notify me</button>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="track-group-label">By Industry</p>
+                    <div class="track-item">
+                        <div class="track-item-left">
+                            <div class="track-icon ecommerce">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            </div>
+                            <div>
+                                <div class="track-item-title">E-commerce</div>
+                                <div class="track-item-subtitle">Product visibility in AI shopping results</div>
+                            </div>
+                        </div>
+                        <button class="track-notify">Notify me</button>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-item-left">
+                            <div class="track-icon saas">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                            </div>
+                            <div>
+                                <div class="track-item-title">SaaS &amp; B2B</div>
+                                <div class="track-item-subtitle">AI search for software companies</div>
+                            </div>
+                        </div>
+                        <button class="track-notify">Notify me</button>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-item-left">
+                            <div class="track-icon local">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <div class="track-item-title">Local Business</div>
+                                <div class="track-item-subtitle">Local visibility in AI recommendations</div>
+                            </div>
+                        </div>
+                        <button class="track-notify">Notify me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BOTTOM CTA ==================== -->
+    <section class="bottom-cta">
+        <div class="bottom-cta-content">
+            <h2>Get the Complete AI Search Playbook</h2>
+            <p>12+ templates and frameworks delivered instantly, plus every guide sent to your inbox as it publishes.</p>
+            <form class="bottom-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Get instant access</button>
+            </form>
+            <label class="bottom-trial-checkbox">
+                <input type="checkbox" checked>
+                <span>Also start a free Semrush trial — no credit card required</span>
+            </label>
+        </div>
+    </section>
+
+    <!-- ==================== TRUST METRICS ==================== -->
+    <section class="trust-metrics">
+        <div class="trust-metrics-content">
+            <p class="trust-metrics-label">Marketers all over the world trust Semrush</p>
+            <div class="metrics-grid">
+                <div>
+                    <div class="metric-number">10M</div>
+                    <div class="metric-label">Marketing professionals have already used Semrush</div>
+                </div>
+                <div>
+                    <div class="metric-number">21</div>
+                    <div class="metric-label">International awards for best SEO software suite</div>
+                </div>
+                <div>
+                    <div class="metric-number">35%</div>
+                    <div class="metric-label">Fortune 500 companies use Semrush as their go-to tool</div>
+                </div>
+            </div>
+            <div class="awards-row">
+                <div class="award-badge">
+                    <div class="award-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+                    <span class="award-text">#1 SEO Tool</span>
+                </div>
+                <div class="award-badge">
+                    <div class="award-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <span class="award-text">#1 Competitive Intelligence</span>
+                </div>
+                <div class="award-badge">
+                    <div class="award-icon"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></div>
+                    <span class="award-text">Best Software 2026</span>
+                </div>
+                <div class="award-badge">
+                    <div class="award-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <span class="award-text">Best AEO Tools</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <span class="footer-text">&copy; 2008 - 2026 Semrush. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="#">Legal Info</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Do not sell my personal info</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
