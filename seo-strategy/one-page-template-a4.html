@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One-Page SEO Strategy — Template</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #191C1F;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    margin: 0 auto;
+    padding: 20mm 18mm 15mm 18mm;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5mm;
+    padding-bottom: 4mm;
+    border-bottom: 2px solid #6A35FF;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    background: #FF642D;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .logo-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #191C1F;
+    letter-spacing: -0.3px;
+  }
+
+  .template-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #6A35FF;
+    letter-spacing: -0.5px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 8mm;
+    margin-bottom: 4mm;
+  }
+
+  .meta-item {
+    font-size: 8.5px;
+    color: #555;
+  }
+
+  .meta-label {
+    font-weight: 600;
+    color: #191C1F;
+  }
+
+  /* Strategy sentence */
+  .strategy-sentence {
+    background: #F8F6FF;
+    border-left: 3px solid #6A35FF;
+    padding: 3mm 4mm;
+    margin-bottom: 4mm;
+    font-size: 9.5px;
+    line-height: 1.5;
+  }
+
+  .strategy-sentence .label {
+    font-weight: 700;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #6A35FF;
+    display: block;
+    margin-bottom: 1mm;
+  }
+
+  .strategy-sentence .content {
+    color: #191C1F;
+    font-weight: 500;
+  }
+
+  /* Sections */
+  .sections-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5mm;
+  }
+
+  .section {
+    border: 1px solid #E8E8E8;
+    border-radius: 3mm;
+    padding: 3mm;
+    page-break-inside: avoid;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    margin-bottom: 2.5mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .section-number {
+    background: #6A35FF;
+    color: #fff;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #191C1F;
+  }
+
+  .section-subtitle {
+    font-size: 7.5px;
+    color: #888;
+    font-weight: 500;
+  }
+
+  /* Section content */
+  .field {
+    margin-bottom: 2mm;
+  }
+
+  .field:last-child {
+    margin-bottom: 0;
+  }
+
+  .field-label {
+    font-size: 7.5px;
+    font-weight: 600;
+    color: #6A35FF;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5mm;
+  }
+
+  .field-value {
+    font-size: 8.5px;
+    line-height: 1.45;
+    color: #191C1F;
+  }
+
+  /* Two-column table */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+
+  .col-header {
+    font-size: 7.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 1mm;
+    margin-bottom: 1mm;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .col-header.invest {
+    color: #2E7D32;
+  }
+
+  .col-header.skip {
+    color: #C62828;
+  }
+
+  .col-item {
+    font-size: 8px;
+    line-height: 1.5;
+    color: #191C1F;
+    padding-left: 2mm;
+    position: relative;
+    margin-bottom: 0.8mm;
+  }
+
+  .col-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+  }
+
+  .invest-list .col-item::before {
+    background: #2E7D32;
+  }
+
+  .skip-list .col-item::before {
+    background: #C62828;
+  }
+
+  /* Metrics table */
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8px;
+  }
+
+  .metrics-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    padding: 1mm 1.5mm;
+    border-bottom: 1px solid #E8E8E8;
+  }
+
+  .metrics-table td {
+    padding: 1mm 1.5mm;
+    font-size: 8px;
+    color: #191C1F;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  /* Audience platform mini-table */
+  .platform-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8mm 0;
+    border-bottom: 1px solid #F0F0F0;
+    font-size: 8px;
+  }
+
+  .platform-row:last-child {
+    border-bottom: none;
+  }
+
+  .platform-name {
+    font-weight: 500;
+    color: #191C1F;
+  }
+
+  .platform-priority {
+    font-size: 7px;
+    font-weight: 600;
+    padding: 0.5mm 2mm;
+    border-radius: 100px;
+  }
+
+  .priority-high {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+
+  .priority-med {
+    background: #F0EBFF;
+    color: #6A35FF;
+  }
+
+  .priority-low {
+    background: #F5F5F5;
+    color: #888;
+  }
+
+  /* Authority compact */
+  .authority-row {
+    display: flex;
+    gap: 2mm;
+    align-items: flex-start;
+    margin-bottom: 1.5mm;
+    font-size: 8px;
+    line-height: 1.45;
+  }
+
+  .authority-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .authority-label {
+    font-weight: 600;
+    color: #6A35FF;
+    font-size: 7.5px;
+    min-width: 14mm;
+    flex-shrink: 0;
+  }
+
+  /* Decision rules */
+  .decision-rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+    margin-top: 2mm;
+  }
+
+  .rule {
+    font-size: 7.5px;
+    line-height: 1.45;
+    padding: 1.5mm 2mm;
+    border-radius: 2mm;
+  }
+
+  .rule-stay {
+    background: #E8F5E9;
+  }
+
+  .rule-reassess {
+    background: #FFF3E0;
+  }
+
+  .rule .rule-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5mm;
+  }
+
+  /* Full-width section */
+  .section-full {
+    grid-column: 1 / -1;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 3mm;
+    padding-top: 2mm;
+    border-top: 1px solid #E8E8E8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7px;
+    color: #888;
+  }
+
+  .footer-review {
+    font-weight: 500;
+  }
+
+  /* Print styles */
+  @media print {
+    body {
+      background: #fff;
+    }
+    .page {
+      margin: 0;
+      padding: 18mm 16mm 12mm 16mm;
+    }
+  }
+
+  /* Screen preview helper */
+  @media screen {
+    body {
+      background: #e5e5e5;
+      padding: 20px 0;
+    }
+    .page {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+      background: #fff;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-area">
+      <span class="logo-dot"></span>
+      <span class="logo-text">semrush</span>
+    </div>
+    <div class="template-title">One-Page SEO Strategy</div>
+  </div>
+
+  <!-- Meta -->
+  <div class="meta-row">
+    <div class="meta-item"><span class="meta-label">Business:</span> Kindfolk — Sustainable Homeware (DTC)</div>
+    <div class="meta-item"><span class="meta-label">Prepared:</span> February 2026</div>
+    <div class="meta-item"><span class="meta-label">Review:</span> August 2026 (6-mo)</div>
+  </div>
+
+  <!-- Strategy in one sentence -->
+  <div class="strategy-sentence">
+    <span class="label">Strategy in one sentence</span>
+    <span class="content">Own the "sustainable homeware" buying journey through product page conversion and off-site brand authority — not by outpublishing bigger competitors on content volume.</span>
+  </div>
+
+  <!-- Sections Grid -->
+  <div class="sections-grid">
+
+    <!-- Section 1: Goal -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div>
+          <div class="section-title">Goal</div>
+          <div class="section-subtitle">What business outcome is SEO serving?</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Business Goal</div>
+        <div class="field-value">Grow organic revenue 50% in 18 months. Reduce paid ad dependency from 65% to under 45%.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">SEO's Role</div>
+        <div class="field-value">Improve product page conversion and build brand authority across buying guides, communities, and AI recommendations.</div>
+      </div>
+      <table class="metrics-table">
+        <tr><th>Metric</th><th>Now</th><th>Target</th></tr>
+        <tr><td>Organic revenue</td><td>$38K/mo</td><td>$57K/mo</td></tr>
+        <tr><td>Product page conversion rate</td><td>2.1%</td><td>3.0%+</td></tr>
+        <tr><td>Organic share of total revenue</td><td>35%</td><td>50%+</td></tr>
+      </table>
+    </div>
+
+    <!-- Section 2: Audience -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div>
+          <div class="section-title">Audience</div>
+          <div class="section-subtitle">Who are you reaching and where do they look?</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Who</div>
+        <div class="field-value">Sustainability-conscious consumers, 28-45, researching homeware purchases. Care about materials, sourcing, durability.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Where They Search</div>
+        <div class="platform-row">
+          <span class="platform-name">Google — product + comparison queries</span>
+          <span class="platform-priority priority-high">Primary</span>
+        </div>
+        <div class="platform-row">
+          <span class="platform-name">Reddit — brand recs, community trust</span>
+          <span class="platform-priority priority-high">High</span>
+        </div>
+        <div class="platform-row">
+          <span class="platform-name">AI tools — comparative research</span>
+          <span class="platform-priority priority-med">Growing</span>
+        </div>
+        <div class="platform-row">
+          <span class="platform-name">Instagram / Pinterest — visual discovery</span>
+          <span class="platform-priority priority-low">Low</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Key Insight</div>
+        <div class="field-value">Post-purchase surveys show customers compare 3-4 brands before buying. We need to be present at each comparison point.</div>
+      </div>
+    </div>
+
+    <!-- Section 3: Strategic Focus (full width) -->
+    <div class="section section-full">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div>
+          <div class="section-title">Strategic Focus</div>
+          <div class="section-subtitle">What are you investing in vs. deliberately skipping?</div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="invest-list">
+          <div class="col-header invest">Investing In</div>
+          <div class="col-item">Product + category page overhaul (all ~20 core pages)</div>
+          <div class="col-item">10-12 buying guides targeting mid-funnel research queries</div>
+          <div class="col-item">Off-site authority: gift guides, product seeding, review generation (15-20 pitches/month)</div>
+          <div class="col-item">Community presence: Reddit + sustainability forums (5+ hrs/week)</div>
+        </div>
+        <div class="skip-list">
+          <div class="col-header skip">Deliberately Skipping</div>
+          <div class="col-item">Blog scaling / high-volume informational content</div>
+          <div class="col-item">Video and podcast production (Year 2 consideration)</div>
+          <div class="col-item">Traditional link building campaigns (investing in mentions and citations instead)</div>
+          <div class="col-item">Broad informational terms ("what is sustainable living")</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top: 2mm;">
+        <div class="field-label">Topics We're Owning</div>
+        <div class="field-value">Sustainable bedding (materials, certifications) · Eco-friendly kitchen & dining · Transparent pricing & sourcing</div>
+      </div>
+    </div>
+
+    <!-- Section 4: Authority Play -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div>
+          <div class="section-title">Authority Play</div>
+          <div class="section-subtitle">What kind of authority are you building?</div>
+        </div>
+      </div>
+      <div class="authority-row">
+        <span class="authority-label">Content</span>
+        <span>Product authority through transparency — materials sourcing, certifications, honest pricing on every page.</span>
+      </div>
+      <div class="authority-row">
+        <span class="authority-label">Off-site</span>
+        <span>15-20 outreach pitches/month. 4 seasonal gift guide campaigns. Product seeding for reviews. Unlinked mention monitoring. Reddit 5+ hrs/week.</span>
+      </div>
+      <div class="authority-row">
+        <span class="authority-label">Technical</span>
+        <span>Mobile speed 3.8s → under 2s. Structured data on all product pages. AI crawler access.</span>
+      </div>
+    </div>
+
+    <!-- Section 5: Success Signals -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div>
+          <div class="section-title">Success Signals</div>
+          <div class="section-subtitle">How will you know it's working?</div>
+        </div>
+      </div>
+      <table class="metrics-table">
+        <tr><th>Metric</th><th>How</th><th>Target</th></tr>
+        <tr><td>Organic revenue</td><td>GA4 / Shopify</td><td>$57K/mo by M18</td></tr>
+        <tr><td>Product page conversion</td><td>GA4 by page type</td><td>2.1% → 3.0%</td></tr>
+        <tr><td>AI Visibility score</td><td>Semrush AI Visibility</td><td>12 → 35+/100</td></tr>
+        <tr><td>Brand search volume</td><td>GSC / Semrush</td><td>Trending up</td></tr>
+      </table>
+      <div class="decision-rules">
+        <div class="rule rule-stay">
+          <span class="rule-label">Stay the course if:</span>
+          Share of voice and brand mentions trending up in first 6 months — revenue follows authority, not the other way around.
+        </div>
+        <div class="rule rule-reassess">
+          <span class="rule-label">Reassess if:</span>
+          Product page conversion hasn't improved by month 6. Re-evaluate page quality or audience-product fit.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>The One-Page SEO Strategy — semrush.com/seo-strategy</div>
+    <div class="footer-review">Quarterly check · Six-month review · Annual rebuild</div>
+  </div>
+
+</div>
+
+</body>
+</html>
