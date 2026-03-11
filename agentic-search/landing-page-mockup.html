@@ -9,6 +9,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
+      --green: #1DBF73;
+      --green-hover: #17a863;
       --purple: #6A35FF;
       --purple-hover: #5529CC;
       --near-black: #191C1F;
@@ -34,34 +36,48 @@
       background: var(--white);
     }
 
+    a { color: inherit; }
+
+    /* DRAFT BANNER */
+    .draft-banner {
+      background: #FFF3E0;
+      color: #E65100;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     /* NAV */
     .nav {
       position: sticky;
       top: 0;
       background: var(--white);
       border-bottom: 1px solid var(--border);
-      padding: 16px 40px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      height: 60px;
+    }
+    .nav-left {
       display: flex;
       align-items: center;
       gap: 32px;
-      z-index: 100;
     }
     .nav-logo {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: var(--near-black);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      letter-spacing: 0.5px;
     }
-    .nav-logo .dot {
-      width: 10px;
-      height: 10px;
-      background: var(--orange);
-      border-radius: 50%;
-      display: inline-block;
-    }
+    .nav-logo svg { flex-shrink: 0; }
     .nav-links {
       display: flex;
       gap: 28px;
@@ -72,11 +88,26 @@
       color: var(--text-secondary);
       font-size: 14px;
       font-weight: 500;
+      transition: color 0.2s;
     }
+    .nav-links a:hover { color: var(--near-black); }
     .nav-links a.active {
       color: var(--purple);
       font-weight: 600;
     }
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      padding: 8px 40px;
+      background: var(--warm-gray);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .breadcrumb a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
 
     /* SECTIONS */
     .section {
@@ -89,11 +120,11 @@
     }
     .section-lavender { background: var(--lavender); }
     .section-white { background: var(--white); }
+    .section-gray { background: var(--warm-gray); }
     .section-dark {
-      background: linear-gradient(135deg, #1C0D3B, #2A1558);
+      background: var(--near-black);
       color: var(--white);
     }
-
     .section-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -101,33 +132,48 @@
 
     /* HERO */
     .hero {
-      padding: 100px 40px 80px;
+      padding: 80px 40px 60px;
       position: relative;
       overflow: hidden;
+      background: var(--white);
     }
     .hero-inner {
       max-width: 1200px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+      position: relative;
+      z-index: 1;
     }
     .hero-decoration {
       position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 500px;
-      height: 500px;
-      background: linear-gradient(135deg, #A8E6CF, #C4B5FF);
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.4;
+      top: -60px;
+      right: -40px;
+      width: 420px;
+      height: 420px;
       pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-decoration::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(106, 53, 255, 0.12) 0px,
+        rgba(106, 53, 255, 0.12) 20px,
+        rgba(0, 200, 180, 0.10) 20px,
+        rgba(0, 200, 180, 0.10) 40px,
+        rgba(29, 191, 115, 0.10) 40px,
+        rgba(29, 191, 115, 0.10) 60px,
+        transparent 60px,
+        transparent 80px
+      );
+      filter: blur(24px);
+      transform: rotate(-10deg) scale(1.4);
     }
     .hero-badge {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 6px 14px;
       background: var(--light-purple);
       color: var(--purple);
       font-size: 12px;
@@ -135,28 +181,26 @@
       border-radius: 100px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
     .hero h1 {
       font-size: 52px;
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.08;
       margin-bottom: 24px;
       color: var(--near-black);
+      max-width: 680px;
     }
-    .hero h1 .highlight {
-      color: var(--purple);
-    }
-    .hero p {
+    .hero p.hero-sub {
       font-size: 18px;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 32px;
-      max-width: 520px;
+      margin-bottom: 36px;
+      max-width: 620px;
     }
-    .hero-cta {
+    .cta-green {
       display: inline-block;
-      background: var(--purple);
+      background: var(--green);
       color: var(--white);
       padding: 14px 28px;
       border-radius: 8px;
@@ -165,123 +209,7 @@
       text-decoration: none;
       transition: background 0.2s;
     }
-    .hero-cta:hover { background: var(--purple-hover); }
-
-    /* HERO VISUAL — Search Stack */
-    .stack-visual {
-      position: relative;
-      z-index: 1;
-    }
-    .stack-layer {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 28px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .stack-layer:hover {
-      border-color: var(--purple);
-      box-shadow: 0 4px 20px rgba(106, 53, 255, 0.08);
-    }
-    .stack-layer.active-layer {
-      border-color: var(--purple);
-      box-shadow: 0 4px 24px rgba(106, 53, 255, 0.12);
-      background: var(--lavender);
-    }
-    .stack-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-    .stack-icon.seo { background: #E8F5E9; color: #2E7D32; }
-    .stack-icon.aeo { background: #E3F2FD; color: #1565C0; }
-    .stack-icon.aao { background: var(--light-purple); color: var(--purple); }
-    .stack-icon svg { width: 24px; height: 24px; }
-    .funnel-icon { display: inline-flex; margin-right: 4px; }
-    .funnel-icon svg { width: 20px; height: 20px; vertical-align: middle; }
-    .product-icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 10px; margin: 0 auto 12px; }
-    .product-icon svg { width: 28px; height: 28px; }
-    .product-icon.pi-visibility { background: #E3F2FD; color: #1565C0; }
-    .product-icon.pi-agent { background: var(--light-purple); color: var(--purple); }
-    .product-icon.pi-competitive { background: #E8F5E9; color: #2E7D32; }
-    .stack-layer-content h3 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .stack-layer-content .stack-label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-tertiary);
-    }
-    .stack-layer-content p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin: 0;
-      line-height: 1.5;
-    }
-    .stack-connector {
-      width: 2px;
-      height: 12px;
-      background: var(--border);
-      margin-left: 44px;
-    }
-
-    /* STATS BAR */
-    .stats-bar {
-      padding: 60px 40px;
-      background: var(--lavender);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .stats-bar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .stats-bar-label {
-      text-align: center;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-tertiary);
-      margin-bottom: 32px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      text-align: center;
-    }
-    .stat-number {
-      font-size: 44px;
-      font-weight: 800;
-      color: var(--near-black);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat-number .stat-accent { color: var(--purple); }
-    .stat-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .stat-source {
-      font-size: 11px;
-      color: var(--text-tertiary);
-      margin-top: 4px;
-    }
+    .cta-green:hover { background: var(--green-hover); }
 
     /* SECTION HEADERS */
     .section-header {
@@ -306,103 +234,228 @@
       margin: 0 auto;
     }
 
-    /* GUIDE CARDS */
-    .guides-grid {
+    /* THREE LENSES */
+    .lenses-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      margin-bottom: 36px;
     }
-    .guide-card {
+    .lens-card {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 28px;
+      position: relative;
       transition: border-color 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
     }
-    .guide-card:hover {
+    .lens-card.lens-active {
       border-color: var(--purple);
-      box-shadow: 0 4px 20px rgba(106, 53, 255, 0.08);
+      border-width: 2px;
+      box-shadow: 0 4px 24px rgba(106, 53, 255, 0.12);
     }
-    .guide-card.coming-soon {
-      opacity: 0.65;
-      background: #F8F8F8;
+    .lens-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
     }
-    .guide-card.coming-soon:hover {
-      border-color: var(--border);
-      box-shadow: none;
+    .lens-icon svg { width: 24px; height: 24px; }
+    .lens-icon.icon-blue { background: #E3F2FD; color: #1565C0; }
+    .lens-icon.icon-amber { background: #FFF3E0; color: #E65100; }
+    .lens-icon.icon-purple { background: var(--light-purple); color: var(--purple); }
+    .lens-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
-    .guide-card-header {
+    .lens-card p.lens-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .lens-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      font-size: 12px;
     }
-    .guide-phase {
-      font-size: 11px;
+    .lens-maturity {
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+    .lens-label {
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--text-tertiary);
     }
-    .guide-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .badge-available {
-      background: var(--success-bg);
-      color: var(--success-text);
-    }
-    .badge-coming-soon {
+    .lens-here-marker {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       background: var(--light-purple);
       color: var(--purple);
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
-    .badge-flagship {
+    .lens-here-marker::before {
+      content: '';
+      width: 6px;
+      height: 6px;
       background: var(--purple);
-      color: var(--white);
+      border-radius: 50%;
     }
-    .guide-card h3 {
-      font-size: 19px;
-      font-weight: 700;
-      line-height: 1.35;
+
+    .continuum-bar {
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #1565C0, #E65100, #6A35FF);
       margin-bottom: 12px;
     }
-    .guide-card p {
-      font-size: 15px;
+    .continuum-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .continuum-note {
+      text-align: center;
+      font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      padding: 60px 40px;
+      background: var(--white);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .stats-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-card {
+      border-left: 3px solid var(--green);
+      padding-left: 20px;
+    }
+    .stat-number {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--near-black);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .stat-source {
+      font-size: 11px;
+    }
+    .stat-source a {
+      color: var(--text-tertiary);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      transition: color 0.2s;
+    }
+    .stat-source a:hover { color: var(--purple); }
+
+    /* CONTENT HUB CARDS */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .hub-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hub-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 4px 20px rgba(106, 53, 255, 0.08);
+    }
+    .hub-card.coming-soon {
+      opacity: 0.6;
+      background: #FAFAFA;
+    }
+    .hub-card.coming-soon:hover {
+      border-color: var(--border);
+      box-shadow: none;
+    }
+    .hub-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+    .pill-article { background: #E3F2FD; color: #1565C0; }
+    .pill-video { background: #FCE4EC; color: #C62828; }
+    .pill-template { background: #E8F5E9; color: #2E7D32; }
+    .hub-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .hub-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
       flex-grow: 1;
     }
-    .guide-card-footer {
-      margin-top: 20px;
-      padding-top: 16px;
+    .hub-card-link {
+      margin-top: 16px;
+      padding-top: 14px;
       border-top: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
-    .guide-type {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-tertiary);
-    }
-    .guide-link {
+    .hub-card-link a {
       font-size: 14px;
       font-weight: 600;
       color: var(--purple);
       text-decoration: none;
     }
-    .guide-link:hover { text-decoration: underline; }
+    .hub-card-link a:hover { text-decoration: underline; }
+    .hub-card-link .coming-label {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
 
     /* FUNNEL COMPARISON */
-    .funnel-section {
+    .funnel-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      gap: 40px;
       align-items: start;
     }
     .funnel-box {
@@ -411,8 +464,9 @@
       border-radius: 12px;
       padding: 32px;
     }
+    .funnel-box.funnel-agent { border-color: var(--purple); }
     .funnel-box h3 {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       margin-bottom: 24px;
       display: flex;
@@ -422,29 +476,27 @@
     .funnel-step {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       padding: 14px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
     .funnel-step:last-child { border-bottom: none; }
     .funnel-dot {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       flex-shrink: 0;
     }
     .funnel-dot.human { background: #E3F2FD; color: #1565C0; }
     .funnel-dot.agent { background: var(--light-purple); color: var(--purple); }
-    .funnel-step-content {
-      flex-grow: 1;
-    }
+    .funnel-step-content { flex-grow: 1; }
     .funnel-step-content strong {
-      font-size: 15px;
+      font-size: 14px;
       display: block;
       margin-bottom: 2px;
     }
@@ -453,7 +505,7 @@
       color: var(--text-secondary);
     }
     .funnel-actor {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -465,44 +517,16 @@
     .actor-agent { background: var(--light-purple); color: var(--purple); }
     .actor-both { background: #FFF3E0; color: #E65100; }
 
-    /* QUOTE */
-    .quote-block {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .quote-mark {
-      font-size: 64px;
-      color: var(--purple);
-      opacity: 0.3;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .quote-text {
-      font-size: 22px;
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--near-black);
-      margin-bottom: 20px;
-    }
-    .quote-attr {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-    .quote-attr strong { color: var(--near-black); }
-
-    /* TIMELINE / WHAT'S HAPPENING */
+    /* TIMELINE */
     .timeline {
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
     .timeline-item {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 32px;
-      padding: 28px 0;
+      grid-template-columns: 120px 1fr;
+      gap: 28px;
+      padding: 24px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
     .timeline-item:last-child { border-bottom: none; }
@@ -510,401 +534,443 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--purple);
-      padding-top: 4px;
+      padding-top: 3px;
     }
     .timeline-content h3 {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .timeline-content p {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.6;
     }
 
-    /* BOTTOM CTA */
-    .bottom-cta {
+    /* PRODUCT CARDS */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 4px 20px rgba(106, 53, 255, 0.08);
+    }
+    .product-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .product-icon svg { width: 24px; height: 24px; }
+    .product-icon.pi-visibility { background: #E3F2FD; color: #1565C0; }
+    .product-icon.pi-agent { background: var(--light-purple); color: var(--purple); }
+    .product-icon.pi-competitive { background: #E8F5E9; color: #2E7D32; }
+    .product-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .product-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* FOOTER CTA */
+    .footer-cta {
       text-align: center;
       padding: 100px 40px;
+      background: var(--near-black);
     }
-    .bottom-cta h2 {
-      font-size: 40px;
+    .footer-cta h2 {
+      font-size: 36px;
       font-weight: 800;
       color: var(--white);
       margin-bottom: 20px;
       line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .bottom-cta p {
-      font-size: 18px;
-      color: rgba(255,255,255,0.7);
+    .footer-cta p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
       margin-bottom: 36px;
       max-width: 560px;
       margin-left: auto;
       margin-right: auto;
       line-height: 1.7;
     }
-    .bottom-cta .cta-dark {
-      display: inline-block;
-      background: var(--white);
-      color: var(--deep-purple);
-      padding: 16px 32px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
-      transition: opacity 0.2s;
+    .awards-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 48px;
+      flex-wrap: wrap;
     }
-    .bottom-cta .cta-dark:hover { opacity: 0.9; }
+    .award-badge {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 24px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+    .footer a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    .footer a:hover { text-decoration: underline; }
+
+    /* INTERNAL NOTE */
+    .internal-note {
+      padding: 32px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      border-top: 1px solid var(--border-subtle);
+    }
 
     /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 36px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-      .guides-grid { grid-template-columns: 1fr; }
-      .funnel-section { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    @media (max-width: 1024px) {
+      .lenses-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .hub-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
-    /* DRAFT WATERMARK */
-    .draft-banner {
-      background: #FFF3E0;
-      color: #E65100;
-      text-align: center;
-      padding: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .breadcrumb { padding: 8px 20px; }
+      .hero { padding: 60px 20px 40px; }
+      .hero h1 { font-size: 34px; }
+      .hero p.hero-sub { font-size: 16px; }
+      .section { padding: 60px 20px; }
+      .section-full { padding: 60px 20px; }
+      .stats-bar { padding: 40px 20px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .hub-grid { grid-template-columns: 1fr; }
+      .funnel-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+      .product-grid { grid-template-columns: 1fr; }
+      .section-header h2 { font-size: 28px; }
+      .footer-cta { padding: 60px 20px; }
+      .footer-cta h2 { font-size: 26px; }
+      .awards-row { gap: 16px; }
     }
   </style>
 </head>
 <body>
 
+<!-- DRAFT BANNER -->
 <div class="draft-banner">INTERNAL DRAFT — Agentic Search Hub Concept — March 2026</div>
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="#" class="nav-logo"><span class="dot"></span> Semrush</a>
-  <ul class="nav-links">
-    <li><a href="#">Platform</a></li>
-    <li><a href="#">Solutions</a></li>
-    <li><a href="#" class="active">Agentic Search</a></li>
-    <li><a href="#">Resources</a></li>
-    <li><a href="#">Pricing</a></li>
-  </ul>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+        <path d="M12 2L3 9l3.5 3L12 7l5.5 5L21 9l-9-7zM12 22l9-7-3.5-3L12 17l-5.5-5L3 15l9 7z"/>
+      </svg>
+      SEMRUSH
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Solutions</a></li>
+      <li><a href="#" class="active">AI Search</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Resources</a></li>
+    </ul>
+  </div>
 </nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">AI Search</a><span>&rsaquo;</span><a href="#">Digital Brand Visibility</a><span>&rsaquo;</span><strong style="color: var(--near-black);">Agentic Search</strong>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-decoration"></div>
   <div class="hero-inner">
-    <div class="hero-text">
-      <span class="hero-badge">The Agentic Search Guide</span>
-      <h1>The Internet's New User <span class="highlight">Isn't Human</span></h1>
-      <p>AI agents are browsing, comparing, and buying on behalf of real people. They don't click ads or scroll pages. They parse data, check trust signals, and decide before a human ever sees the options. This is how search works now.</p>
-      <a href="#flagship" class="hero-cta">Understand the Shift</a>
+    <span class="hero-badge">Agentic Search</span>
+    <h1>The Internet's New User Isn't Human</h1>
+    <p class="hero-sub">AI agents are browsing, comparing, and buying on behalf of real people. This is the deep dive into agentic search — what it is, how it works, and what it means for your brand's visibility.</p>
+    <a href="flagship-article.html" class="cta-green">Start with the Overview</a>
+  </div>
+</section>
+
+<!-- THE THREE LENSES -->
+<section class="section-full section-lavender">
+  <div class="section-inner">
+    <div class="section-header section-header-centered">
+      <h2>Where Agentic Search Fits</h2>
+      <p>AI SEO isn't one thing. It's three overlapping disciplines at different stages of maturity. Here's where agentic search sits in the broader picture.</p>
     </div>
-    <div class="stack-visual">
-      <div class="stack-layer">
-        <div class="stack-icon seo"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg></div>
-        <div class="stack-layer-content">
-          <span class="stack-label">Traditional Search</span>
-          <h3>SEO — Be Found</h3>
-          <p>Human searches, browses results, clicks through to your site</p>
+    <div class="lenses-grid">
+      <!-- Classic Search -->
+      <div class="lens-card">
+        <div class="lens-icon icon-blue">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h3>Classic Search</h3>
+        <p class="lens-desc">Be found when people search</p>
+        <div class="lens-meta">
+          <span class="lens-maturity">Maturity: Established</span>
+          <span class="lens-label">SEO</span>
         </div>
       </div>
-      <div class="stack-connector"></div>
-      <div class="stack-layer">
-        <div class="stack-icon aeo"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg></div>
-        <div class="stack-layer-content">
-          <span class="stack-label">AI-Generated Answers</span>
-          <h3>AEO — Be the Answer</h3>
-          <p>AI synthesizes information from sources and presents it directly to the human</p>
+      <!-- AI Search -->
+      <div class="lens-card">
+        <div class="lens-icon icon-amber">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>
+        </div>
+        <h3>AI Search</h3>
+        <p class="lens-desc">Be cited, quoted, and recommended by AI</p>
+        <div class="lens-meta">
+          <span class="lens-maturity">Maturity: Emerging</span>
+          <span class="lens-label">GEO · AEO</span>
         </div>
       </div>
-      <div class="stack-connector"></div>
-      <div class="stack-layer active-layer">
-        <div class="stack-icon aao"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg></div>
-        <div class="stack-layer-content">
-          <span class="stack-label">Autonomous Agent Actions</span>
-          <h3>AAO — Be Chosen When No Human Is Looking</h3>
-          <p>Agent acts autonomously — evaluates, selects, and transacts. No human reviews the choice.</p>
+      <!-- Agentic Search -->
+      <div class="lens-card lens-active">
+        <div class="lens-icon icon-purple">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
+        </div>
+        <h3>Agentic Search</h3>
+        <p class="lens-desc">Be chosen and transacted with by AI agents</p>
+        <div class="lens-meta">
+          <span class="lens-maturity">Maturity: Nascent</span>
+          <span class="lens-here-marker">You are here</span>
         </div>
       </div>
     </div>
+    <!-- Continuum bar -->
+    <div class="continuum-bar"></div>
+    <div class="continuum-labels">
+      <span>Human-driven</span>
+      <span>Machine-autonomous</span>
+    </div>
+    <p class="continuum-note">AI SEO = Classic Search + AI Search + Agentic Search — one evolving discipline, not competing acronyms.</p>
   </div>
 </section>
 
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stats-bar-inner">
-    <div class="stats-bar-label">The shift is already measurable</div>
     <div class="stats-grid">
-      <div>
-        <div class="stat-number">51<span class="stat-accent">%</span></div>
+      <div class="stat-card">
+        <div class="stat-number">51%</div>
         <div class="stat-desc">of web traffic is now non-human</div>
-        <div class="stat-source"><a href="https://www.securityweek.com/bot-traffic-surpasses-humans-online-driven-by-ai-and-criminal-innovation/" target="_blank" rel="noopener" style="color: var(--text-tertiary); text-decoration: underline;">Imperva, 2026</a></div>
+        <div class="stat-source"><a href="https://www.securityweek.com/bot-traffic-surpasses-humans-online-driven-by-ai-and-criminal-innovation/" target="_blank" rel="noopener">Imperva, 2026</a></div>
       </div>
-      <div>
-        <div class="stat-number">1,300<span class="stat-accent">%</span></div>
+      <div class="stat-card">
+        <div class="stat-number">1,300%</div>
         <div class="stat-desc">growth in agentic web traffic, Jan–Aug 2025</div>
-        <div class="stat-source"><a href="https://www.humansecurity.com/learn/blog/ai-agent-statistics-agentic-commerce/" target="_blank" rel="noopener" style="color: var(--text-tertiary); text-decoration: underline;">HUMAN Security</a></div>
+        <div class="stat-source"><a href="https://www.humansecurity.com/learn/blog/ai-agent-statistics-agentic-commerce/" target="_blank" rel="noopener">HUMAN Security</a></div>
       </div>
-      <div>
+      <div class="stat-card">
         <div class="stat-number">4.9</div>
-        <div class="stat-desc">average search steps per query by Google's agent research</div>
-        <div class="stat-source"><a href="https://www.searchenginejournal.com/googles-sage-agentic-ai-research-what-it-means-for-seo/566215/" target="_blank" rel="noopener" style="color: var(--text-tertiary); text-decoration: underline;">Google SAGE, 2026</a></div>
+        <div class="stat-desc">average search steps per AI agent query</div>
+        <div class="stat-source"><a href="https://www.searchenginejournal.com/googles-sage-agentic-ai-research-what-it-means-for-seo/566215/" target="_blank" rel="noopener">Google SAGE, 2026</a></div>
       </div>
-      <div>
-        <div class="stat-number">0.27<span class="stat-accent">%</span></div>
-        <div class="stat-desc">CTR from AI platforms to publisher sites (down from 0.8%)</div>
-        <div class="stat-source"><a href="https://www.adexchanger.com/publishers/the-ai-search-reckoning-is-dismantling-open-web-traffic-and-publishers-may-never-recover/" target="_blank" rel="noopener" style="color: var(--text-tertiary); text-decoration: underline;">TollBit, Q4 2025</a></div>
+      <div class="stat-card">
+        <div class="stat-number">0.27%</div>
+        <div class="stat-desc">CTR from AI platforms to publishers (down from 0.8%)</div>
+        <div class="stat-source"><a href="https://www.adexchanger.com/publishers/the-ai-search-reckoning-is-dismantling-open-web-traffic-and-publishers-may-never-recover/" target="_blank" rel="noopener">TollBit / AdExchanger</a></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FLAGSHIP CALLOUT -->
-<section class="section" id="flagship">
-  <div class="section-header">
-    <span class="hero-badge">Featured Guide</span>
-    <h2>The Internet's New User Isn't Human</h2>
-    <p>We've spent 25 years optimizing for humans who search. Now we need to optimize for machines that act. Most marketers haven't noticed the shift. This guide makes the case for why it matters — grounded in what's happening, not what might happen.</p>
-  </div>
-  <div style="background: var(--lavender); border: 1px solid var(--border); border-radius: 12px; padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-    <div>
-      <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 16px;">What you'll understand after reading</h3>
-      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
-        <div style="display: flex; gap: 12px; align-items: start;">
-          <span style="color: var(--purple); font-weight: 700; flex-shrink: 0;">01</span>
-          <span style="font-size: 15px; color: var(--text-secondary);">Why the shift from "asking AI" to "delegating to AI" changes the entire search landscape</span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: start;">
-          <span style="color: var(--purple); font-weight: 700; flex-shrink: 0;">02</span>
-          <span style="font-size: 15px; color: var(--text-secondary);">What the data actually shows — traffic patterns, protocol adoption, and the gap between hype and reality</span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: start;">
-          <span style="color: var(--purple); font-weight: 700; flex-shrink: 0;">03</span>
-          <span style="font-size: 15px; color: var(--text-secondary);">The data behind the shift: traffic patterns, protocol wars, and who's building what</span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: start;">
-          <span style="color: var(--purple); font-weight: 700; flex-shrink: 0;">04</span>
-          <span style="font-size: 15px; color: var(--text-secondary);">What Semrush sees in the data — and what practitioners should do right now</span>
-        </div>
-      </div>
-      <a href="flagship-article.html" class="hero-cta">Read the Full Guide</a>
-    </div>
-    <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 32px;">
-      <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Key insight from the guide</div>
-      <div class="quote-mark" style="text-align: left; margin-bottom: 4px; font-size: 48px;">"</div>
-      <p style="font-size: 17px; line-height: 1.65; margin-bottom: 16px;">The industry now faces two distinct strategic problems: traditional SEO, focused on humans who want to browse, compare, and buy — and AI search optimization, focused on supplying information so AI agents can find, trust, and use it without a user ever visiting the site.</p>
-      <p style="font-size: 13px; color: var(--text-tertiary);"><strong style="color: var(--near-black);">Mike King</strong>, CEO, iPullRank</p>
-    </div>
-  </div>
-</section>
-
-<!-- THE GUIDES -->
-<section class="section-full section-lavender">
+<!-- CONTENT HUB -->
+<section class="section-full section-white">
   <div class="section-inner">
     <div class="section-header section-header-centered">
-      <h2>The Complete Guide to Agentic Search</h2>
-      <p>Seven guides that take you from understanding the shift to acting on it. Each builds on the last.</p>
+      <h2>Explore Agentic Search</h2>
+      <p>Articles, frameworks, and resources on how AI agents are reshaping search — and what it means for your brand.</p>
     </div>
-    <div class="guides-grid">
-
-      <!-- Guide 1 — Flagship -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 1 — Foundation</span>
-          <span class="guide-badge badge-available">Available</span>
-        </div>
+    <div class="hub-grid">
+      <!-- 1. Flagship -->
+      <div class="hub-card">
+        <span class="hub-pill pill-article">Article</span>
         <h3>The Internet's New User Isn't Human</h3>
-        <p>The argument for why search marketers need to pay attention to agentic search now. Not hype — data. The evolution from asking AI to delegating to AI, and what it means for visibility, trust, and how brands get chosen.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Long-form Guide</span>
-          <a href="flagship-article.html" class="guide-link">Read guide &rarr;</a>
+        <p>Why the shift from asking AI to delegating to AI changes the entire search landscape. The data, the products, the people already living it.</p>
+        <div class="hub-card-link">
+          <a href="flagship-article.html">Read &rarr;</a>
         </div>
       </div>
-
-      <!-- Guide 2 — Under the Hood -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 1 — Foundation</span>
-          <span class="guide-badge badge-available">Available</span>
-        </div>
+      <!-- 2. What It Is -->
+      <div class="hub-card">
+        <span class="hub-pill pill-article">Article</span>
         <h3>Agentic Search: What It Actually Is (And Isn't)</h3>
-        <p>A peek at the machinery. How AI agents actually work — memory, tool use, multi-step reasoning, trust evaluation. The technical reality explained at a level anyone can follow, with visual breakdowns of the engine under the hood.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Technical Explainer</span>
-          <a href="piece2-article.html" class="guide-link">Read guide &rarr;</a>
+        <p>How AI agents actually work under the hood — the machinery of tool use, multi-step reasoning, trust evaluation, and where it still breaks.</p>
+        <div class="hub-card-link">
+          <a href="piece2-article.html">Read &rarr;</a>
         </div>
       </div>
-
-      <!-- Guide 3 — Strategic Framework -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 2 — Optimization</span>
-          <span class="guide-badge badge-coming-soon">Coming Soon</span>
-        </div>
+      <!-- 3. Optimize -->
+      <div class="hub-card coming-soon">
+        <span class="hub-pill pill-article">Article</span>
         <h3>How to Optimize for Agentic Search</h3>
-        <p>The strategic framework. The three-layer search stack — SEO, AEO, AAO — and what changes at each level. How to baseline your AI visibility, identify the prompts that lead to agent action, and build the trust signals agents rely on.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Strategy Guide</span>
-          <a href="#" class="guide-link" style="color: var(--text-tertiary);">Coming soon</a>
+        <p>The strategic framework for the three-layer search stack and what changes at each level.</p>
+        <div class="hub-card-link">
+          <span class="coming-label">Coming soon</span>
         </div>
       </div>
-
-      <!-- Guide 4 — Technical Implementation -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 2 — Optimization</span>
-          <span class="guide-badge badge-coming-soon">Coming Soon</span>
-        </div>
+      <!-- 4. Agent-Ready -->
+      <div class="hub-card coming-soon">
+        <span class="hub-pill pill-article">Article</span>
         <h3>Making Your Site Agent-Ready</h3>
-        <p>The implementation playbook. Structured data requirements, llms.txt, agent-ready APIs, action-enabling architecture. What to build so agents can parse your site, trust your data, and complete tasks on behalf of users.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Technical Guide</span>
-          <a href="#" class="guide-link" style="color: var(--text-tertiary);">Coming soon</a>
+        <p>Structured data, llms.txt, agent-ready APIs, and the technical implementation playbook.</p>
+        <div class="hub-card-link">
+          <span class="coming-label">Coming soon</span>
         </div>
       </div>
-
-      <!-- WebMCP -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 2 — Optimization</span>
-          <span class="guide-badge badge-available">In Production</span>
-        </div>
+      <!-- 5. WebMCP -->
+      <div class="hub-card coming-soon">
+        <span class="hub-pill pill-article">Article</span>
         <h3>WebMCP: What It Is, Why It Matters, and What to Do Now</h3>
-        <p>The browser-level standard that lets any webpage declare its capabilities as structured tools for AI agents. How it works, how to test it today, and why it's the responsive design moment for the agentic web.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Technical Deep Dive</span>
-          <a href="#" class="guide-link">In review &rarr;</a>
+        <p>The browser-level standard that lets websites declare capabilities as structured tools for AI agents.</p>
+        <div class="hub-card-link">
+          <span class="coming-label">Coming soon</span>
         </div>
       </div>
-
-      <!-- Guide 5 — Funnel -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 3 — Bigger Picture</span>
-          <span class="guide-badge badge-coming-soon">Coming Soon</span>
-        </div>
-        <h3>The Agent-Mediated Funnel</h3>
-        <p>How buying decisions change when an AI agent evaluates options before the human ever sees them. The disrupted funnel model, with real-world examples from travel, ecommerce, and B2B SaaS.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Marketing Strategy</span>
-          <a href="#" class="guide-link" style="color: var(--text-tertiary);">Coming soon</a>
+      <!-- 6. Video -->
+      <div class="hub-card coming-soon">
+        <span class="hub-pill pill-video">Video</span>
+        <h3>Agentic Search Explained (Video)</h3>
+        <p>A visual walkthrough of how AI agents browse, evaluate, and act on behalf of users.</p>
+        <div class="hub-card-link">
+          <span class="coming-label">Coming soon</span>
         </div>
       </div>
-
-      <!-- Guide 6 — Data -->
-      <div class="guide-card">
-        <div class="guide-card-header">
-          <span class="guide-phase">Phase 3 — Bigger Picture</span>
-          <span class="guide-badge badge-coming-soon">Coming Soon</span>
-        </div>
-        <h3>Agent Traffic vs. Human Traffic</h3>
-        <p>The data story. Who's actually visiting your site in 2026 — the traffic composition shift, what it means for measurement, and how to track the visitors that don't behave like people.</p>
-        <div class="guide-card-footer">
-          <span class="guide-type">Data Report</span>
-          <a href="#" class="guide-link" style="color: var(--text-tertiary);">Coming soon</a>
+      <!-- 7. Template -->
+      <div class="hub-card coming-soon">
+        <span class="hub-pill pill-template">Template</span>
+        <h3>Agentic Search Readiness Checklist</h3>
+        <p>Audit your site's readiness for AI agent traffic with this step-by-step template.</p>
+        <div class="hub-card-link">
+          <span class="coming-label">Coming soon</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- THE FUNNEL SHIFT -->
-<section class="section">
-  <div class="section-header">
-    <h2>The Funnel Has a New Gatekeeper</h2>
-    <p>In traditional search, humans discover brands through their own browsing. In agentic search, an AI agent evaluates and selects before the human ever becomes aware. The first impression isn't yours to make anymore.</p>
-  </div>
-  <div class="funnel-section">
-    <div class="funnel-box">
-      <h3><span class="funnel-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#1565C0" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg></span> Traditional Search Funnel</h3>
-      <div class="funnel-step">
-        <div class="funnel-dot human">1</div>
-        <div class="funnel-step-content">
-          <strong>Awareness</strong>
-          <span>Human discovers brand through search results</span>
-        </div>
-        <span class="funnel-actor actor-human">Human</span>
-      </div>
-      <div class="funnel-step">
-        <div class="funnel-dot human">2</div>
-        <div class="funnel-step-content">
-          <strong>Consideration</strong>
-          <span>Human compares options, reads reviews</span>
-        </div>
-        <span class="funnel-actor actor-human">Human</span>
-      </div>
-      <div class="funnel-step">
-        <div class="funnel-dot human">3</div>
-        <div class="funnel-step-content">
-          <strong>Decision</strong>
-          <span>Human selects and purchases</span>
-        </div>
-        <span class="funnel-actor actor-human">Human</span>
-      </div>
-      <div class="funnel-step">
-        <div class="funnel-dot human">4</div>
-        <div class="funnel-step-content">
-          <strong>Conversion</strong>
-          <span>Transaction completed</span>
-        </div>
-        <span class="funnel-actor actor-human">Human</span>
-      </div>
+<section class="section-full section-lavender">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>The Funnel Will Have a New Gatekeeper</h2>
+      <p>As agentic search matures, AI agents will evaluate and select before the human ever becomes aware. The first impression won't be yours to make.</p>
     </div>
-    <div class="funnel-box" style="border-color: var(--purple);">
-      <h3><span class="funnel-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6A35FF" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg></span> Agent-Mediated Funnel</h3>
-      <div class="funnel-step">
-        <div class="funnel-dot agent">1</div>
-        <div class="funnel-step-content">
-          <strong>Agent Evaluates</strong>
-          <span>AI agent researches, compares, and filters options autonomously</span>
+    <div class="funnel-grid">
+      <div class="funnel-box">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#1565C0" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+          Traditional Search Funnel
+        </h3>
+        <div class="funnel-step">
+          <div class="funnel-dot human">1</div>
+          <div class="funnel-step-content">
+            <strong>Awareness</strong>
+            <span>Human discovers brand through search results</span>
+          </div>
+          <span class="funnel-actor actor-human">Human</span>
         </div>
-        <span class="funnel-actor actor-agent">Agent</span>
+        <div class="funnel-step">
+          <div class="funnel-dot human">2</div>
+          <div class="funnel-step-content">
+            <strong>Consideration</strong>
+            <span>Human compares options, reads reviews</span>
+          </div>
+          <span class="funnel-actor actor-human">Human</span>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-dot human">3</div>
+          <div class="funnel-step-content">
+            <strong>Decision</strong>
+            <span>Human selects and purchases</span>
+          </div>
+          <span class="funnel-actor actor-human">Human</span>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-dot human">4</div>
+          <div class="funnel-step-content">
+            <strong>Conversion</strong>
+            <span>Transaction completed</span>
+          </div>
+          <span class="funnel-actor actor-human">Human</span>
+        </div>
       </div>
-      <div class="funnel-step">
-        <div class="funnel-dot agent">2</div>
-        <div class="funnel-step-content">
-          <strong>Agent Selects</strong>
-          <span>Agent narrows to best match based on trust signals and user context</span>
+      <div class="funnel-box funnel-agent">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6A35FF" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
+          Agent-Mediated Funnel
+        </h3>
+        <div class="funnel-step">
+          <div class="funnel-dot agent">1</div>
+          <div class="funnel-step-content">
+            <strong>Agent Evaluates</strong>
+            <span>AI agent researches, compares, and filters options autonomously</span>
+          </div>
+          <span class="funnel-actor actor-agent">Agent</span>
         </div>
-        <span class="funnel-actor actor-agent">Agent</span>
-      </div>
-      <div class="funnel-step">
-        <div class="funnel-dot human">3</div>
-        <div class="funnel-step-content">
-          <strong>Human Sees Options</strong>
-          <span>Human becomes aware of brand only at this stage</span>
+        <div class="funnel-step">
+          <div class="funnel-dot agent">2</div>
+          <div class="funnel-step-content">
+            <strong>Agent Selects</strong>
+            <span>Agent narrows to best match based on trust signals and user context</span>
+          </div>
+          <span class="funnel-actor actor-agent">Agent</span>
         </div>
-        <span class="funnel-actor actor-both">Both</span>
-      </div>
-      <div class="funnel-step">
-        <div class="funnel-dot human">4</div>
-        <div class="funnel-step-content">
-          <strong>Validation or Action</strong>
-          <span>Human validates the agent's choice — or the agent completes the task</span>
+        <div class="funnel-step">
+          <div class="funnel-dot human">3</div>
+          <div class="funnel-step-content">
+            <strong>Human Sees Options</strong>
+            <span>Human becomes aware of brand only at this stage</span>
+          </div>
+          <span class="funnel-actor actor-both">Both</span>
         </div>
-        <span class="funnel-actor actor-both">Both</span>
+        <div class="funnel-step">
+          <div class="funnel-dot human">4</div>
+          <div class="funnel-step-content">
+            <strong>Validation or Action</strong>
+            <span>Human validates the agent's choice — or the agent completes the task</span>
+          </div>
+          <span class="funnel-actor actor-both">Both</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- QUOTE SECTION -->
-<section class="section-full section-lavender" style="padding: 80px 40px;">
-  <div class="quote-block">
-    <div class="quote-mark">"</div>
-    <p class="quote-text">We're trying to fit a baseball bat through a keyhole by applying SEO ranking logic to probabilistic systems. Own proprietary data and unique metrics that AI models can't just synthesize or ignore.</p>
-    <p class="quote-attr"><strong>Britney Muller</strong>, AI Educator & Researcher</p>
-  </div>
-</section>
-
-<!-- WHAT'S HAPPENING TIMELINE -->
+<!-- WHAT'S ALREADY HAPPENING — TIMELINE -->
 <section class="section">
   <div class="section-header">
     <h2>What's Already Happening</h2>
@@ -970,42 +1036,59 @@
   </div>
 </section>
 
-<!-- SEMRUSH PRODUCT TIE-IN -->
+<!-- PRODUCT TIE-IN -->
 <section class="section-full section-lavender">
   <div class="section-inner">
     <div class="section-header section-header-centered">
       <h2>Measure Your Agentic Visibility</h2>
-      <p>Understanding the shift is step one. Measuring where you stand is step two. Semrush One tracks your brand's presence across AI-generated answers, agent interactions, and traditional search — all in one platform.</p>
+      <p>Understanding the shift is step one. Measuring where you stand is step two. Semrush tracks your brand's presence across AI-generated answers, agent interactions, and traditional search.</p>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center;">
-        <div class="product-icon pi-visibility"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div>
-        <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 8px;">AI Visibility Tracking</h3>
-        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Track where your brand appears in ChatGPT, Gemini, Perplexity, and Google AI Overviews. See who's getting cited where you're not.</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-icon pi-visibility">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+        </div>
+        <h3>AI Visibility Tracking</h3>
+        <p>Track where your brand appears in ChatGPT, Gemini, Perplexity, and Google AI Overviews. See who's getting cited where you're not.</p>
       </div>
-      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center;">
-        <div class="product-icon pi-agent"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg></div>
-        <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 8px;">Agent Analytics</h3>
-        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Enterprise-grade tracking of how autonomous AI agents interact with your brand content. See the visitors that don't behave like people.</p>
+      <div class="product-card">
+        <div class="product-icon pi-agent">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+        </div>
+        <h3>Agent Analytics</h3>
+        <p>Enterprise-grade tracking of how autonomous AI agents interact with your brand content. See the visitors that don't behave like people.</p>
       </div>
-      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center;">
-        <div class="product-icon pi-competitive"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg></div>
-        <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 8px;">Competitive Intelligence</h3>
-        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Compare your agentic visibility against competitors. Understand who agents recommend — and why — across every major AI platform.</p>
+      <div class="product-card">
+        <div class="product-icon pi-competitive">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+        </div>
+        <h3>Competitive Intelligence</h3>
+        <p>Compare your agentic visibility against competitors. Understand who agents recommend — and why — across every major AI platform.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BOTTOM CTA -->
-<section class="section-full section-dark bottom-cta">
-  <h2>The web has a new user.<br>Are you ready for it?</h2>
-  <p>Start with the guide. Understand the shift. Then use Semrush One to measure where you stand and build your agentic search strategy.</p>
-  <a href="flagship-article.html" class="cta-dark">Start Reading</a>
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2>The Web Has a New User.<br>Is Your Brand Ready?</h2>
+  <p>Start with the overview. Understand the shift. Then measure where you stand with Semrush.</p>
+  <a href="flagship-article.html" class="cta-green">Start Reading</a>
+  <div class="awards-row">
+    <span class="award-badge">G2 #1 SEO Tool</span>
+    <span class="award-badge">TrustRadius Top Rated</span>
+    <span class="award-badge">Search Engine Land Award</span>
+    <span class="award-badge">Martech Breakthrough</span>
+  </div>
 </section>
 
-<!-- FOOTER NOTE -->
-<div style="padding: 40px; text-align: center; font-size: 13px; color: var(--text-tertiary); border-top: 1px solid var(--border);">
+<!-- FOOTER -->
+<div class="footer">
+  &copy; 2008–2026 Semrush. All rights reserved. <a href="#">Legal Info</a> <a href="#">Privacy Policy</a>
+</div>
+
+<!-- INTERNAL NOTE -->
+<div class="internal-note">
   <strong>Internal Draft</strong> — Semrush Agentic Search Hub Concept &middot; Michael Ofei, March 2026<br>
   For review by Andrew Warden, Leigh McKenzie, and the Owned Media team
 </div>
