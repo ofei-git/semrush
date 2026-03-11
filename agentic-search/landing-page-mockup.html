@@ -11,8 +11,8 @@
     :root {
       --green: #1DBF73;
       --green-hover: #17a863;
-      --purple: #6A35FF;
-      --purple-hover: #5529CC;
+      --purple: #7B5AFF;
+      --purple-hover: #6A35FF;
       --near-black: #191C1F;
       --white: #FFFFFF;
       --lavender: #F8F6FF;
@@ -142,6 +142,81 @@
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text { }
+    .hero-video {
+      position: relative;
+      background: var(--near-black);
+      border-radius: 12px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .hero-video::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1C0D3B, #2A1558);
+      opacity: 0.95;
+    }
+    .hero-video-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--white);
+    }
+    .hero-play-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .hero-play-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    .hero-play-btn svg {
+      width: 24px;
+      height: 24px;
+      color: var(--white);
+      margin-left: 3px;
+    }
+    .hero-video-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 4px;
+    }
+    .hero-video-duration {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
+    .hero-video-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .hero-decoration {
       position: absolute;
@@ -667,6 +742,7 @@
       .nav-links { display: none; }
       .breadcrumb { padding: 8px 20px; }
       .hero { padding: 60px 20px 40px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 34px; }
       .hero p.hero-sub { font-size: 16px; }
       .section { padding: 60px 20px; }
@@ -717,10 +793,22 @@
 <section class="hero">
   <div class="hero-decoration"></div>
   <div class="hero-inner">
-    <span class="hero-badge">Agentic Search</span>
-    <h1>The Internet's New User Isn't Human</h1>
-    <p class="hero-sub">AI agents are browsing, comparing, and buying on behalf of real people. This is the deep dive into agentic search — what it is, how it works, and what it means for your brand's visibility.</p>
-    <a href="flagship-article.html" class="cta-green">Start with the Overview</a>
+    <div class="hero-text">
+      <span class="hero-badge">Agentic Search</span>
+      <h1>The Internet's New User Isn't Human</h1>
+      <p class="hero-sub">AI agents are browsing, comparing, and buying on behalf of real people. This is the deep dive into agentic search — what it is, how it works, and what it means for your brand's visibility.</p>
+      <a href="flagship-article.html" class="cta-green">Start with the Overview</a>
+    </div>
+    <div class="hero-video">
+      <span class="hero-video-badge">Coming Soon</span>
+      <div class="hero-video-content">
+        <div class="hero-play-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+        </div>
+        <div class="hero-video-label">Agentic Search Explained</div>
+        <div class="hero-video-duration">2 min overview</div>
+      </div>
+    </div>
   </div>
 </section>
 
