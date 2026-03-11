@@ -5,7 +5,7 @@
 
 ---
 
-When ChatGPT launched in November 2022, most of us had the same thought within the first few hours: wouldn't it be incredible if this thing could just *do* things for me? Not answer questions. Not summarize articles. Actually act. Book the flight. Compare the insurance plans. File the reimbursement.
+When ChatGPT launched, most of us had the same thought within the first few hours: wouldn't it be incredible if this thing could just *do* things for me? Not answer questions. Not summarize articles. Actually act. Book the flight. Compare the insurance plans. File the reimbursement.
 
 From late 2022 through most of 2024, that didn't really happen. What we got was a brilliant collaborator — maybe the best research partner any of us have ever had. We stitched together automations. Zapier chains that needed babysitting. Workflows that broke the moment one API changed.
 
