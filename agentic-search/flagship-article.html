@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Internet's New User Isn't Human — Semrush</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple: #6A35FF;
+      --purple-hover: #5529CC;
+      --near-black: #191C1F;
+      --white: #FFFFFF;
+      --lavender: #F8F6FF;
+      --light-purple: #F0EBFF;
+      --text-secondary: #555555;
+      --text-tertiary: #888888;
+      --border: #E8E8E8;
+      --border-subtle: #F0F0F0;
+      --deep-purple: #1C0D3B;
+      --orange: #FF642D;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--near-black);
+      line-height: 1.6;
+      font-size: 16px;
+      background: var(--white);
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 40px; display: flex; align-items: center; gap: 32px; z-index: 100;
+    }
+    .nav-logo {
+      font-size: 22px; font-weight: 800; color: var(--near-black);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+    }
+    .nav-logo .dot { width: 10px; height: 10px; background: var(--orange); border-radius: 50%; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; }
+    .nav-links a.active { color: var(--purple); font-weight: 600; }
+    .nav-back { font-size: 13px; color: var(--text-tertiary); text-decoration: none; margin-left: auto; }
+    .nav-back:hover { color: var(--purple); }
+
+    /* ARTICLE HERO */
+    .article-hero {
+      padding: 80px 40px 48px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .article-hero .badge {
+      display: inline-block; padding: 4px 12px; background: var(--light-purple);
+      color: var(--purple); font-size: 12px; font-weight: 600;
+      border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px;
+    }
+    .article-hero h1 {
+      font-size: 44px; font-weight: 800; line-height: 1.12; margin-bottom: 20px;
+    }
+    .article-hero h1 .highlight { color: var(--purple); }
+    .article-meta {
+      font-size: 14px; color: var(--text-tertiary); display: flex; gap: 20px; align-items: center;
+      padding-bottom: 32px; border-bottom: 1px solid var(--border);
+    }
+
+    /* ARTICLE BODY */
+    .article-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 40px 80px;
+    }
+    .article-body p {
+      font-size: 17px; line-height: 1.75; margin-bottom: 24px; color: var(--near-black);
+    }
+    .article-body p.punch {
+      font-size: 20px; font-weight: 600; line-height: 1.5; margin: 32px 0;
+    }
+    .article-body h2 {
+      font-size: 28px; font-weight: 700; line-height: 1.25; margin: 56px 0 24px; color: var(--near-black);
+    }
+    .article-body a {
+      color: var(--purple); text-decoration: underline; text-decoration-color: rgba(106, 53, 255, 0.3);
+      text-underline-offset: 3px;
+    }
+    .article-body a:hover { text-decoration-color: var(--purple); }
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .aside-note {
+      font-size: 15px; color: var(--text-secondary); background: var(--lavender);
+      border-left: 3px solid var(--purple); padding: 16px 20px; margin: 28px 0;
+      border-radius: 0 8px 8px 0; line-height: 1.7;
+    }
+
+    .blockquote {
+      margin: 36px 0; padding: 28px 32px;
+      background: var(--lavender); border-radius: 12px; position: relative;
+    }
+    .blockquote::before {
+      content: "\201C"; position: absolute; top: 12px; left: 16px;
+      font-size: 48px; color: var(--purple); opacity: 0.25; line-height: 1;
+    }
+    .blockquote p {
+      font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 8px;
+    }
+    .blockquote .attr {
+      font-size: 13px; color: var(--text-tertiary); padding-left: 8px; margin-bottom: 0;
+    }
+    .blockquote .attr strong { color: var(--near-black); }
+
+    /* VISUAL: TIMELINE */
+    .visual-timeline {
+      margin: 40px 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .visual-timeline-header {
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .visual-timeline-header h3 {
+      font-size: 15px; font-weight: 700; color: var(--near-black);
+    }
+    .visual-timeline-header p {
+      font-size: 13px; color: var(--text-tertiary); margin: 4px 0 0; line-height: 1.5;
+    }
+    .tl-item {
+      display: grid; grid-template-columns: 100px 1fr; gap: 20px;
+      padding: 16px 28px; border-bottom: 1px solid var(--border-subtle);
+      align-items: start;
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-date { font-size: 13px; font-weight: 600; color: var(--purple); padding-top: 2px; }
+    .tl-content { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .tl-content strong { color: var(--near-black); font-weight: 600; }
+
+    /* VISUAL: DATA CARDS */
+    .visual-data {
+      margin: 40px 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .data-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .data-card .num {
+      font-size: 36px; font-weight: 800; color: var(--near-black); line-height: 1; margin-bottom: 8px;
+    }
+    .data-card .num .accent { color: var(--purple); }
+    .data-card .desc { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px; }
+    .data-card .source {
+      font-size: 11px; color: var(--text-tertiary);
+    }
+    .data-card .source a { color: var(--text-tertiary); text-decoration: underline; }
+
+    /* VISUAL: BOT COMPARISON */
+    .visual-comparison {
+      margin: 40px 0; background: var(--white);
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .visual-comparison-header {
+      padding: 20px 28px 16px; border-bottom: 1px solid var(--border-subtle);
+    }
+    .visual-comparison-header h3 { font-size: 15px; font-weight: 700; }
+    .comparison-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .comparison-col {
+      padding: 24px 28px;
+    }
+    .comparison-col:first-child { border-right: 1px solid var(--border-subtle); }
+    .comparison-col h4 {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .comparison-col h4 .dot-indicator {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .dot-old { background: var(--text-tertiary); }
+    .dot-new { background: var(--purple); }
+    .comparison-trait {
+      font-size: 14px; color: var(--text-secondary); padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle); line-height: 1.5;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .comparison-trait:last-child { border-bottom: none; }
+    .trait-icon { flex-shrink: 0; width: 20px; height: 20px; color: var(--text-tertiary); }
+    .comparison-col:last-child .trait-icon { color: var(--purple); }
+
+    /* VISUAL: MEASUREMENT SHIFT */
+    .visual-measurement {
+      margin: 40px 0; background: var(--lavender);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px;
+    }
+    .visual-measurement h3 {
+      font-size: 15px; font-weight: 700; margin-bottom: 20px;
+    }
+    .measurement-row {
+      display: flex; align-items: center; gap: 16px; padding: 12px 0;
+      border-bottom: 1px solid rgba(106, 53, 255, 0.08);
+    }
+    .measurement-row:last-child { border-bottom: none; }
+    .measurement-label {
+      font-size: 14px; color: var(--text-secondary); flex: 1;
+    }
+    .measurement-bar-track {
+      flex: 2; height: 8px; background: rgba(106, 53, 255, 0.08);
+      border-radius: 4px; position: relative; overflow: hidden;
+    }
+    .measurement-bar {
+      height: 100%; border-radius: 4px; transition: width 0.3s;
+    }
+    .bar-before { background: var(--text-tertiary); }
+    .bar-after { background: var(--purple); }
+    .measurement-value {
+      font-size: 13px; font-weight: 700; width: 60px; text-align: right;
+    }
+    .val-dim { color: var(--text-tertiary); }
+    .val-alert { color: var(--purple); }
+
+    /* NEXT GUIDE CTA */
+    .next-guide {
+      margin: 48px 0;
+      background: linear-gradient(135deg, #1C0D3B, #2A1558);
+      border-radius: 12px;
+      padding: 40px 36px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .next-guide-text { flex: 1; }
+    .next-guide-text .label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: rgba(255,255,255,0.5); margin-bottom: 10px;
+    }
+    .next-guide-text h3 {
+      font-size: 22px; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 10px;
+    }
+    .next-guide-text p {
+      font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 0;
+    }
+    .next-guide-btn {
+      display: inline-block; background: var(--white); color: var(--deep-purple);
+      padding: 14px 28px; border-radius: 8px; font-weight: 700; font-size: 14px;
+      text-decoration: none; flex-shrink: 0; transition: opacity 0.2s;
+    }
+    .next-guide-btn:hover { opacity: 0.9; }
+
+    /* GUIDE SERIES BAR */
+    .series-bar {
+      margin: 48px 0 0; padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+    .series-bar-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--text-tertiary); margin-bottom: 16px;
+    }
+    .series-links {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .series-link {
+      font-size: 15px; color: var(--text-secondary); text-decoration: none;
+      display: flex; align-items: center; gap: 10px; padding: 8px 0;
+    }
+    .series-link:hover { color: var(--purple); }
+    .series-link .sl-num {
+      font-size: 12px; font-weight: 700; color: var(--purple);
+      background: var(--light-purple); width: 24px; height: 24px;
+      border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .series-link.current { font-weight: 600; color: var(--near-black); }
+    .series-link.current .sl-num { background: var(--purple); color: var(--white); }
+
+    /* DRAFT WATERMARK */
+    .draft-banner {
+      background: #FFF3E0; color: #E65100; text-align: center;
+      padding: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .article-hero h1 { font-size: 32px; }
+      .article-body { padding: 32px 20px 60px; }
+      .visual-data { grid-template-columns: 1fr; }
+      .comparison-row { grid-template-columns: 1fr; }
+      .comparison-col:first-child { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+      .next-guide { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="draft-banner">INTERNAL DRAFT — Flagship Article Mockup — March 2026</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo"><span class="dot"></span> Semrush</a>
+  <ul class="nav-links">
+    <li><a href="#">Platform</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#" class="active">Agentic Search</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="landing-page-mockup.html" class="nav-back">&larr; Back to Agentic Search Hub</a>
+</nav>
+
+<!-- ARTICLE HERO -->
+<header class="article-hero">
+  <span class="badge">Agentic Search Guide</span>
+  <h1>The Internet's New User <span class="highlight">Isn't Human</span></h1>
+  <div class="article-meta">
+    <span>March 2026</span>
+    <span>7 min read</span>
+    <span>Part 1 of 7</span>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p>When ChatGPT launched in November 2022, most of us had the same thought within the first few hours: wouldn't it be incredible if this thing could just <em>do</em> things for me? Not answer questions. Not summarize articles. Actually act. Book the flight. Compare the insurance plans. File the reimbursement.</p>
+
+  <p>From late 2022 through most of 2024, that didn't really happen. What we got was a brilliant collaborator — maybe the best research partner any of us have ever had. We stitched together automations. Zapier chains that needed babysitting. Workflows that broke the moment one API changed.</p>
+
+  <p>The personal AI that handles your life stayed stubbornly out of reach.</p>
+
+  <p class="punch">Then 2025 happened.</p>
+
+  <!-- ============================== -->
+  <h2>The shift from collaboration to delegation</h2>
+
+  <p>The first cracks appeared early. In February 2025, OpenAI launched deep research inside ChatGPT — the first time most people experienced an AI that goes away, investigates a topic across dozens of sources, and comes back with a synthesized report. Gemini and Perplexity followed with their own deep research modes within months. It wasn't full agency yet. But it was the first taste of delegation.</p>
+
+  <p>Then the tools got hands. In June 2025, Anthropic shipped <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> — an AI that doesn't just suggest code, it writes, tests, debugs, and commits across entire projects. For developers, this was the moment AI went from "helpful assistant" to "autonomous teammate." The same pattern was about to hit search.</p>
+
+  <p>In July 2025, Perplexity launched the Comet browser. By September it was driving 52.5% of all agentic web traffic. In October, OpenAI shipped <a href="https://openai.com/index/atlas/" target="_blank" rel="noopener">Atlas with Agent Mode</a> — autonomously finding flights, comparing prices, completing purchases.</p>
+
+  <p>In November, <a href="https://github.com/openclaw" target="_blank" rel="noopener">OpenClaw</a> went viral. 149,000 GitHub stars in a single week. 770,000 autonomous agents deployed. A literal run on Mac Minis.</p>
+
+  <p>In January 2026, Google launched Chrome auto-browse powered by Gemini and published the <a href="https://www.searchenginejournal.com/googles-sage-agentic-ai-research-what-it-means-for-seo/566215/" target="_blank" rel="noopener">SAGE research paper</a>, training agents that chain an average of 4.9 search steps per query. That same month, Microsoft, Google, Anthropic, and OpenAI <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/microsoft-google-openai-and-anthropic-join-forces-to-form-agentic-ai-alliance-according-to-report-organization-backed-by-the-linux-foundation-is-set-to-create-open-source-standards-for-ai-agents" target="_blank" rel="noopener">formed the Agentic AI Foundation</a> under the Linux Foundation to develop open agent standards.</p>
+
+  <!-- VISUAL 1: Timeline -->
+  <div class="visual-timeline">
+    <div class="visual-timeline-header">
+      <h3>The year AI learned to act</h3>
+      <p>From deep research to autonomous agents, February 2025 – March 2026</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Feb 2025</div>
+      <div class="tl-content"><strong>Deep research launches</strong> in ChatGPT. First mainstream experience of AI that investigates independently and reports back. Gemini and Perplexity follow within months.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Jun 2025</div>
+      <div class="tl-content"><strong>Anthropic ships Claude Code.</strong> AI that writes, tests, debugs, and commits code autonomously. One of the first widely-used agentic developer tools.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Jul 2025</div>
+      <div class="tl-content"><strong>Perplexity Comet</strong> launches. Search-first agentic browsing. Captures 52.5% of agentic traffic by September.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Oct 2025</div>
+      <div class="tl-content"><strong>OpenAI Atlas</strong> ships Agent Mode. Autonomously finds flights, compares prices, completes purchases.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Nov 2025</div>
+      <div class="tl-content"><strong>OpenClaw goes viral.</strong> 149K GitHub stars in one week. 770K agents deployed. A run on Mac Minis.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Dec 2025</div>
+      <div class="tl-content"><strong>MCP donated to Linux Foundation.</strong> Model Context Protocol becomes the dominant agent standard. 97M+ monthly SDK downloads.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Jan 2026</div>
+      <div class="tl-content"><strong>Google Chrome auto-browse</strong> and the <strong>SAGE paper.</strong> Agents that chain 4.9 search steps per query. Universal Commerce Protocol launched.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Mar 2026</div>
+      <div class="tl-content"><strong>Bot traffic surpasses humans.</strong> 51% of all web traffic is now non-human. AI bot visits at 1:31 ratio to humans.</div>
+    </div>
+  </div>
+
+  <p>The prototype phase is over. These are products with paying users completing real tasks.</p>
+
+  <p>And the results are already personal. In February 2026, Jesse Genet — an entrepreneur and homeschooling parent — <a href="https://www.youtube.com/@HowIAI" target="_blank" rel="noopener">described on the How I AI podcast</a> how she runs her household with five specialized OpenClaw agents. Each one deployed on its own Mac Mini. Homeschool curriculum. Finances. Scheduling. Software development. Operations.</p>
+
+  <p>She built a custom kids' TV app from scratch and shipped it in four days. Zero prior terminal experience. She photographs curriculum books and her agent generates formatted, ready-to-teach lesson plans from the images. She says "Sylvie, print this" and the document goes from scan to paper in 30 seconds flat.</p>
+
+  <div class="aside-note">
+    She treats agent onboarding like employee onboarding. Each one gets a role, a persona file, and a dedicated machine. That's her actual workflow.
+  </div>
+
+  <p>Jesse isn't an outlier. Federico Viticci at MacStories <a href="https://www.macstories.net/stories/clawbot-showed-me-what-the-future-of-personal-ai-assistants-looks-like/" target="_blank" rel="noopener">burned through 180 million tokens</a> building his personal agent setup. Brandon Gell, COO of Every, built an agent named Zosia that he and his wife use to <a href="https://every.to/source-code/openclaw-setting-up-your-first-personal-ai-agent" target="_blank" rel="noopener">track nanny hours, order groceries, and book date nights</a> through iMessage.</p>
+
+  <!-- ============================== -->
+  <h2>This isn't the bot traffic you're used to</h2>
+
+  <p>Bots have always been on the internet. Automated traffic accounts for <a href="https://www.securityweek.com/bot-traffic-surpasses-humans-online-driven-by-ai-and-criminal-innovation/" target="_blank" rel="noopener">51% of all web visits</a> as of early 2026. Crawlers, scrapers, spam bots — they've been a fixture of the web for decades.</p>
+
+  <p>Those bots were extractive. They took data. They didn't act on anyone's behalf.</p>
+
+  <p>The new wave is <em>transactional</em>. These agents browse, compare, evaluate, and purchase on behalf of real people with real budgets.</p>
+
+  <!-- VISUAL 2: Data Cards -->
+  <div class="visual-data">
+    <div class="data-card">
+      <div class="num">1,300<span class="accent">%</span></div>
+      <div class="desc">Growth in agentic web traffic, January – August 2025</div>
+      <div class="source"><a href="https://www.humansecurity.com/learn/blog/ai-agent-statistics-agentic-commerce/" target="_blank" rel="noopener">HUMAN Security</a></div>
+    </div>
+    <div class="data-card">
+      <div class="num">1:31</div>
+      <div class="desc">AI bot to human visit ratio (Q4 2025), up from 1:200 in Q1</div>
+      <div class="source">TollBit</div>
+    </div>
+    <div class="data-card">
+      <div class="num">305<span class="accent">%</span></div>
+      <div class="desc">Year-over-year growth in OpenAI's GPTBot traffic</div>
+      <div class="source"><a href="https://blog.cloudflare.com/radar-2025-year-in-review/" target="_blank" rel="noopener">Cloudflare, 2025 Year in Review</a></div>
+    </div>
+    <div class="data-card">
+      <div class="num">4.5<span class="accent">M</span></div>
+      <div class="desc">Monthly agentic requests by August 2025</div>
+      <div class="source"><a href="https://www.humansecurity.com/learn/blog/ai-agent-statistics-agentic-commerce/" target="_blank" rel="noopener">HUMAN Security</a></div>
+    </div>
+  </div>
+
+  <p>These agents don't behave like human visitors. They don't click ads. They don't scroll. They don't read your headline and feel persuaded. They parse structured data, check trust signals across multiple sources, and make a selection.</p>
+
+  <p>Often before a human ever sees the options.</p>
+
+  <!-- VISUAL 3: Bot Comparison -->
+  <div class="visual-comparison">
+    <div class="visual-comparison-header">
+      <h3>Two types of non-human traffic</h3>
+    </div>
+    <div class="comparison-row">
+      <div class="comparison-col">
+        <h4><span class="dot-indicator dot-old"></span> Traditional bots</h4>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+          Extract data from pages
+        </div>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"/></svg>
+          Follow programmed crawl patterns
+        </div>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+          No intent behind the visit
+        </div>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+          No human behind the action
+        </div>
+      </div>
+      <div class="comparison-col">
+        <h4><span class="dot-indicator dot-new"></span> Agentic traffic</h4>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>
+          Evaluate, compare, and transact
+        </div>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+          Reason across multi-step goals
+        </div>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/></svg>
+          Real human budget behind every action
+        </div>
+        <div class="comparison-trait">
+          <svg class="trait-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+          Trust signals determine the outcome
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <h2>What this means for search marketers</h2>
+
+  <p>For 25 years, search marketing has been about getting found by humans. Keyword strategy, content optimization, link building, technical SEO — all designed for a world where a person types a query, scans a results page, and clicks.</p>
+
+  <p>That world still exists. A parallel one is forming alongside it.</p>
+
+  <div class="blockquote">
+    <p>The industry now faces "two distinct strategic problems — traditional SEO, focused on humans who want to browse, compare, and buy, and AI search optimization, focused on supplying information so AI agents can find, trust, and use it without a user ever visiting the site."</p>
+    <p class="attr"><strong>Mike King</strong>, CEO, <a href="https://searchengineland.com/ai-search-visibility-seo-predictions-2026-468042" target="_blank" rel="noopener">iPullRank</a></p>
+  </div>
+
+  <p>When an agent evaluates five options and selects one before the human sees any of them, being "found" isn't the finish line. Being <em>chosen</em> by a machine acting on someone's behalf is what matters. The signals agents rely on for that choice look different from what we've optimized for — reviews, expert citations, community consensus, third-party mentions. If your brand's trust signals are thin or inconsistent across the web, agents will route around you.</p>
+
+  <p>Measurement is breaking too.</p>
+
+  <!-- VISUAL 4: Measurement Shift -->
+  <div class="visual-measurement">
+    <h3>The metrics we relied on are shifting</h3>
+    <div class="measurement-row">
+      <div class="measurement-label">CTR from AI platforms to publishers</div>
+      <div class="measurement-bar-track">
+        <div class="measurement-bar bar-before" style="width: 80%;"></div>
+      </div>
+      <div class="measurement-value val-dim">0.8%</div>
+    </div>
+    <div class="measurement-row">
+      <div class="measurement-label" style="color: var(--purple); font-weight: 500;">Same metric, six months later</div>
+      <div class="measurement-bar-track">
+        <div class="measurement-bar bar-after" style="width: 27%;"></div>
+      </div>
+      <div class="measurement-value val-alert">0.27%</div>
+    </div>
+    <div style="height: 12px;"></div>
+    <div class="measurement-row">
+      <div class="measurement-label">Zero-click searches (share of all queries)</div>
+      <div class="measurement-bar-track">
+        <div class="measurement-bar bar-after" style="width: 69%;"></div>
+      </div>
+      <div class="measurement-value val-alert">69%</div>
+    </div>
+    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 12px; text-align: right;">
+      Sources: <a href="https://www.adexchanger.com/publishers/the-ai-search-reckoning-is-dismantling-open-web-traffic-and-publishers-may-never-recover/" target="_blank" rel="noopener" style="color: var(--text-tertiary);">AdExchanger / TollBit</a>, <span style="color: var(--text-tertiary);">Search Engine Land</span>
+    </div>
+  </div>
+
+  <p>The metrics we've relied on for two decades are quietly becoming unreliable. New tools like <a href="https://www.semrush.com/ai-seo/overview/" target="_blank" rel="noopener">Semrush One's AI Visibility tracking</a> are emerging to fill that gap, but the discipline of measuring agent-driven impact is still being invented.</p>
+
+  <!-- ============================== -->
+  <h2>The honest assessment</h2>
+
+  <p>It would be irresponsible to write about this without acknowledging where things actually stand.</p>
+
+  <p>This is early. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">McKinsey's 2025 State of AI report</a> shows only 23% of organizations are scaling agentic AI. Another 39% are experimenting. Experimenting and scaling are different things. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" target="_blank" rel="noopener">Gartner warns</a> that over 40% of agentic AI projects risk cancellation by 2027 without proper governance.</p>
+
+  <p>The security picture is sobering. Summer Yue, a director of alignment at Meta, <a href="https://sfstandard.com/2026/02/25/openclaw-goes-rogue/" target="_blank" rel="noopener">lost control of her own OpenClaw agent</a> when it deleted her entire inbox after running out of working memory. Researchers at Brave demonstrated <a href="https://brave.com/blog/comet-prompt-injection/" target="_blank" rel="noopener">prompt injection attacks</a> against Perplexity's Comet — hidden Reddit comments that could instruct the agent to extract user credentials. Thousands of OpenClaw setups were found <a href="https://techcrunch.com/2025/10/25/the-glaring-security-risks-with-ai-browser-agents/" target="_blank" rel="noopener">accidentally exposed to the internet</a> with shell access and API keys wide open.</p>
+
+  <p>The technology works. It also breaks in ways nobody has fully solved. The trajectory is what matters. The organizations building for this now — even imperfectly — will be better positioned than those waiting for a maturity that may arrive faster than expected.</p>
+
+  <!-- ============================== -->
+  <h2>Where to go from here</h2>
+
+  <p>This guide is the starting point. The shift from human-driven search to agent-mediated search touches how you structure your site, build trust signals, measure success, and rethink your funnel when the first three steps happen before a human is even aware of your brand.</p>
+
+  <!-- Next Guide CTA -->
+  <div class="next-guide">
+    <div class="next-guide-text">
+      <div class="label">Next in the series</div>
+      <h3>Agentic Search: What It Actually Is (And Isn't)</h3>
+      <p>How agents actually work under the hood. The machinery of memory, tool use, and multi-step reasoning — and where it still falls short.</p>
+    </div>
+    <a href="piece2-article.html" class="next-guide-btn">Read Next Guide &rarr;</a>
+  </div>
+
+  <p>We're building out the full picture across this guide series — from the foundational mechanics to the optimization framework, technical implementation, and the data story behind the traffic shift.</p>
+
+  <p>The promise that took its time is arriving. Not perfectly. Not all at once.</p>
+
+  <p>But it's here.</p>
+
+  <!-- Series Navigation -->
+  <div class="series-bar">
+    <div class="series-bar-label">The Complete Agentic Search Guide</div>
+    <div class="series-links">
+      <a href="#" class="series-link current">
+        <span class="sl-num">1</span>
+        The Internet's New User Isn't Human
+      </a>
+      <a href="piece2-article.html" class="series-link">
+        <span class="sl-num">2</span>
+        Agentic Search: What It Actually Is (And Isn't)
+      </a>
+      <a href="#" class="series-link">
+        <span class="sl-num">3</span>
+        How to Optimize for Agentic Search
+      </a>
+      <a href="#" class="series-link">
+        <span class="sl-num">4</span>
+        Making Your Site Agent-Ready
+      </a>
+      <a href="#" class="series-link">
+        <span class="sl-num">5</span>
+        WebMCP: What It Is, Why It Matters, and What to Do Now
+      </a>
+      <a href="#" class="series-link">
+        <span class="sl-num">6</span>
+        The Agent-Mediated Funnel
+      </a>
+      <a href="#" class="series-link">
+        <span class="sl-num">7</span>
+        Agent Traffic vs. Human Traffic
+      </a>
+    </div>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<div style="padding: 40px; text-align: center; font-size: 13px; color: var(--text-tertiary); border-top: 1px solid var(--border);">
+  <strong>Internal Draft</strong> — Flagship Article Mockup &middot; Michael Ofei, March 2026<br>
+  For review by Andrew Warden, Leigh McKenzie, and the Owned Media team
+</div>
+
+</body>
+</html>

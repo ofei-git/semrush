@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Search: What It Actually Is (And Isn't) — Semrush</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --purple: #6A35FF; --purple-hover: #5529CC; --near-black: #191C1F;
+      --white: #FFFFFF; --lavender: #F8F6FF; --light-purple: #F0EBFF;
+      --text-secondary: #555555; --text-tertiary: #888888;
+      --border: #E8E8E8; --border-subtle: #F0F0F0;
+      --deep-purple: #1C0D3B; --orange: #FF642D;
+      --green: #2E7D32; --green-bg: #E8F5E9;
+      --blue: #1565C0; --blue-bg: #E3F2FD;
+      --amber: #E65100; --amber-bg: #FFF3E0;
+    }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--near-black); line-height: 1.6; font-size: 16px; background: var(--white); }
+
+    .nav { position: sticky; top: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; align-items: center; gap: 32px; z-index: 100; }
+    .nav-logo { font-size: 22px; font-weight: 800; color: var(--near-black); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .nav-logo .dot { width: 10px; height: 10px; background: var(--orange); border-radius: 50%; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; }
+    .nav-links a.active { color: var(--purple); font-weight: 600; }
+    .nav-back { font-size: 13px; color: var(--text-tertiary); text-decoration: none; margin-left: auto; }
+    .nav-back:hover { color: var(--purple); }
+
+    .article-hero { padding: 80px 40px 48px; max-width: 780px; margin: 0 auto; }
+    .article-hero .badge { display: inline-block; padding: 4px 12px; background: var(--light-purple); color: var(--purple); font-size: 12px; font-weight: 600; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; }
+    .article-hero h1 { font-size: 40px; font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+    .article-hero h1 .highlight { color: var(--purple); }
+    .article-meta { font-size: 14px; color: var(--text-tertiary); display: flex; gap: 20px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+    .article-body { max-width: 780px; margin: 0 auto; padding: 48px 40px 80px; }
+    .article-body p { font-size: 17px; line-height: 1.75; margin-bottom: 24px; }
+    .article-body h2 { font-size: 28px; font-weight: 700; line-height: 1.25; margin: 56px 0 24px; }
+    .article-body h3 { font-size: 20px; font-weight: 700; line-height: 1.3; margin: 40px 0 16px; }
+    .article-body a { color: var(--purple); text-decoration: underline; text-decoration-color: rgba(106,53,255,0.3); text-underline-offset: 3px; }
+    .article-body a:hover { text-decoration-color: var(--purple); }
+    .article-body strong { font-weight: 600; }
+    .article-body em { font-style: italic; }
+
+    .aside-note { font-size: 15px; color: var(--text-secondary); background: var(--lavender); border-left: 3px solid var(--purple); padding: 16px 20px; margin: 28px 0; border-radius: 0 8px 8px 0; line-height: 1.7; }
+
+    /* VISUAL CONTAINERS */
+    .visual { margin: 40px 0; background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .visual-header { padding: 20px 28px 16px; border-bottom: 1px solid var(--border-subtle); }
+    .visual-header h3 { font-size: 15px; font-weight: 700; margin: 0; }
+    .visual-header p { font-size: 13px; color: var(--text-tertiary); margin: 4px 0 0; }
+    .visual-body { padding: 28px; }
+    .visual-lav { background: var(--lavender); }
+    .visual-caption { font-size: 12px; color: var(--text-tertiary); padding: 0 28px 20px; line-height: 1.6; }
+    .visual-caption a { color: var(--text-tertiary); }
+
+    /* SPECTRUM */
+    .spectrum-bar { height: 6px; background: linear-gradient(to right, var(--border), var(--purple)); border-radius: 3px; margin-bottom: 28px; }
+    .spectrum-items { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .spectrum-item { text-align: center; }
+    .spectrum-dot { width: 12px; height: 12px; border-radius: 50%; margin: 0 auto 10px; }
+    .sd-1 { background: #CCC; } .sd-2 { background: #999; } .sd-3 { background: #9B7AFF; } .sd-4 { background: var(--purple); }
+    .spectrum-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .spectrum-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+    /* TRIGGER CARDS */
+    .trigger-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .trigger-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 24px; position: relative; }
+    .trigger-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 10px 10px 0 0; }
+    .trigger-card:nth-child(1)::before { background: var(--blue); }
+    .trigger-card:nth-child(2)::before { background: var(--purple); }
+    .trigger-card:nth-child(3)::before { background: var(--amber); }
+    .trigger-num { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .tn-1 { color: var(--blue); } .tn-2 { color: var(--purple); } .tn-3 { color: var(--amber); }
+    .trigger-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .trigger-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 12px; }
+    .trigger-example { font-size: 12px; color: var(--text-tertiary); font-style: italic; line-height: 1.5; }
+    .trigger-autonomy { display: flex; align-items: center; gap: 8px; margin-top: 20px; padding: 12px 0 0; border-top: 1px solid var(--border-subtle); }
+    .trigger-autonomy span { font-size: 11px; color: var(--text-tertiary); }
+    .autonomy-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .autonomy-fill { height: 100%; border-radius: 2px; }
+    .af-1 { width: 30%; background: var(--blue); } .af-2 { width: 60%; background: var(--purple); } .af-3 { width: 95%; background: var(--amber); }
+
+    /* DECOMPOSITION VISUAL */
+    .decomp { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 0; align-items: start; }
+    .decomp-left { background: var(--lavender); border-radius: 10px; padding: 20px; }
+    .decomp-left .label { font-size: 11px; font-weight: 600; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .decomp-left p { font-size: 15px; line-height: 1.65; margin: 0; color: var(--near-black); font-style: italic; }
+    .decomp-arrow { display: flex; align-items: center; justify-content: center; color: var(--purple); padding-top: 30px; }
+    .decomp-right { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .decomp-right .label { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .decomp-task { display: flex; gap: 10px; align-items: start; padding: 6px 0; }
+    .decomp-task .num { font-size: 12px; font-weight: 700; color: var(--purple); background: var(--light-purple); width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .decomp-task span { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* TOOL CALL VISUAL */
+    .tool-flow { display: flex; align-items: stretch; gap: 0; }
+    .tool-step { flex: 1; padding: 20px; text-align: center; position: relative; }
+    .tool-step:not(:last-child)::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--purple); font-weight: 700; font-size: 18px; z-index: 1; }
+    .tool-step-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .tsi-agent { background: var(--light-purple); }
+    .tsi-tool { background: var(--green-bg); }
+    .tsi-eval { background: var(--blue-bg); }
+    .tool-step-icon svg { width: 24px; height: 24px; }
+    .tool-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .tool-step p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+    /* CHAIN VISUAL */
+    .chain { display: flex; flex-direction: column; gap: 0; }
+    .chain-step { display: flex; align-items: start; gap: 16px; padding: 14px 0; }
+    .chain-step:not(:last-child) { border-bottom: 1px dashed var(--border); }
+    .chain-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .ci-a { background: var(--blue-bg); color: var(--blue); }
+    .ci-b { background: var(--amber-bg); color: var(--amber); }
+    .ci-c { background: var(--green-bg); color: var(--green); }
+    .ci-d { background: var(--light-purple); color: var(--purple); }
+    .chain-content { flex: 1; }
+    .chain-content strong { font-size: 14px; display: block; margin-bottom: 2px; }
+    .chain-content span { font-size: 13px; color: var(--text-secondary); }
+    .chain-connector { font-size: 11px; color: var(--purple); font-weight: 600; padding-left: 52px; padding-top: 4px; padding-bottom: 4px; }
+
+    /* TRUST VISUAL */
+    .trust-product { font-size: 16px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .trust-product .tp-badge { font-size: 11px; font-weight: 600; background: var(--light-purple); color: var(--purple); padding: 3px 8px; border-radius: 4px; }
+    .trust-signal { display: flex; align-items: start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-subtle); }
+    .trust-signal:last-of-type { border-bottom: none; }
+    .trust-strength { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .ts-strong { background: var(--green); }
+    .ts-moderate { background: #FFA726; }
+    .ts-weak { background: #EF5350; }
+    .trust-signal-content { flex: 1; }
+    .trust-signal-content .source { font-size: 13px; font-weight: 600; }
+    .trust-signal-content .finding { font-size: 13px; color: var(--text-secondary); }
+    .trust-assessment { margin-top: 20px; padding: 16px; background: var(--lavender); border-radius: 8px; }
+    .trust-assessment h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+    .trust-meter { display: flex; gap: 12px; }
+    .trust-meter-item { flex: 1; }
+    .trust-meter-item .tm-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+    .trust-meter-item .tm-bar { height: 6px; border-radius: 3px; background: var(--border); }
+    .trust-meter-item .tm-fill { height: 100%; border-radius: 3px; }
+    .tmf-strong { width: 85%; background: var(--green); }
+    .tmf-moderate { width: 55%; background: #FFA726; }
+    .tmf-weak { width: 25%; background: #EF5350; }
+
+    /* MEMORY LAYERS */
+    .memory-layers { position: relative; }
+    .memory-layer { border-radius: 10px; padding: 20px; margin-bottom: 12px; }
+    .ml-raw { background: #F5F5F5; border: 1px solid var(--border); }
+    .ml-context { background: var(--light-purple); border: 1px solid rgba(106,53,255,0.15); }
+    .ml-output { background: var(--white); border: 2px solid var(--purple); }
+    .memory-layer .ml-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .ml-raw .ml-label { color: var(--text-tertiary); }
+    .ml-context .ml-label { color: var(--purple); }
+    .ml-output .ml-label { color: var(--purple); }
+    .memory-layer p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    .ml-arrow { text-align: center; color: var(--purple); font-size: 18px; margin: 4px 0; }
+
+    /* AUTONOMY SPECTRUM */
+    .auto-spectrum { position: relative; }
+    .auto-track { height: 8px; background: linear-gradient(to right, var(--green-bg), var(--light-purple)); border-radius: 4px; margin-bottom: 20px; position: relative; }
+    .auto-marker { position: absolute; top: -6px; width: 20px; height: 20px; background: var(--purple); border: 3px solid var(--white); border-radius: 50%; box-shadow: 0 2px 8px rgba(106,53,255,0.3); }
+    .auto-labels { display: flex; justify-content: space-between; margin-bottom: 16px; }
+    .auto-labels span { font-size: 12px; font-weight: 600; }
+    .auto-labels .al-left { color: var(--green); }
+    .auto-labels .al-right { color: var(--purple); }
+    .auto-points { display: flex; justify-content: space-between; }
+    .auto-point { text-align: center; flex: 1; }
+    .auto-point .ap-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); margin: 0 auto 6px; }
+    .auto-point.active .ap-dot { background: var(--purple); box-shadow: 0 0 0 3px rgba(106,53,255,0.15); }
+    .auto-point span { font-size: 11px; color: var(--text-tertiary); line-height: 1.4; display: block; }
+    .auto-point.active span { color: var(--purple); font-weight: 600; }
+
+    /* HUB AND SPOKE */
+    .hub-center { width: 100px; height: 100px; background: var(--purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .hub-center span { color: var(--white); font-size: 12px; font-weight: 700; text-align: center; line-height: 1.3; }
+    .hub-ring-label { text-align: center; font-size: 11px; color: var(--purple); font-weight: 600; margin-bottom: 16px; }
+    .hub-spokes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .hub-spoke { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 10px; text-align: center; }
+    .hub-spoke svg { width: 24px; height: 24px; color: var(--purple); margin-bottom: 8px; }
+    .hub-spoke h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+    .hub-spoke p { font-size: 11px; color: var(--text-tertiary); line-height: 1.4; margin: 0; }
+
+    /* RELIABILITY */
+    .rel-items { display: flex; flex-direction: column; gap: 16px; }
+    .rel-item { display: flex; align-items: center; gap: 16px; }
+    .rel-label { font-size: 14px; font-weight: 500; width: 260px; flex-shrink: 0; }
+    .rel-bar-track { flex: 1; height: 24px; background: #F5F5F5; border-radius: 6px; overflow: hidden; }
+    .rel-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 12px; }
+    .rel-bar span { font-size: 11px; font-weight: 600; color: var(--white); }
+    .rb-high { background: linear-gradient(to right, #43A047, #66BB6A); width: 90%; }
+    .rb-mh { background: linear-gradient(to right, #43A047, #9CCC65); width: 72%; }
+    .rb-med { background: linear-gradient(to right, #FFA726, #FFB74D); width: 55%; }
+    .rb-dev { background: linear-gradient(to right, var(--purple), #9B7AFF); width: 35%; }
+
+    /* NEXT GUIDE CTA */
+    .next-guide { margin: 48px 0; background: linear-gradient(135deg, #1C0D3B, #2A1558); border-radius: 12px; padding: 40px 36px; display: flex; align-items: center; gap: 32px; }
+    .next-guide-text { flex: 1; }
+    .next-guide-text .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .next-guide-text h3 { font-size: 22px; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 10px; }
+    .next-guide-text p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0; }
+    .next-guide-btn { display: inline-block; background: var(--white); color: var(--deep-purple); padding: 14px 28px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; flex-shrink: 0; }
+
+    .series-bar { margin: 48px 0 0; padding: 32px 0; border-top: 1px solid var(--border); }
+    .series-bar-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); margin-bottom: 16px; }
+    .series-links { display: flex; flex-direction: column; gap: 10px; }
+    .series-link { font-size: 15px; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+    .series-link:hover { color: var(--purple); }
+    .series-link .sl-num { font-size: 12px; font-weight: 700; color: var(--purple); background: var(--light-purple); width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .series-link.current { font-weight: 600; color: var(--near-black); }
+    .series-link.current .sl-num { background: var(--purple); color: var(--white); }
+
+    .draft-banner { background: #FFF3E0; color: #E65100; text-align: center; padding: 10px; font-size: 13px; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .article-hero h1 { font-size: 30px; }
+      .article-body { padding: 32px 20px 60px; }
+      .spectrum-items, .trigger-grid { grid-template-columns: 1fr; }
+      .decomp { grid-template-columns: 1fr; }
+      .decomp-arrow { transform: rotate(90deg); padding: 8px 0; }
+      .tool-flow { flex-direction: column; }
+      .tool-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -8px; transform: translateX(-50%); }
+      .hub-spokes { grid-template-columns: repeat(2, 1fr); }
+      .rel-item { flex-direction: column; align-items: stretch; }
+      .rel-label { width: auto; }
+      .next-guide { flex-direction: column; text-align: center; }
+      .auto-points { flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="draft-banner">INTERNAL DRAFT — Piece 2 Article Mockup v2 — March 2026</div>
+
+<nav class="nav">
+  <a href="#" class="nav-logo"><span class="dot"></span> Semrush</a>
+  <ul class="nav-links">
+    <li><a href="#">Platform</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#" class="active">Agentic Search</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="landing-page-mockup.html" class="nav-back">&larr; Back to Agentic Search Hub</a>
+</nav>
+
+<header class="article-hero">
+  <span class="badge">Agentic Search Guide</span>
+  <h1>Agentic Search: What It Actually Is <span class="highlight">(And Isn't)</span></h1>
+  <div class="article-meta">
+    <span>March 2026</span>
+    <span>12 min read</span>
+    <span>Part 2 of 7</span>
+  </div>
+</header>
+
+<article class="article-body">
+
+  <p>Agentic search is what happens when AI stops answering questions and starts completing tasks. Instead of summarizing information for a human to act on, an AI agent autonomously browses the web, evaluates options across multiple sources, and takes action — booking a flight, signing up for a trial, purchasing a product — on behalf of a real person.</p>
+
+  <p>That's the one-sentence version. The longer version is more interesting, because the term "agentic" has been applied to everything from chatbots to email drafters to Zapier automations in recent months. Some of that is fair — agency exists on a spectrum. But the shift that matters for search marketers is specific: AI systems that independently research, evaluate, and act on the open web, making decisions that used to require a human clicking through search results.</p>
+
+  <p>This guide is a look under the hood. How these systems actually work, what triggers them, where they're reliable, and where they're not.</p>
+
+  <!-- ============================== -->
+  <h2>The three capabilities that define an AI agent</h2>
+
+  <p>Not everything called "agentic" qualifies. Three specific capabilities separate a true AI agent from the AI tools most people use today.</p>
+
+  <p><strong>Autonomy.</strong> The AI initiates actions without being told each step. You give it a goal — "find me a project management tool that fits my team" — and it determines the path on its own. It decides what to search, which sites to visit, what data to compare.</p>
+
+  <p><strong>Tool use.</strong> The AI can reach outside itself. It searches the web, calls APIs, reads databases, interacts with websites. A language model that only generates text from its training data isn't an agent. An AI that can pick up the phone, check a pricing page, and cross-reference a review site is something different entirely.</p>
+
+  <p><strong>Goal persistence.</strong> The AI works toward an outcome across multiple steps and adapts when things don't go as expected. If a pricing page returns a 404, it doesn't stop. It finds another source. If review data contradicts a company's claims, it flags the discrepancy and investigates further.</p>
+
+  <p>A chatbot answers your question. An automation runs a predefined sequence. An AI agent receives a goal and figures out how to achieve it.</p>
+
+  <!-- VISUAL 1: Spectrum -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>The spectrum from tool to AI agent</h3>
+      <p>Most "AI tools" people use today sit somewhere in the middle</p>
+    </div>
+    <div class="visual-body">
+      <div class="spectrum-bar"></div>
+      <div class="spectrum-items">
+        <div class="spectrum-item">
+          <div class="spectrum-dot sd-1"></div>
+          <h4>Automation Script</h4>
+          <p>Follows a fixed script. No decisions. Breaks when conditions change.</p>
+        </div>
+        <div class="spectrum-item">
+          <div class="spectrum-dot sd-2"></div>
+          <h4>Chatbot</h4>
+          <p>Responds to prompts. One turn at a time. No persistent memory.</p>
+        </div>
+        <div class="spectrum-item">
+          <div class="spectrum-dot sd-3"></div>
+          <h4>AI Assistant</h4>
+          <p>Reasons about your request. Suggests next steps. Waits for approval.</p>
+        </div>
+        <div class="spectrum-item">
+          <div class="spectrum-dot sd-4"></div>
+          <h4>AI Agent</h4>
+          <p>Receives a goal. Plans, acts, and adapts across multiple steps until done.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>Deep research modules — in ChatGPT, Gemini, and Perplexity — were a significant leap toward the agent end of this spectrum. They were the first time many people experienced AI that goes away, works independently across dozens of sources, and comes back with a synthesized report. <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> pushed further by writing, testing, and committing code autonomously across entire projects. The full agentic search experience — where the AI browses, evaluates, decides, and transacts on your behalf — is the next step in that progression.</p>
+
+  <!-- ============================== -->
+  <h2>What triggers an AI agent to act</h2>
+
+  <p>AI agent behavior isn't always a deliberate choice. Sometimes you trigger it without knowing. There are three distinct patterns, and understanding them matters because each one generates a different kind of traffic hitting your website.</p>
+
+  <!-- VISUAL 2: Trigger Cards -->
+  <div class="visual visual-lav">
+    <div class="visual-header" style="border-bottom-color: rgba(106,53,255,0.08);">
+      <h3>Three ways AI agent behavior gets triggered</h3>
+      <p>Each pattern generates a different kind of agentic web traffic</p>
+    </div>
+    <div class="visual-body">
+      <div class="trigger-grid">
+        <div class="trigger-card">
+          <div class="trigger-num tn-1">Pattern 1</div>
+          <h4>A conversation turns agentic</h4>
+          <p>You ask an AI something that requires current data or multi-step reasoning. The AI decides on its own to browse the web, call tools, or spawn deeper research.</p>
+          <div class="trigger-example">"What's the best CRM for a 15-person sales team right now?"</div>
+          <div class="trigger-autonomy">
+            <span>Autonomy</span>
+            <div class="autonomy-bar"><div class="autonomy-fill af-1"></div></div>
+          </div>
+        </div>
+        <div class="trigger-card">
+          <div class="trigger-num tn-2">Pattern 2</div>
+          <h4>You choose to delegate</h4>
+          <p>You open an agentic product — Comet, Atlas, deep research — and give it a specific goal. You know you're delegating. The product is built for it.</p>
+          <div class="trigger-example">"Find me flights to Lisbon under $800 in June."</div>
+          <div class="trigger-autonomy">
+            <span>Autonomy</span>
+            <div class="autonomy-bar"><div class="autonomy-fill af-2"></div></div>
+          </div>
+        </div>
+        <div class="trigger-card">
+          <div class="trigger-num tn-3">Pattern 3</div>
+          <h4>Agents run on their own</h4>
+          <p>An AI agent is configured with a persistent role and runs on a schedule or in response to conditions. No human prompt needed.</p>
+          <div class="trigger-example">"When new curriculum arrives, generate lesson plans automatically."</div>
+          <div class="trigger-autonomy">
+            <span>Autonomy</span>
+            <div class="autonomy-bar"><div class="autonomy-fill af-3"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="visual-caption">Patterns 1 and 2 are the primary sources of agentic search traffic today. Pattern 3 is growing fast.</div>
+  </div>
+
+  <p>For the rest of this guide, we'll follow an AI agent through Pattern 2 — an intentional, goal-directed task — because it's the clearest way to see the machinery in motion. But keep this in mind: much of the agentic traffic already hitting your website looks like Pattern 1. A user asked a question in ChatGPT, and the AI decided your site was worth visiting to find the answer.</p>
+
+  <!-- ============================== -->
+  <h2>How an AI agent processes a search query, step by step</h2>
+
+  <p>Say you ask an AI agent: "Find the best project management tool for my 12-person marketing team. Budget under $500/month. We need Slack integration and time tracking."</p>
+
+  <p>Here's what actually happens inside the machine.</p>
+
+  <!-- STEP 1 -->
+  <h3>Step 1: The agent builds a plan before it acts</h3>
+
+  <p>The AI agent doesn't search "best project management tool." It breaks your natural language into structured, checkable criteria — essentially writing itself a task list before doing anything.</p>
+
+  <!-- VISUAL 3: Decomposition -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>Goal decomposition — from prompt to plan</h3>
+      <p>The AI agent translates ambiguous human language into structured, checkable criteria</p>
+    </div>
+    <div class="visual-body">
+      <div class="decomp">
+        <div class="decomp-left">
+          <div class="label">What you say</div>
+          <p>"Find the best project management tool for my 12-person marketing team. Budget under $500/month. We need Slack integration and time tracking."</p>
+        </div>
+        <div class="decomp-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </div>
+        <div class="decomp-right">
+          <div class="label">What the agent plans</div>
+          <div class="decomp-task"><span class="num">1</span><span>Identify PM tools serving teams of 10–20</span></div>
+          <div class="decomp-task"><span class="num">2</span><span>Filter by pricing &le; $500/month</span></div>
+          <div class="decomp-task"><span class="num">3</span><span>Verify Slack integration (native, not third-party)</span></div>
+          <div class="decomp-task"><span class="num">4</span><span>Verify time tracking feature</span></div>
+          <div class="decomp-task"><span class="num">5</span><span>Cross-reference reviews for similar team profiles</span></div>
+          <div class="decomp-task"><span class="num">6</span><span>Rank by overall fit &rarr; present top 3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>This is reasoning, not retrieval. The agent is decomposing ambiguous human language into specific criteria it can check one by one. The quality of this decomposition determines everything that follows.</p>
+
+  <!-- STEP 2 -->
+  <h3>Step 2: The agent selects and calls its tools</h3>
+
+  <p>The AI agent decides which tools to use for each sub-task. Search the web for comparison articles. Check G2 and Capterra for user reviews. Visit product pricing pages directly. Query a product database if one's available.</p>
+
+  <p>The connection layer that makes this possible is MCP — Model Context Protocol. Think of MCP as the USB-C of the AI world. One standard protocol that lets an agent plug into any external tool, database, or API. It has <a href="https://en.wikipedia.org/wiki/Model_Context_Protocol" target="_blank" rel="noopener">97 million monthly SDK downloads</a> and backing from Anthropic, OpenAI, Google, and Microsoft.</p>
+
+  <p>Here's what a tool call actually looks like in practice. The agent recognizes it needs pricing data. It looks at its available MCP connections — web search, review APIs, product databases. It selects the web search tool and sends a structured request: "Asana pricing plans 2026." The tool returns structured results — URLs, snippets, publication dates. The agent reads the results, notices the top article is from 2024, flags it as potentially outdated, and decides to visit Asana's pricing page directly.</p>
+
+  <!-- VISUAL 4: Tool Call -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>How an AI agent calls a tool</h3>
+      <p>The decision loop that repeats for every sub-task</p>
+    </div>
+    <div class="visual-body">
+      <div class="tool-flow">
+        <div class="tool-step">
+          <div class="tool-step-icon tsi-agent" style="color: var(--purple);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>
+          </div>
+          <h4>Agent sends request</h4>
+          <p>Recognizes a need, selects a tool, sends a structured query</p>
+        </div>
+        <div class="tool-step">
+          <div class="tool-step-icon tsi-tool" style="color: var(--green);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z"/></svg>
+          </div>
+          <h4>Tool returns data</h4>
+          <p>Processes the request and returns structured results</p>
+        </div>
+        <div class="tool-step">
+          <div class="tool-step-icon tsi-eval" style="color: var(--blue);">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+          </div>
+          <h4>Agent evaluates</h4>
+          <p>Assesses the results, flags issues, decides next action</p>
+        </div>
+      </div>
+    </div>
+    <div class="visual-caption">This loop — need → select tool → request → response → evaluate → decide — repeats for every sub-task.</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <h3>Step 3: The agent chains multiple research steps</h3>
+
+  <p>Here's where AI agents diverge sharply from chatbots. A chatbot pulls the first relevant result and summarizes it. An agent chains multiple steps together, with each step informing the next.</p>
+
+  <p>Google's <a href="https://www.searchenginejournal.com/googles-sage-agentic-ai-research-what-it-means-for-seo/566215/" target="_blank" rel="noopener">SAGE research paper</a> found that their agents chain an average of 4.9 search steps per query.</p>
+
+  <!-- VISUAL 5: Research Chain -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>Multi-step research in action</h3>
+      <p>Each step informs the next — averaging 4.9 steps per query (Google SAGE)</p>
+    </div>
+    <div class="visual-body">
+      <div class="chain">
+        <div class="chain-step">
+          <div class="chain-icon ci-a">A</div>
+          <div class="chain-content">
+            <strong>Reads comparison article</strong>
+            <span>Finds top 8 PM tools. Notes that Asana is listed at $10.99/user — article published Oct 2024.</span>
+          </div>
+        </div>
+        <div class="chain-connector">Spots outdated pricing &darr;</div>
+        <div class="chain-step">
+          <div class="chain-icon ci-b">B</div>
+          <div class="chain-content">
+            <strong>Visits Asana's pricing page directly</strong>
+            <span>Current Pro tier: $24.99/user/month. Significant increase since the article. Comparison data is unreliable.</span>
+          </div>
+        </div>
+        <div class="chain-connector">Needs corroboration &darr;</div>
+        <div class="chain-step">
+          <div class="chain-icon ci-c">C</div>
+          <div class="chain-content">
+            <strong>Checks G2 reviews for pricing mentions</strong>
+            <span>Multiple Jan 2026 reviews confirm the $24.99 price point. Several note "recent price increase."</span>
+          </div>
+        </div>
+        <div class="chain-connector">Corroborated — updates evaluation &darr;</div>
+        <div class="chain-step">
+          <div class="chain-icon ci-d">D</div>
+          <div class="chain-content">
+            <strong>Recalculates against budget constraint</strong>
+            <span>12 users &times; $24.99 = $299.88/month. Under $500 budget. Asana remains a candidate.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <h3>Step 4: The agent evaluates which sources to trust</h3>
+
+  <p>This is the step that matters most for marketers.</p>
+
+  <p>The AI agent doesn't just find information. It builds a corroboration map — checking whether what one source says is confirmed or contradicted by others. Here's what that evaluation actually looks like for one product in our example:</p>
+
+  <!-- VISUAL 6: Trust Evaluation -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>How an AI agent evaluates trust</h3>
+      <p>Multiple signals feed into an assessment — consistent signals reinforce, contradictions flag</p>
+    </div>
+    <div class="visual-body">
+      <div class="trust-product">Evaluating: Asana <span class="tp-badge">Candidate #3 of 5</span></div>
+
+      <div class="trust-signal">
+        <div class="trust-strength ts-strong"></div>
+        <div class="trust-signal-content">
+          <div class="source">Company pricing page</div>
+          <div class="finding">$24.99/user/month (Pro tier) — direct source, current as of March 2026</div>
+        </div>
+      </div>
+      <div class="trust-signal">
+        <div class="trust-strength ts-strong"></div>
+        <div class="trust-signal-content">
+          <div class="source">G2 — 10,400+ reviews, 4.3/5</div>
+          <div class="finding">"Best for creative teams" — pricing consistent, Slack integration confirmed</div>
+        </div>
+      </div>
+      <div class="trust-signal">
+        <div class="trust-strength ts-strong"></div>
+        <div class="trust-signal-content">
+          <div class="source">Capterra — 4.5/5</div>
+          <div class="finding">Pricing matches, "good Slack integration," time tracking available on paid tiers</div>
+        </div>
+      </div>
+      <div class="trust-signal">
+        <div class="trust-strength ts-moderate"></div>
+        <div class="trust-signal-content">
+          <div class="source">Reddit r/projectmanagement</div>
+          <div class="finding">Mixed sentiment — learning curve complaints, but active community discussion</div>
+        </div>
+      </div>
+      <div class="trust-signal">
+        <div class="trust-strength ts-weak"></div>
+        <div class="trust-signal-content">
+          <div class="source">Expert endorsements</div>
+          <div class="finding">No recent expert-authored reviews or industry endorsements found</div>
+        </div>
+      </div>
+
+      <div class="trust-assessment">
+        <h4>Signal assessment</h4>
+        <div class="trust-meter">
+          <div class="trust-meter-item">
+            <div class="tm-label">Pricing / Features</div>
+            <div class="tm-bar"><div class="tm-fill tmf-strong"></div></div>
+          </div>
+          <div class="trust-meter-item">
+            <div class="tm-label">Community sentiment</div>
+            <div class="tm-bar"><div class="tm-fill tmf-moderate"></div></div>
+          </div>
+          <div class="trust-meter-item">
+            <div class="tm-label">Expert validation</div>
+            <div class="tm-bar"><div class="tm-fill tmf-weak"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="visual-caption">This is directly actionable: you can see which types of trust signals your brand might be missing.</div>
+  </div>
+
+  <!-- STEP 5 -->
+  <h3>Step 5: The agent layers in what it knows about you</h3>
+
+  <p>If the AI agent has memory — through prior conversations, saved preferences, or a user profile — it layers personal context over the results.</p>
+
+  <p>You prefer visual tools over spreadsheet-style interfaces. You tried Monday.com last year and rejected it. Your team is fully remote. Same query, different results for different people.</p>
+
+  <!-- VISUAL 7: Memory Layers -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>How memory personalizes results</h3>
+      <p>User context filters and reranks the raw research output</p>
+    </div>
+    <div class="visual-body">
+      <div class="memory-layers">
+        <div class="memory-layer ml-raw">
+          <div class="ml-label">Raw research results</div>
+          <p>1. Monday.com — best feature match. 2. Asana — strong reviews. 3. ClickUp — lowest price. 4. Teamwork — Slack-native. 5. Wrike — enterprise-ready.</p>
+        </div>
+        <div class="ml-arrow">&darr;</div>
+        <div class="memory-layer ml-context">
+          <div class="ml-label">User context overlay</div>
+          <p>Prefers visual interfaces. Rejected Monday.com in 2025. Team is fully remote — mobile access matters. Marketing department — creative workflow features over engineering tools.</p>
+        </div>
+        <div class="ml-arrow">&darr;</div>
+        <div class="memory-layer ml-output">
+          <div class="ml-label">Personalized output</div>
+          <p>1. Asana — visual, strong reviews, creative team fit. 2. ClickUp — visual, lowest price, good mobile. 3. Teamwork — Slack-native, remote-friendly. Monday.com removed based on prior rejection.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>For brands, this means declaring what you're best at becomes as important as declaring what you do. If your product is great for remote marketing teams, has that been stated clearly across your site, your reviews, and the communities where those teams gather?</p>
+
+  <!-- STEP 6 -->
+  <h3>Step 6: The agent recommends or acts</h3>
+
+  <p>Depending on the level of autonomy the user has granted, the AI agent either presents a shortlist for the human to choose from or takes action directly — signing up for a free trial, booking a demo, starting a purchase.</p>
+
+  <p>Most agents today operate closer to the assistive end. They present options. Full autonomy — where the agent completes a transaction without human review — is where things are heading. For most use cases, we're not there yet.</p>
+
+  <!-- VISUAL 8: Autonomy Spectrum -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>The autonomy spectrum</h3>
+      <p>Where most AI agents operate today — and where they're heading</p>
+    </div>
+    <div class="visual-body">
+      <div class="auto-spectrum">
+        <div class="auto-labels">
+          <span class="al-left">Assistive</span>
+          <span class="al-right">Fully autonomous</span>
+        </div>
+        <div class="auto-track">
+          <div class="auto-marker" style="left: 35%;"></div>
+        </div>
+        <div class="auto-points">
+          <div class="auto-point"><div class="ap-dot"></div><span>Presents research</span></div>
+          <div class="auto-point active"><div class="ap-dot"></div><span>Recommends options</span></div>
+          <div class="auto-point active"><div class="ap-dot"></div><span>Drafts actions for approval</span></div>
+          <div class="auto-point"><div class="ap-dot"></div><span>Executes with confirmation</span></div>
+          <div class="auto-point"><div class="ap-dot"></div><span>Executes independently</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="visual-caption">The purple marker shows where most agents operate today: recommending options and drafting actions for human approval.</div>
+  </div>
+
+  <!-- ============================== -->
+  <h2>MCP and WebMCP: How agents connect to the web</h2>
+
+  <p>Two protocols are worth understanding because they're the infrastructure layer underneath everything above.</p>
+
+  <p><strong>MCP (Model Context Protocol)</strong> connects AI agents to tools. Created by Anthropic in late 2024, <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/microsoft-google-openai-and-anthropic-join-forces-to-form-agentic-ai-alliance-according-to-report-organization-backed-by-the-linux-foundation-is-set-to-create-open-source-standards-for-ai-agents" target="_blank" rel="noopener">donated to the Linux Foundation in December 2025</a>. When an agent needs to search the web, check a database, or call an API, MCP is the standard that makes the connection work. One universal protocol instead of custom integration for every tool.</p>
+
+  <p><strong>WebMCP</strong> is the browser-native extension. Instead of an AI agent guessing which button does what on your site — screenshotting, parsing HTML, hoping the layout doesn't change — WebMCP lets your site declare its capabilities as structured, callable tools. Your site says "here's a function called searchProducts, it needs a category and price range, call it and I'll return structured results." The agent calls the function. Gets the data. Moves on.</p>
+
+  <div class="aside-note">
+    We have a full deep dive on WebMCP in this guide series — how it works technically, how to test it in Chrome 146 today, and what marketers need to know.
+  </div>
+
+  <!-- VISUAL 9: Hub -->
+  <div class="visual visual-lav">
+    <div class="visual-header" style="border-bottom-color: rgba(106,53,255,0.08);">
+      <h3>How AI agents connect to the world</h3>
+      <p>MCP is the universal connector. WebMCP extends that into the browser.</p>
+    </div>
+    <div class="visual-body" style="text-align: center;">
+      <div class="hub-center"><span>AI<br>Agent</span></div>
+      <div class="hub-ring-label">Connected via MCP</div>
+      <div class="hub-spokes">
+        <div class="hub-spoke">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg>
+          <h4>Web Search</h4>
+          <p>Queries across engines and indexes</p>
+        </div>
+        <div class="hub-spoke">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+          <h4>Product APIs</h4>
+          <p>Pricing, features, inventory</p>
+        </div>
+        <div class="hub-spoke">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>
+          <h4>Review Sites</h4>
+          <p>G2, Capterra, Reddit</p>
+        </div>
+        <div class="hub-spoke">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+          <h4>Websites</h4>
+          <p>Via WebMCP tools</p>
+        </div>
+        <div class="hub-spoke">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+          <h4>User Memory</h4>
+          <p>Preferences and history</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <h2>Three failure modes every marketer should understand</h2>
+
+  <p>If everything above made AI agents sound capable, this section grounds it.</p>
+
+  <p><strong>Hallucination compounds across steps.</strong> When agents chain multiple research steps, errors in early steps propagate forward. One developer described building a "mega-agent" that hallucinated through critical tasks — he rebuilt as seven specialized agents, each with a narrow scope, to contain the damage. This is why Google's SAGE research found that <a href="https://www.searchenginejournal.com/googles-sage-agentic-ai-research-what-it-means-for-seo/566215/" target="_blank" rel="noopener">"information co-location"</a> — finding related answers on a single comprehensive page rather than chaining across unreliable ones — was the most common shortcut agents used, accounting for 35% of cases.</p>
+
+  <p><strong>Prompt injection is unsolved.</strong> AI agents that browse the web are vulnerable to hidden instructions on the pages they visit. <a href="https://brave.com/blog/comet-prompt-injection/" target="_blank" rel="noopener">Brave's security research</a> demonstrated this concretely: a hidden comment on Reddit could instruct Perplexity's Comet browser to extract a user's email and steal credentials — triggered by a simple "summarize this page" request. The agent can't reliably distinguish between the user's instructions and content on a webpage. This is a fundamental, unsolved challenge.</p>
+
+  <p><strong>Autonomy can exceed its boundaries.</strong> Summer Yue, a director of alignment at Meta, <a href="https://sfstandard.com/2026/02/25/openclaw-goes-rogue/" target="_blank" rel="noopener">told her OpenClaw agent</a> to seek approval before taking any action. It agreed. Then it ran out of working memory, compressed previous messages, and lost her instruction in the process. The agent deleted her entire inbox. The lesson: the more autonomous the AI agent, the more carefully its constraints need to be maintained.</p>
+
+  <!-- VISUAL 10: Reliability -->
+  <div class="visual">
+    <div class="visual-header">
+      <h3>AI agent reliability by task type</h3>
+      <p>Where agents are dependable today — and where they're still being figured out</p>
+    </div>
+    <div class="visual-body">
+      <div class="rel-items">
+        <div class="rel-item">
+          <div class="rel-label">Research and summarization</div>
+          <div class="rel-bar-track"><div class="rel-bar rb-high"><span>High</span></div></div>
+        </div>
+        <div class="rel-item">
+          <div class="rel-label">Product comparison</div>
+          <div class="rel-bar-track"><div class="rel-bar rb-mh"><span>Medium-high</span></div></div>
+        </div>
+        <div class="rel-item">
+          <div class="rel-label">Multi-step transactions</div>
+          <div class="rel-bar-track"><div class="rel-bar rb-med"><span>Medium</span></div></div>
+        </div>
+        <div class="rel-item">
+          <div class="rel-label">Autonomous real-world actions</div>
+          <div class="rel-bar-track"><div class="rel-bar rb-dev"><span>Developing</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="visual-caption">This is why <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">McKinsey found only 23% of organizations</a> are scaling agentic AI. The technology works for some tasks. For others, it's still being figured out.</div>
+  </div>
+
+  <!-- ============================== -->
+  <h2>What this means for your optimization strategy</h2>
+
+  <p>Now that you've seen the machinery — the reasoning, the tool calls, the trust evaluation, the memory layer, the failure modes — the optimization questions become concrete.</p>
+
+  <p>How do you build trust signals that an AI agent can verify across multiple independent sources? How do you structure your site so an agent's tools can parse it efficiently? How do you show up in the right step of a 4.9-step research chain? How do you declare what your brand is best at so that memory-equipped agents match you to the right users?</p>
+
+  <p>Those are the questions the next guide answers.</p>
+
+  <div class="next-guide">
+    <div class="next-guide-text">
+      <div class="label">Next in the series</div>
+      <h3>How to Optimize for Agentic Search</h3>
+      <p>The strategic framework. The three-layer search stack — SEO, AEO, AAO — and what changes at each level.</p>
+    </div>
+    <a href="#" class="next-guide-btn">Read Next Guide &rarr;</a>
+  </div>
+
+  <div class="series-bar">
+    <div class="series-bar-label">The Complete Agentic Search Guide</div>
+    <div class="series-links">
+      <a href="flagship-article.html" class="series-link"><span class="sl-num">1</span>The Internet's New User Isn't Human</a>
+      <a href="#" class="series-link current"><span class="sl-num">2</span>Agentic Search: What It Actually Is (And Isn't)</a>
+      <a href="#" class="series-link"><span class="sl-num">3</span>How to Optimize for Agentic Search</a>
+      <a href="#" class="series-link"><span class="sl-num">4</span>Making Your Site Agent-Ready</a>
+      <a href="#" class="series-link"><span class="sl-num">5</span>WebMCP: What It Is, Why It Matters, and What to Do Now</a>
+      <a href="#" class="series-link"><span class="sl-num">6</span>The Agent-Mediated Funnel</a>
+      <a href="#" class="series-link"><span class="sl-num">7</span>Agent Traffic vs. Human Traffic</a>
+    </div>
+  </div>
+
+</article>
+
+<div style="padding: 40px; text-align: center; font-size: 13px; color: var(--text-tertiary); border-top: 1px solid var(--border);">
+  <strong>Internal Draft</strong> — Piece 2 Article Mockup v2 &middot; Michael Ofei, March 2026<br>
+  For review by Andrew Warden, Leigh McKenzie, and the Owned Media team
+</div>
+
+</body>
+</html>
