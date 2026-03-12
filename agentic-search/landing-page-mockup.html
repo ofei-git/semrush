@@ -9,10 +9,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --green: #1DBF73;
-      --green-hover: #17a863;
-      --purple: #7B5AFF;
-      --purple-hover: #6A35FF;
+      --purple: #6A35FF;
+      --purple-hover: #5529CC;
       --near-black: #191C1F;
       --white: #FFFFFF;
       --lavender: #F8F6FF;
@@ -23,9 +21,16 @@
       --border: #E8E8E8;
       --border-subtle: #F0F0F0;
       --deep-purple: #1C0D3B;
-      --success-bg: #E8F5E9;
-      --success-text: #2E7D32;
       --orange: #FF642D;
+      --blue: #1565C0;
+      --blue-bg: #E3F2FD;
+      --amber: #E65100;
+      --amber-bg: #FFF3E0;
+      --green: #2E7D32;
+      --green-bg: #E8F5E9;
+      --green-tint: #F0FAF0;
+      --red: #C62828;
+      --red-bg: #FCE4EC;
     }
 
     body {
@@ -47,6 +52,39 @@
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.5px;
+    }
+
+    /* ANNOTATION BLOCKS */
+    .annotation {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      background: #FFFDE7;
+      border-left: 4px solid #F9A825;
+      font-size: 13px;
+      color: #5D4037;
+      line-height: 1.6;
+    }
+    .annotation strong { color: #E65100; }
+
+    /* OPTION DIVIDER (for context section choices) */
+    .option-label {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 40px;
+      background: var(--near-black);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .option-label span {
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      margin-left: 12px;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
     /* NAV */
@@ -77,7 +115,6 @@
       gap: 8px;
       letter-spacing: 0.5px;
     }
-    .nav-logo svg { flex-shrink: 0; }
     .nav-links {
       display: flex;
       gap: 28px;
@@ -88,49 +125,67 @@
       color: var(--text-secondary);
       font-size: 14px;
       font-weight: 500;
-      transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--near-black); }
-    .nav-links a.active {
-      color: var(--purple);
-      font-weight: 600;
+    .nav-links a.active { color: var(--purple); font-weight: 600; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
-    .breadcrumb {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      padding: 8px 40px;
-      background: var(--warm-gray);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .breadcrumb a {
-      color: var(--text-tertiary);
+    .nav-login {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
       text-decoration: none;
     }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb span { margin: 0 6px; }
+    .nav-cta {
+      background: var(--purple);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
 
-    /* SECTIONS */
-    .section {
-      padding: 80px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-full {
-      padding: 80px 40px;
-    }
+    /* SECTION BASICS */
+    .section-full { padding: 80px 40px; }
     .section-lavender { background: var(--lavender); }
     .section-white { background: var(--white); }
     .section-gray { background: var(--warm-gray); }
-    .section-dark {
-      background: var(--near-black);
-      color: var(--white);
-    }
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .section-dark { background: var(--deep-purple); color: var(--white); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
 
-    /* HERO */
+    /* SECTION HEADERS */
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .section-dark .section-label { color: rgba(255,255,255,0.5); }
+    .section-header { margin-bottom: 48px; }
+    .section-header-centered { text-align: center; }
+    .section-header-centered p { margin: 0 auto; }
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+    .section-dark .section-header p { color: rgba(255,255,255,0.65); }
+
+    /* ===========================
+       HERO
+       =========================== */
     .hero {
       padding: 80px 40px 60px;
       position: relative;
@@ -147,104 +202,15 @@
       gap: 60px;
       align-items: center;
     }
-    .hero-text { }
-    .hero-video {
-      position: relative;
-      background: var(--near-black);
-      border-radius: 12px;
-      aspect-ratio: 16 / 9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    }
-    .hero-video::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #1C0D3B, #2A1558);
-      opacity: 0.95;
-    }
-    .hero-video-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      color: var(--white);
-    }
-    .hero-play-btn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-      transition: background 0.2s;
-      cursor: pointer;
-    }
-    .hero-play-btn:hover {
-      background: rgba(255,255,255,0.25);
-    }
-    .hero-play-btn svg {
-      width: 24px;
-      height: 24px;
-      color: var(--white);
-      margin-left: 3px;
-    }
-    .hero-video-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 4px;
-    }
-    .hero-video-duration {
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-    }
-    .hero-video-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 100px;
-      z-index: 2;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
     .hero-decoration {
       position: absolute;
-      top: -60px;
-      right: -40px;
-      width: 420px;
-      height: 420px;
+      top: -80px; right: -60px;
+      width: 500px; height: 500px;
+      background: linear-gradient(135deg, #A8E6CF, #C4B5FF);
+      filter: blur(80px);
+      opacity: 0.4;
       pointer-events: none;
       z-index: 0;
-      overflow: hidden;
-    }
-    .hero-decoration::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: repeating-linear-gradient(
-        135deg,
-        rgba(106, 53, 255, 0.12) 0px,
-        rgba(106, 53, 255, 0.12) 20px,
-        rgba(0, 200, 180, 0.10) 20px,
-        rgba(0, 200, 180, 0.10) 40px,
-        rgba(29, 191, 115, 0.10) 40px,
-        rgba(29, 191, 115, 0.10) 60px,
-        transparent 60px,
-        transparent 80px
-      );
-      filter: blur(24px);
-      transform: rotate(-10deg) scale(1.4);
     }
     .hero-badge {
       display: inline-block;
@@ -271,9 +237,9 @@
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 36px;
-      max-width: 620px;
+      max-width: 580px;
     }
-    .cta-green {
+    .cta-primary {
       display: inline-block;
       background: var(--purple);
       color: var(--white);
@@ -284,253 +250,345 @@
       text-decoration: none;
       transition: background 0.2s;
     }
-    .cta-green:hover { background: var(--purple-hover); }
-
-    /* SECTION HEADERS */
-    .section-header {
-      margin-bottom: 48px;
-    }
-    .section-header h2 {
-      font-size: 36px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .section-header p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      max-width: 640px;
-      line-height: 1.7;
-    }
-    .section-header-centered {
-      text-align: center;
-    }
-    .section-header-centered p {
-      margin: 0 auto;
-    }
-
-    /* THREE LENSES */
-    .lenses-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 36px;
-    }
-    .lens-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
+    .cta-primary:hover { background: var(--purple-hover); }
+    .hero-video {
       position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .lens-card.lens-active {
-      border-color: var(--purple);
-      border-width: 2px;
-      box-shadow: 0 4px 24px rgba(106, 53, 255, 0.12);
-    }
-    .lens-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
+      background: var(--near-black);
+      border-radius: 12px;
+      aspect-ratio: 16 / 9;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
-    .lens-icon svg { width: 24px; height: 24px; }
-    .lens-icon.icon-blue { background: #E3F2FD; color: #1565C0; }
-    .lens-icon.icon-amber { background: #FFF3E0; color: #E65100; }
-    .lens-icon.icon-purple { background: var(--light-purple); color: var(--purple); }
-    .lens-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .lens-card p.lens-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .lens-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-    }
-    .lens-maturity {
-      color: var(--text-tertiary);
-      font-weight: 500;
-    }
-    .lens-label {
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-tertiary);
-    }
-    .lens-here-marker {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: var(--light-purple);
-      color: var(--purple);
-      padding: 3px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    .lens-here-marker::before {
+    .hero-video::before {
       content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--purple);
-      border-radius: 50%;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1C0D3B, #2A1558);
+      opacity: 0.95;
+    }
+    .hero-video-content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--white);
+    }
+    .hero-play-btn {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; cursor: pointer;
+    }
+    .hero-play-btn svg { width: 24px; height: 24px; color: var(--white); margin-left: 3px; }
+    .hero-video-label { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+    .hero-video-duration { font-size: 12px; color: rgba(255,255,255,0.45); }
+    .hero-video-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7);
+      font-size: 11px; font-weight: 600; padding: 4px 10px;
+      border-radius: 100px; z-index: 2; text-transform: uppercase; letter-spacing: 0.5px;
     }
 
-    .continuum-bar {
-      height: 4px;
-      border-radius: 2px;
-      background: linear-gradient(90deg, #1565C0, #E65100, #6A35FF);
-      margin-bottom: 12px;
+    /* ===========================
+       CONTEXT — ICON-FORWARD (Option A)
+       =========================== */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
     }
-    .continuum-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-tertiary);
-      font-weight: 500;
-      margin-bottom: 24px;
-    }
-    .continuum-note {
+    .icon-card {
       text-align: center;
-      font-size: 14px;
+      padding: 48px 28px 40px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .icon-card.ic-active {
+      border-color: var(--purple);
+      border-width: 2px;
+      box-shadow: 0 4px 24px rgba(106, 53, 255, 0.08);
+    }
+    .icon-card-illustration {
+      width: 100px; height: 100px; border-radius: 50%;
+      margin: 0 auto 28px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .icon-card-illustration svg { width: 44px; height: 44px; }
+    .icon-card-illustration.ill-people { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); color: var(--blue); }
+    .icon-card-illustration.ill-ai { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); color: var(--amber); }
+    .icon-card-illustration.ill-agents { background: linear-gradient(135deg, var(--light-purple), #D4C5FF); color: var(--purple); }
+    .icon-card-illustration::after {
+      content: ''; position: absolute;
+      top: -8px; left: -8px; right: -8px; bottom: -8px;
+      border-radius: 50%; border: 2px dashed currentColor; opacity: 0.15;
+    }
+    .icon-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .icon-card .ic-verb {
+      font-size: 15px; color: var(--text-tertiary); font-weight: 500; margin-bottom: 16px;
+    }
+    .icon-card p.ic-desc {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6; max-width: 280px; margin: 0 auto;
+    }
+    .icon-card .ic-arrow {
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      color: var(--border); font-size: 20px; z-index: 2;
+    }
+    .context-footer {
+      text-align: center;
+      font-size: 15px;
       color: var(--text-secondary);
-      font-style: italic;
+      line-height: 1.65;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
     }
 
-    /* STATS BAR */
+    /* ===========================
+       CONTEXT — FLOW LANES (Option B)
+       =========================== */
+    .lanes-container { margin-bottom: 48px; }
+    .lanes-wrapper {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .lanes-header {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .lanes-header-label {
+      padding: 14px 24px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-tertiary);
+      border-right: 1px solid var(--border);
+    }
+    .lanes-header-flow {
+      padding: 14px 28px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-tertiary);
+      display: flex; justify-content: space-between;
+    }
+    .lane {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      min-height: 120px;
+      border-bottom: 1px solid var(--border);
+    }
+    .lane:last-child { border-bottom: none; }
+    .lane-agents { background: rgba(106, 53, 255, 0.02); }
+    .lane-label {
+      display: flex; align-items: center; gap: 14px;
+      padding: 28px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .lane-label-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .lane-label-icon svg { width: 22px; height: 22px; }
+    .lane-label-icon.li-people { background: var(--blue-bg); color: var(--blue); }
+    .lane-label-icon.li-ai { background: var(--amber-bg); color: var(--amber); }
+    .lane-label-icon.li-agents { background: var(--light-purple); color: var(--purple); }
+    .lane-label h3 { font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .lane-flow {
+      display: flex; align-items: center;
+      padding: 20px 28px; gap: 0;
+    }
+    .lane-step { display: flex; align-items: center; }
+    .lane-step-content {
+      background: var(--warm-gray); border-radius: 8px;
+      padding: 10px 16px; font-size: 13px; font-weight: 500;
+      color: var(--near-black); white-space: nowrap;
+    }
+    .lane-agents .lane-step-content {
+      background: var(--light-purple); color: var(--purple);
+    }
+    .lane-step-arrow {
+      color: var(--text-tertiary); font-size: 18px; margin: 0 10px; flex-shrink: 0;
+    }
+    .lane-outcome {
+      margin-left: auto; flex-shrink: 0;
+      padding: 8px 16px; border-radius: 8px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .lane-outcome-human { background: var(--blue-bg); color: var(--blue); }
+    .lane-outcome-both { background: var(--amber-bg); color: var(--amber); }
+    .lane-outcome-agent { background: var(--light-purple); color: var(--purple); }
+
+    /* ===========================
+       STATS BAR
+       =========================== */
     .stats-bar {
       padding: 60px 40px;
       background: var(--white);
       border-top: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
     }
-    .stats-bar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .stats-bar-inner { max-width: 1200px; margin: 0 auto; }
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 32px;
     }
-    .stat-card {
-      border-left: 3px solid var(--purple);
-      padding-left: 20px;
-    }
+    .stat-card { border-left: 3px solid var(--purple); padding-left: 20px; }
     .stat-number {
-      font-size: 40px;
-      font-weight: 800;
-      color: var(--near-black);
-      line-height: 1;
-      margin-bottom: 8px;
+      font-size: 40px; font-weight: 800; color: var(--near-black);
+      line-height: 1; margin-bottom: 8px;
     }
-    .stat-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 6px;
-    }
-    .stat-source {
-      font-size: 11px;
-    }
+    .stat-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px; }
+    .stat-source { font-size: 11px; }
     .stat-source a {
-      color: var(--text-tertiary);
-      text-decoration: underline;
+      color: var(--text-tertiary); text-decoration: underline;
       text-decoration-color: var(--border);
-      transition: color 0.2s;
     }
-    .stat-source a:hover { color: var(--purple); }
 
-    /* CONTENT HUB CARDS */
-    .hub-grid {
+    /* ===========================
+       EXPLORE — FEATURED + GRID
+       =========================== */
+    .pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 100px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .pill svg { width: 12px; height: 12px; }
+    .pill-article { background: var(--blue-bg); color: var(--blue); }
+    .pill-video { background: var(--red-bg); color: var(--red); }
+    .pill-template { background: var(--green-bg); color: var(--green); }
+    .pill-checklist { background: var(--amber-bg); color: var(--amber); }
+    .pill-live { background: var(--green-bg); color: var(--green); }
+
+    /* Featured card */
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--green-tint);
+      border: 2px solid #C8E6C9;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: border-color 0.2s;
+    }
+    .featured-card:hover { border-color: var(--green); }
+    .featured-card-visual {
+      background: linear-gradient(135deg, var(--deep-purple), #2A1558);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 48px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-visual-graphic {
+      position: relative;
+      width: 180px; height: 180px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .featured-visual-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .featured-visual-ring-1 { width: 180px; height: 180px; top: 0; left: 0; }
+    .featured-visual-ring-2 { width: 130px; height: 130px; top: 25px; left: 25px; border-color: rgba(255,255,255,0.12); }
+    .featured-visual-ring-3 { width: 80px; height: 80px; top: 50px; left: 50px; border-color: rgba(255,255,255,0.18); }
+    .featured-visual-center {
+      position: relative; z-index: 1;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(106, 53, 255, 0.4);
+      border: 2px solid rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .featured-visual-center svg { width: 28px; height: 28px; color: var(--white); }
+    .featured-visual-label {
+      margin-top: 20px;
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .featured-card-content {
+      padding: 40px 36px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .featured-card-content .featured-meta {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    }
+    .featured-card-content h3 {
+      font-size: 24px; font-weight: 700; line-height: 1.3; margin-bottom: 12px;
+    }
+    .featured-card-content p {
+      font-size: 15px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 24px;
+    }
+    .featured-card-content a.featured-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 15px; font-weight: 600; color: var(--purple); text-decoration: none;
+    }
+    .featured-card-content a.featured-link:hover { text-decoration: underline; }
+
+    /* Explore grid */
+    .fg-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
-    .hub-card {
+    .fg-card {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
+      padding: 24px;
+      display: flex; flex-direction: column;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .hub-card:hover {
+    .fg-card:hover {
       border-color: var(--purple);
       box-shadow: 0 4px 20px rgba(106, 53, 255, 0.08);
     }
-    .hub-card.coming-soon {
-      opacity: 0.6;
-      background: #FAFAFA;
+    .fg-card.fg-live {
+      background: var(--green-tint); border-color: #C8E6C9;
     }
-    .hub-card.coming-soon:hover {
-      border-color: var(--border);
-      box-shadow: none;
+    .fg-card.fg-live:hover { border-color: var(--green); }
+    .fg-card.fg-soon { opacity: 0.6; background: #FAFAFA; }
+    .fg-card.fg-soon:hover { border-color: var(--border); box-shadow: none; }
+    .fg-card-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
     }
-    .hub-pill {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      margin-bottom: 14px;
-      width: fit-content;
+    .fg-format-icon {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .pill-article { background: #E3F2FD; color: #1565C0; }
-    .pill-video { background: #FCE4EC; color: #C62828; }
-    .pill-template { background: #E8F5E9; color: #2E7D32; }
-    .hub-card h3 {
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.35;
-      margin-bottom: 10px;
+    .fg-format-icon svg { width: 14px; height: 14px; }
+    .fgi-video { background: var(--red-bg); color: var(--red); }
+    .fgi-checklist { background: var(--amber-bg); color: var(--amber); }
+    .fgi-template { background: var(--green-bg); color: var(--green); }
+    .fgi-article { background: var(--blue-bg); color: var(--blue); }
+    .fg-card h4 { font-size: 15px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+    .fg-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; flex-grow: 1; }
+    .fg-card-footer {
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-subtle);
     }
-    .hub-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      flex-grow: 1;
+    .fg-card-footer a {
+      font-size: 13px; font-weight: 600; color: var(--purple); text-decoration: none;
     }
-    .hub-card-link {
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-subtle);
-    }
-    .hub-card-link a {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--purple);
-      text-decoration: none;
-    }
-    .hub-card-link a:hover { text-decoration: underline; }
-    .hub-card-link .coming-label {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      font-weight: 500;
+    .fg-card-footer a:hover { text-decoration: underline; }
+    .fg-card-footer .coming {
+      font-size: 13px; color: var(--text-tertiary); font-weight: 500;
     }
 
-    /* FUNNEL COMPARISON */
+    /* ===========================
+       FUNNEL COMPARISON
+       =========================== */
     .funnel-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 32px;
       align-items: start;
     }
     .funnel-box {
@@ -539,231 +597,313 @@
       border-radius: 12px;
       padding: 32px;
     }
-    .funnel-box.funnel-agent { border-color: var(--purple); }
+    .funnel-box.funnel-agent {
+      border-color: var(--purple);
+      border-width: 2px;
+    }
     .funnel-box h3 {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 17px; font-weight: 700; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
     }
     .funnel-step {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      display: flex; align-items: center; gap: 14px;
       padding: 14px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
     .funnel-step:last-child { border-bottom: none; }
     .funnel-dot {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
     }
-    .funnel-dot.human { background: #E3F2FD; color: #1565C0; }
+    .funnel-dot.human { background: var(--blue-bg); color: var(--blue); }
     .funnel-dot.agent { background: var(--light-purple); color: var(--purple); }
     .funnel-step-content { flex-grow: 1; }
-    .funnel-step-content strong {
-      font-size: 14px;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .funnel-step-content span {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
+    .funnel-step-content strong { font-size: 14px; display: block; margin-bottom: 2px; }
+    .funnel-step-content span { font-size: 13px; color: var(--text-secondary); }
     .funnel-actor {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      flex-shrink: 0;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; flex-shrink: 0;
     }
-    .actor-human { background: #E3F2FD; color: #1565C0; }
+    .actor-human { background: var(--blue-bg); color: var(--blue); }
     .actor-agent { background: var(--light-purple); color: var(--purple); }
-    .actor-both { background: #FFF3E0; color: #E65100; }
+    .actor-both { background: var(--amber-bg); color: var(--amber); }
 
-    /* TIMELINE */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-    }
+    /* ===========================
+       TIMELINE
+       =========================== */
+    .timeline { display: flex; flex-direction: column; }
     .timeline-item {
       display: grid;
       grid-template-columns: 120px 1fr;
-      gap: 28px;
-      padding: 24px 0;
+      gap: 28px; padding: 24px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
     .timeline-item:last-child { border-bottom: none; }
     .timeline-date {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--purple);
-      padding-top: 3px;
+      font-size: 13px; font-weight: 600; color: var(--purple); padding-top: 3px;
     }
-    .timeline-content h3 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .timeline-content p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+    .timeline-content h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .timeline-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
-    /* PRODUCT CARDS */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    /* ===========================
+       SEMRUSH PRODUCT / CTA SECTION
+       =========================== */
+    .product-section {
+      padding: 100px 40px;
+      background: var(--deep-purple);
+      color: var(--white);
     }
-    .product-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
+    .product-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-headline {
       text-align: center;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 48px;
     }
-    .product-card:hover {
-      border-color: var(--purple);
-      box-shadow: 0 4px 20px rgba(106, 53, 255, 0.08);
+    .product-headline .section-label {
+      color: rgba(255,255,255,0.45);
     }
-    .product-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 14px;
+    .product-headline h2 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
     }
-    .product-icon svg { width: 24px; height: 24px; }
-    .product-icon.pi-visibility { background: #E3F2FD; color: #1565C0; }
-    .product-icon.pi-agent { background: var(--light-purple); color: var(--purple); }
-    .product-icon.pi-competitive { background: #E8F5E9; color: #2E7D32; }
-    .product-card h3 {
-      font-size: 16px;
+    .product-headline p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    /* Primary solution card */
+    .primary-solution {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 32px;
+    }
+    .primary-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--purple);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .primary-solution h3 {
+      font-size: 24px;
       font-weight: 700;
       margin-bottom: 8px;
     }
-    .product-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
+    .primary-solution > p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
       line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .primary-solution .cta-primary {
+      margin-bottom: 32px;
+    }
+    .product-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .product-feature {
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .product-feature-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .product-feature-icon svg { width: 18px; height: 18px; }
+    .pfi-visibility { background: rgba(21, 101, 192, 0.2); color: #64B5F6; }
+    .pfi-brand { background: rgba(255, 152, 0, 0.2); color: #FFB74D; }
+    .pfi-citations { background: rgba(106, 53, 255, 0.2); color: #B39DFF; }
+    .pfi-keywords { background: rgba(21, 101, 192, 0.2); color: #64B5F6; }
+    .pfi-audit { background: rgba(255, 152, 0, 0.2); color: #FFB74D; }
+    .pfi-webmcp { background: rgba(106, 53, 255, 0.2); color: #B39DFF; }
+    .product-feature h4 {
+      font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--white);
+    }
+    .product-feature p {
+      font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.55;
+    }
+    .product-feature .toolkit-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      padding: 3px 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
     }
 
-    /* FOOTER CTA */
-    .footer-cta {
+    /* Also relevant */
+    .also-relevant {
+      margin-top: 40px;
+    }
+    .also-relevant-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: rgba(255,255,255,0.35); margin-bottom: 16px;
+    }
+    .also-relevant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .also-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .also-card-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .also-badge {
+      font-size: 10px; font-weight: 600; padding: 3px 8px;
+      border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .also-badge-enterprise { background: rgba(106, 53, 255, 0.3); color: #B39DFF; }
+    .also-badge-intelligence { background: rgba(255, 100, 45, 0.3); color: #FFB39A; }
+    .also-card h4 { font-size: 16px; font-weight: 700; }
+    .also-card > p {
+      font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.55; margin-bottom: 12px;
+    }
+    .also-card-features {
+      list-style: none;
+    }
+    .also-card-features li {
+      font-size: 13px; color: rgba(255,255,255,0.6); padding: 4px 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .also-card-features li::before {
+      content: '→';
+      color: var(--purple);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .also-card a {
+      display: inline-block; margin-top: 12px;
+      font-size: 13px; font-weight: 600; color: var(--purple); text-decoration: none;
+    }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
       text-align: center;
-      padding: 100px 40px;
+      padding: 80px 40px;
       background: var(--near-black);
     }
-    .footer-cta h2 {
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 20px;
-      line-height: 1.15;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .bottom-cta h2 {
+      font-size: 32px; font-weight: 700; color: var(--white);
+      line-height: 1.25; margin-bottom: 16px;
     }
-    .footer-cta p {
-      font-size: 17px;
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 36px;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.7;
+    .bottom-cta h2 .cta-highlight {
+      background: linear-gradient(90deg, #A8E6CF, #C4B5FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .awards-row {
+    .bottom-cta p {
+      font-size: 16px; color: rgba(255,255,255,0.55);
+      max-width: 560px; margin: 0 auto 32px; line-height: 1.6;
+    }
+    .cta-row {
+      display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;
+    }
+    .cta-ghost {
+      display: inline-block;
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      transition: border-color 0.2s;
+    }
+    .cta-ghost:hover { border-color: rgba(255,255,255,0.4); }
+    .cta-subtext {
+      font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 48px;
+    }
+    .trust-metrics {
       display: flex;
       justify-content: center;
-      gap: 32px;
-      margin-top: 48px;
-      flex-wrap: wrap;
+      gap: 60px;
     }
-    .award-badge {
-      font-size: 11px;
-      color: rgba(255,255,255,0.4);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 8px 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
+    .trust-metric { text-align: center; }
+    .trust-metric .tm-number {
+      font-size: 32px; font-weight: 800; color: var(--white);
+      font-style: italic;
+    }
+    .trust-metric .tm-label {
+      font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; line-height: 1.4;
     }
 
     /* FOOTER */
     .footer {
-      padding: 24px 40px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-tertiary);
-      border-top: 1px solid var(--border);
-      background: var(--white);
+      padding: 24px 40px; text-align: center;
+      font-size: 13px; color: var(--text-tertiary);
+      border-top: 1px solid var(--border); background: var(--white);
     }
-    .footer a {
-      color: var(--text-tertiary);
-      text-decoration: none;
-      margin: 0 8px;
-    }
-    .footer a:hover { text-decoration: underline; }
+    .footer a { color: var(--text-tertiary); text-decoration: none; margin: 0 8px; }
 
     /* INTERNAL NOTE */
     .internal-note {
-      padding: 32px 40px;
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-tertiary);
+      padding: 32px 40px; text-align: center;
+      font-size: 13px; color: var(--text-tertiary);
       border-top: 1px solid var(--border-subtle);
     }
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .lenses-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
-      .hub-grid { grid-template-columns: repeat(2, 1fr); }
-      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .icon-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+      .icon-card .ic-arrow { display: none; }
+      .featured-card { grid-template-columns: 1fr; }
+      .fg-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-features-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .breadcrumb { padding: 8px 20px; }
       .hero { padding: 60px 20px 40px; }
       .hero-inner { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 34px; }
-      .hero p.hero-sub { font-size: 16px; }
-      .section { padding: 60px 20px; }
       .section-full { padding: 60px 20px; }
       .stats-bar { padding: 40px 20px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-      .hub-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .fg-grid { grid-template-columns: 1fr; }
       .funnel-grid { grid-template-columns: 1fr; }
+      .product-features-grid { grid-template-columns: 1fr; }
+      .also-relevant-grid { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; gap: 6px; }
-      .product-grid { grid-template-columns: 1fr; }
       .section-header h2 { font-size: 28px; }
-      .footer-cta { padding: 60px 20px; }
-      .footer-cta h2 { font-size: 26px; }
-      .awards-row { gap: 16px; }
+      .product-section { padding: 60px 20px; }
+      .bottom-cta { padding: 60px 20px; }
+      .trust-metrics { gap: 32px; flex-wrap: wrap; }
+      .cta-row { flex-direction: column; align-items: center; }
+      .lanes-wrapper { overflow-x: auto; }
+      .lane { min-width: 700px; }
     }
   </style>
 </head>
 <body>
 
 <!-- DRAFT BANNER -->
-<div class="draft-banner">INTERNAL DRAFT — Agentic Search Hub Concept — March 2026</div>
+<div class="draft-banner">INTERNAL DRAFT — Agentic Search Hub v2 — March 2026</div>
 
 <!-- NAV -->
 <nav class="nav">
@@ -782,22 +922,24 @@
       <li><a href="#">Resources</a></li>
     </ul>
   </div>
+  <div class="nav-right">
+    <a href="#" class="nav-login">Log in</a>
+    <a href="#" class="nav-cta">Start for free</a>
+  </div>
 </nav>
 
-<!-- BREADCRUMB -->
-<div class="breadcrumb">
-  <a href="#">AI Search</a><span>&rsaquo;</span><a href="#">Digital Brand Visibility</a><span>&rsaquo;</span><strong style="color: var(--near-black);">Agentic Search</strong>
-</div>
 
-<!-- HERO -->
+<!-- ===========================
+     HERO
+     =========================== -->
 <section class="hero">
   <div class="hero-decoration"></div>
   <div class="hero-inner">
     <div class="hero-text">
       <span class="hero-badge">Agentic Search</span>
       <h1>The Internet's New User Isn't Human</h1>
-      <p class="hero-sub">AI agents are browsing, comparing, and buying on behalf of real people. This is the deep dive into agentic search — what it is, how it works, and what it means for your brand's visibility.</p>
-      <a href="flagship-article.html" class="cta-green">Start with the Overview</a>
+      <p class="hero-sub">AI agents are browsing, comparing, and buying on behalf of real people. Agentic search is the most disruptive layer of how brands get discovered — but it's not the only one. This is your guide to the full shift.</p>
+      <a href="#explore" class="cta-primary">Explore the Guides →</a>
     </div>
     <div class="hero-video">
       <span class="hero-video-badge">Coming Soon</span>
@@ -812,62 +954,133 @@
   </div>
 </section>
 
-<!-- THE THREE LENSES -->
+
+<!-- ===========================
+     CONTEXT SECTION — OPTION A: ICON-FORWARD
+     =========================== -->
+<div class="option-label">Context Option A <span>— Icon-Forward cards. Simplest to understand. Recommended.</span></div>
+
 <section class="section-full section-lavender">
   <div class="section-inner">
     <div class="section-header section-header-centered">
-      <h2>Where Agentic Search Fits</h2>
-      <p>AI SEO isn't one thing. It's three overlapping disciplines at different stages of maturity. Here's where agentic search sits in the broader picture.</p>
+      <div class="section-label">Context</div>
+      <h2>Your Brand Now Has Three Audiences</h2>
+      <p>Each one evaluates you differently. The inputs haven't changed — authority, structure, clarity, trust. The evaluators have.</p>
     </div>
-    <div class="lenses-grid">
-      <!-- Classic Search -->
-      <div class="lens-card">
-        <div class="lens-icon icon-blue">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg>
+    <div class="icon-grid">
+      <div class="icon-card">
+        <div class="icon-card-illustration ill-people">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
         </div>
-        <h3>Classic Search</h3>
-        <p class="lens-desc">Be found when people search</p>
-        <div class="lens-meta">
-          <span class="lens-maturity">Maturity: Established</span>
-          <span class="lens-label">SEO</span>
-        </div>
+        <h3>People Searching</h3>
+        <p class="ic-verb">Typing, clicking, reading</p>
+        <p class="ic-desc">The original audience. Still the majority of discovery. The foundation everything else builds on.</p>
+        <span class="ic-arrow">→</span>
       </div>
-      <!-- AI Search -->
-      <div class="lens-card">
-        <div class="lens-icon icon-amber">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>
+      <div class="icon-card">
+        <div class="icon-card-illustration ill-ai">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>
         </div>
-        <h3>AI Search</h3>
-        <p class="lens-desc">Be cited, quoted, and recommended by AI</p>
-        <div class="lens-meta">
-          <span class="lens-maturity">Maturity: Emerging</span>
-          <span class="lens-label">GEO · AEO</span>
-        </div>
+        <h3>AI Answering</h3>
+        <p class="ic-verb">Synthesizing, citing, recommending</p>
+        <p class="ic-desc">AI systems that present your content directly. You're either in the answer or you're not.</p>
+        <span class="ic-arrow">→</span>
       </div>
-      <!-- Agentic Search -->
-      <div class="lens-card lens-active">
-        <div class="lens-icon icon-purple">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
+      <div class="icon-card ic-active">
+        <div class="icon-card-illustration ill-agents">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
         </div>
-        <h3>Agentic Search</h3>
-        <p class="lens-desc">Be chosen and transacted with by AI agents</p>
-        <div class="lens-meta">
-          <span class="lens-maturity">Maturity: Nascent</span>
-          <span class="lens-here-marker">You are here</span>
-        </div>
+        <h3>Agents Acting</h3>
+        <p class="ic-verb">Browsing, comparing, transacting</p>
+        <p class="ic-desc">The newest audience. They parse data and cross-check trust signals before a human ever arrives.</p>
       </div>
     </div>
-    <!-- Continuum bar -->
-    <div class="continuum-bar"></div>
-    <div class="continuum-labels">
-      <span>Human-driven</span>
-      <span>Machine-autonomous</span>
+    <div class="context-footer">
+      One brand · Three evaluators · Same fundamentals
     </div>
-    <p class="continuum-note">AI SEO = Classic Search + AI Search + Agentic Search — one evolving discipline, not competing acronyms.</p>
   </div>
 </section>
 
-<!-- STATS BAR -->
+
+<!-- ===========================
+     CONTEXT SECTION — OPTION B: FLOW LANES
+     =========================== -->
+<div class="option-label">Context Option B <span>— Flow Lanes. Shows the behavioral difference through journey shape. More detailed.</span></div>
+
+<section class="section-full section-lavender">
+  <div class="section-inner">
+    <div class="section-header section-header-centered">
+      <div class="section-label">Context</div>
+      <h2>Your Brand Now Has Three Audiences</h2>
+      <p>Same brand. Three different evaluation journeys. Here's what each one looks like.</p>
+    </div>
+    <div class="lanes-container">
+      <div class="lanes-wrapper">
+        <div class="lanes-header">
+          <div class="lanes-header-label">Audience</div>
+          <div class="lanes-header-flow">
+            <span>Intent</span>
+            <span>Evaluation</span>
+            <span>Outcome</span>
+          </div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">
+            <div class="lane-label-icon li-people">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+            </div>
+            <h3>People<br>Searching</h3>
+          </div>
+          <div class="lane-flow">
+            <div class="lane-step"><div class="lane-step-content">Types query</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Scans results</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Clicks & reads</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Decides</div></div>
+            <div class="lane-outcome lane-outcome-human">Human decides</div>
+          </div>
+        </div>
+        <div class="lane">
+          <div class="lane-label">
+            <div class="lane-label-icon li-ai">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>
+            </div>
+            <h3>AI<br>Answering</h3>
+          </div>
+          <div class="lane-flow">
+            <div class="lane-step"><div class="lane-step-content">Receives query</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Retrieves passages</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Synthesizes answer</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Cites (or doesn't)</div></div>
+            <div class="lane-outcome lane-outcome-both">AI filters, human reads</div>
+          </div>
+        </div>
+        <div class="lane lane-agents">
+          <div class="lane-label">
+            <div class="lane-label-icon li-agents">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
+            </div>
+            <h3>Agents<br>Acting</h3>
+          </div>
+          <div class="lane-flow">
+            <div class="lane-step"><div class="lane-step-content">Receives goal</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Multi-step research</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Cross-checks sources</div><span class="lane-step-arrow">→</span></div>
+            <div class="lane-step"><div class="lane-step-content">Selects & acts</div></div>
+            <div class="lane-outcome lane-outcome-agent">Agent decides</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="context-footer">
+      Three journeys, one requirement: be clear, be credible, and be structured enough that whatever is evaluating you — person, AI, or agent — can find and trust your brand.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===========================
+     STATS BAR
+     =========================== -->
 <div class="stats-bar">
   <div class="stats-bar-inner">
     <div class="stats-grid">
@@ -895,85 +1108,134 @@
   </div>
 </div>
 
-<!-- CONTENT HUB -->
-<section class="section-full section-white">
+
+<!-- ===========================
+     EXPLORE — FEATURED + GRID
+     =========================== -->
+<section class="section-full section-white" id="explore">
   <div class="section-inner">
     <div class="section-header section-header-centered">
-      <h2>Explore Agentic Search</h2>
-      <p>Articles, frameworks, and resources on how AI agents are reshaping search — and what it means for your brand.</p>
+      <div class="section-label">Explore</div>
+      <h2>Your Agentic Search Library</h2>
+      <p>Articles, videos, frameworks, and tools — everything you need to understand the shift and prepare your brand.</p>
     </div>
-    <div class="hub-grid">
-      <!-- 1. Flagship -->
-      <div class="hub-card">
-        <span class="hub-pill pill-article">Article</span>
-        <h3>The Internet's New User Isn't Human</h3>
-        <p>Why the shift from asking AI to delegating to AI changes the entire search landscape. The data, the products, the people already living it.</p>
-        <div class="hub-card-link">
-          <a href="flagship-article.html">Read &rarr;</a>
+
+    <!-- Featured card -->
+    <div class="featured-card">
+      <div class="featured-card-visual">
+        <div class="featured-visual-graphic">
+          <div class="featured-visual-ring featured-visual-ring-1"></div>
+          <div class="featured-visual-ring featured-visual-ring-2"></div>
+          <div class="featured-visual-ring featured-visual-ring-3"></div>
+          <div class="featured-visual-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
+          </div>
         </div>
+        <span class="featured-visual-label">Start here</span>
       </div>
-      <!-- 2. What It Is -->
-      <div class="hub-card">
-        <span class="hub-pill pill-article">Article</span>
+      <div class="featured-card-content">
+        <div class="featured-meta">
+          <span class="pill pill-article">Article</span>
+          <span class="pill pill-live">Live</span>
+        </div>
         <h3>Agentic Search: What It Actually Is (And Isn't)</h3>
-        <p>How AI agents actually work under the hood — the machinery of tool use, multi-step reasoning, trust evaluation, and where it still breaks.</p>
-        <div class="hub-card-link">
-          <a href="piece2-article.html">Read &rarr;</a>
-        </div>
+        <p>How AI agents actually work under the hood — the machinery of tool use, multi-step reasoning, trust evaluation, and where it still breaks. The definitive technical explainer.</p>
+        <a href="piece2-article.html" class="featured-link">Read the article →</a>
       </div>
-      <!-- 3. Optimize -->
-      <div class="hub-card coming-soon">
-        <span class="hub-pill pill-article">Article</span>
-        <h3>How to Optimize for Agentic Search</h3>
-        <p>The strategic framework for the three-layer search stack and what changes at each level.</p>
-        <div class="hub-card-link">
-          <span class="coming-label">Coming soon</span>
+    </div>
+
+    <!-- Grid -->
+    <div class="fg-grid">
+      <!-- WebMCP — LIVE -->
+      <div class="fg-card fg-live">
+        <div class="fg-card-top">
+          <span class="pill pill-article">Article</span>
+          <div class="fg-format-icon fgi-article">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+          </div>
         </div>
-      </div>
-      <!-- 4. Agent-Ready -->
-      <div class="hub-card coming-soon">
-        <span class="hub-pill pill-article">Article</span>
-        <h3>Making Your Site Agent-Ready</h3>
-        <p>Structured data, llms.txt, agent-ready APIs, and the technical implementation playbook.</p>
-        <div class="hub-card-link">
-          <span class="coming-label">Coming soon</span>
-        </div>
-      </div>
-      <!-- 5. WebMCP -->
-      <div class="hub-card coming-soon">
-        <span class="hub-pill pill-article">Article</span>
-        <h3>WebMCP: What It Is, Why It Matters, and What to Do Now</h3>
+        <h4>WebMCP: What It Is, Why It Matters, and What to Do Now</h4>
         <p>The browser-level standard that lets websites declare capabilities as structured tools for AI agents.</p>
-        <div class="hub-card-link">
-          <span class="coming-label">Coming soon</span>
-        </div>
+        <div class="fg-card-footer"><a href="https://www.semrush.com/blog/webmcp/" target="_blank">Read →</a></div>
       </div>
-      <!-- 6. Video -->
-      <div class="hub-card coming-soon">
-        <span class="hub-pill pill-video">Video</span>
-        <h3>Agentic Search Explained (Video)</h3>
+      <!-- Agentic Commerce — LIVE -->
+      <div class="fg-card fg-live">
+        <div class="fg-card-top">
+          <span class="pill pill-article">Article</span>
+          <div class="fg-format-icon fgi-article">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>
+          </div>
+        </div>
+        <h4>Agentic Commerce Is Here: What It Means for Ecommerce</h4>
+        <p>How AI agents are changing online shopping — from discovery to purchase.</p>
+        <div class="fg-card-footer"><a href="https://www.semrush.com/blog/agentic-commerce-optimization/" target="_blank">Read →</a></div>
+      </div>
+      <!-- Video — COMING SOON -->
+      <div class="fg-card fg-soon">
+        <div class="fg-card-top">
+          <span class="pill pill-video">Video</span>
+          <div class="fg-format-icon fgi-video">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+          </div>
+        </div>
+        <h4>Agentic Search Explained</h4>
         <p>A visual walkthrough of how AI agents browse, evaluate, and act on behalf of users.</p>
-        <div class="hub-card-link">
-          <span class="coming-label">Coming soon</span>
-        </div>
+        <div class="fg-card-footer"><span class="coming">Coming soon</span></div>
       </div>
-      <!-- 7. Template -->
-      <div class="hub-card coming-soon">
-        <span class="hub-pill pill-template">Template</span>
-        <h3>Agentic Search Readiness Checklist</h3>
-        <p>Audit your site's readiness for AI agent traffic with this step-by-step template.</p>
-        <div class="hub-card-link">
-          <span class="coming-label">Coming soon</span>
+      <!-- How to Optimize — COMING SOON -->
+      <div class="fg-card fg-soon">
+        <div class="fg-card-top">
+          <span class="pill pill-article">Article</span>
         </div>
+        <h4>How to Optimize for Agentic Search</h4>
+        <p>The strategic framework for the three-layer visibility stack and what changes at each level.</p>
+        <div class="fg-card-footer"><span class="coming">Coming soon</span></div>
+      </div>
+      <!-- Making Your Site Agent-Ready — COMING SOON -->
+      <div class="fg-card fg-soon">
+        <div class="fg-card-top">
+          <span class="pill pill-article">Article</span>
+        </div>
+        <h4>Making Your Site Agent-Ready</h4>
+        <p>Structured data, llms.txt, agent-ready APIs, and the technical implementation playbook.</p>
+        <div class="fg-card-footer"><span class="coming">Coming soon</span></div>
+      </div>
+      <!-- Checklist — COMING SOON -->
+      <div class="fg-card fg-soon">
+        <div class="fg-card-top">
+          <span class="pill pill-checklist">Checklist</span>
+          <div class="fg-format-icon fgi-checklist">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          </div>
+        </div>
+        <h4>Agentic Search Readiness Audit</h4>
+        <p>Score your site across the signals agents check.</p>
+        <div class="fg-card-footer"><span class="coming">Coming soon</span></div>
+      </div>
+      <!-- Template — COMING SOON -->
+      <div class="fg-card fg-soon">
+        <div class="fg-card-top">
+          <span class="pill pill-template">Template</span>
+          <div class="fg-format-icon fgi-template">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125"/></svg>
+          </div>
+        </div>
+        <h4>AI Visibility Tracking Spreadsheet</h4>
+        <p>Track citations across AI platforms with competitive benchmarks.</p>
+        <div class="fg-card-footer"><span class="coming">Coming soon</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE FUNNEL SHIFT -->
+
+<!-- ===========================
+     THE FUNNEL SHIFT
+     =========================== -->
 <section class="section-full section-lavender">
   <div class="section-inner">
     <div class="section-header">
+      <div class="section-label">The Shift</div>
       <h2>The Funnel Will Have a New Gatekeeper</h2>
       <p>As agentic search matures, AI agents will evaluate and select before the human ever becomes aware. The first impression won't be yours to make.</p>
     </div>
@@ -985,34 +1247,22 @@
         </h3>
         <div class="funnel-step">
           <div class="funnel-dot human">1</div>
-          <div class="funnel-step-content">
-            <strong>Awareness</strong>
-            <span>Human discovers brand through search results</span>
-          </div>
+          <div class="funnel-step-content"><strong>Awareness</strong><span>Human discovers brand through search results</span></div>
           <span class="funnel-actor actor-human">Human</span>
         </div>
         <div class="funnel-step">
           <div class="funnel-dot human">2</div>
-          <div class="funnel-step-content">
-            <strong>Consideration</strong>
-            <span>Human compares options, reads reviews</span>
-          </div>
+          <div class="funnel-step-content"><strong>Consideration</strong><span>Human compares options, reads reviews</span></div>
           <span class="funnel-actor actor-human">Human</span>
         </div>
         <div class="funnel-step">
           <div class="funnel-dot human">3</div>
-          <div class="funnel-step-content">
-            <strong>Decision</strong>
-            <span>Human selects and purchases</span>
-          </div>
+          <div class="funnel-step-content"><strong>Decision</strong><span>Human selects and purchases</span></div>
           <span class="funnel-actor actor-human">Human</span>
         </div>
         <div class="funnel-step">
           <div class="funnel-dot human">4</div>
-          <div class="funnel-step-content">
-            <strong>Conversion</strong>
-            <span>Transaction completed</span>
-          </div>
+          <div class="funnel-step-content"><strong>Conversion</strong><span>Transaction completed</span></div>
           <span class="funnel-actor actor-human">Human</span>
         </div>
       </div>
@@ -1023,34 +1273,22 @@
         </h3>
         <div class="funnel-step">
           <div class="funnel-dot agent">1</div>
-          <div class="funnel-step-content">
-            <strong>Agent Evaluates</strong>
-            <span>AI agent researches, compares, and filters options autonomously</span>
-          </div>
+          <div class="funnel-step-content"><strong>Agent Evaluates</strong><span>AI agent researches, compares, and filters options autonomously</span></div>
           <span class="funnel-actor actor-agent">Agent</span>
         </div>
         <div class="funnel-step">
           <div class="funnel-dot agent">2</div>
-          <div class="funnel-step-content">
-            <strong>Agent Selects</strong>
-            <span>Agent narrows to best match based on trust signals and user context</span>
-          </div>
+          <div class="funnel-step-content"><strong>Agent Selects</strong><span>Agent narrows to best match based on trust signals and user context</span></div>
           <span class="funnel-actor actor-agent">Agent</span>
         </div>
         <div class="funnel-step">
           <div class="funnel-dot human">3</div>
-          <div class="funnel-step-content">
-            <strong>Human Sees Options</strong>
-            <span>Human becomes aware of brand only at this stage</span>
-          </div>
+          <div class="funnel-step-content"><strong>Human Sees Options</strong><span>Human becomes aware of brand only at this stage</span></div>
           <span class="funnel-actor actor-both">Both</span>
         </div>
         <div class="funnel-step">
           <div class="funnel-dot human">4</div>
-          <div class="funnel-step-content">
-            <strong>Validation or Action</strong>
-            <span>Human validates the agent's choice — or the agent completes the task</span>
-          </div>
+          <div class="funnel-step-content"><strong>Validation or Action</strong><span>Human validates the agent's choice — or the agent completes the task</span></div>
           <span class="funnel-actor actor-both">Both</span>
         </div>
       </div>
@@ -1058,117 +1296,215 @@
   </div>
 </section>
 
-<!-- WHAT'S ALREADY HAPPENING — TIMELINE -->
-<section class="section">
-  <div class="section-header">
-    <h2>What's Already Happening</h2>
-    <p>This isn't a prediction piece. These are products shipping, protocols being adopted, and behaviors changing right now.</p>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-date">Feb 2025</div>
-      <div class="timeline-content">
-        <h3>Deep research launches in ChatGPT</h3>
-        <p>The first time most people experienced AI that investigates independently across dozens of sources and reports back. Gemini and Perplexity follow within months.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Jun 2025</div>
-      <div class="timeline-content">
-        <h3>Anthropic ships Claude Code</h3>
-        <p>AI that writes, tests, debugs, and commits code autonomously across entire projects. One of the first widely-used agentic developer tools.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Jul 2025</div>
-      <div class="timeline-content">
-        <h3>Perplexity launches Comet browser</h3>
-        <p>Search-first agentic browsing. By September, Comet drives 52.5% of all agentic web traffic, overtaking ChatGPT's Atlas.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Oct 2025</div>
-      <div class="timeline-content">
-        <h3>OpenAI launches Atlas with Agent Mode</h3>
-        <p>Autonomously executes multi-step tasks — finding flights, comparing prices, completing purchases inside the browser.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Nov 2025</div>
-      <div class="timeline-content">
-        <h3>OpenClaw goes viral</h3>
-        <p>149K GitHub stars in one week. 770K autonomous agents deployed. A run on Mac Minis. People building personal AI agents that manage finances, homeschooling, grocery ordering, and business operations.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Dec 2025</div>
-      <div class="timeline-content">
-        <h3>MCP donated to Linux Foundation</h3>
-        <p>Microsoft, Google, Anthropic, and OpenAI form the Agentic AI Foundation to develop open-source agent standards. MCP becomes the dominant protocol with 97M+ monthly SDK downloads.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Jan 2026</div>
-      <div class="timeline-content">
-        <h3>Google launches Chrome auto-browse and publishes SAGE</h3>
-        <p>Gemini-powered autonomous browsing ships to Chrome. SAGE research paper trains agents that chain 4.9 search steps per query. Google also launches Universal Commerce Protocol for agent-to-merchant transactions.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Mar 2026</div>
-      <div class="timeline-content">
-        <h3>Bot traffic surpasses human traffic</h3>
-        <p>Automated traffic hits 51% of all web traffic. AI bot visits jump from 1:200 human visits (Q1 2025) to 1:31 (Q4 2025). CTR from AI platforms to publishers collapses to 0.27%.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- PRODUCT TIE-IN -->
-<section class="section-full section-lavender">
+<!-- ===========================
+     TIMELINE
+     =========================== -->
+<section class="section-full section-white">
   <div class="section-inner">
-    <div class="section-header section-header-centered">
-      <h2>Measure Your Agentic Visibility</h2>
-      <p>Understanding the shift is step one. Measuring where you stand is step two. Semrush tracks your brand's presence across AI-generated answers, agent interactions, and traditional search.</p>
+    <div class="section-header">
+      <div class="section-label">What's Already Happening</div>
+      <h2>This Isn't a Prediction Piece</h2>
+      <p>These are products shipping, protocols being adopted, and behaviors changing right now.</p>
     </div>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-icon pi-visibility">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Feb 2025</div>
+        <div class="timeline-content">
+          <h3>Deep research launches in ChatGPT</h3>
+          <p>The first time most people experienced AI that investigates independently across dozens of sources and reports back. Gemini and Perplexity follow within months.</p>
         </div>
-        <h3>AI Visibility Tracking</h3>
-        <p>Track where your brand appears in ChatGPT, Gemini, Perplexity, and Google AI Overviews. See who's getting cited where you're not.</p>
       </div>
-      <div class="product-card">
-        <div class="product-icon pi-agent">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2025</div>
+        <div class="timeline-content">
+          <h3>Anthropic ships Claude Code</h3>
+          <p>AI that writes, tests, debugs, and commits code autonomously across entire projects. One of the first widely-used agentic developer tools.</p>
         </div>
-        <h3>Agent Analytics</h3>
-        <p>Enterprise-grade tracking of how autonomous AI agents interact with your brand content. See the visitors that don't behave like people.</p>
       </div>
-      <div class="product-card">
-        <div class="product-icon pi-competitive">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2025</div>
+        <div class="timeline-content">
+          <h3>Perplexity launches Comet browser</h3>
+          <p>Search-first agentic browsing. By September, Comet drives 52.5% of all agentic web traffic, overtaking ChatGPT's Atlas.</p>
         </div>
-        <h3>Competitive Intelligence</h3>
-        <p>Compare your agentic visibility against competitors. Understand who agents recommend — and why — across every major AI platform.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2025</div>
+        <div class="timeline-content">
+          <h3>OpenAI launches Atlas with Agent Mode</h3>
+          <p>Autonomously executes multi-step tasks — finding flights, comparing prices, completing purchases inside the browser.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Nov 2025</div>
+        <div class="timeline-content">
+          <h3>OpenClaw goes viral</h3>
+          <p>149K GitHub stars in one week. 770K autonomous agents deployed. People building personal AI agents that manage finances, homeschooling, grocery ordering, and business operations.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Dec 2025</div>
+        <div class="timeline-content">
+          <h3>MCP donated to Linux Foundation</h3>
+          <p>Microsoft, Google, Anthropic, and OpenAI form the Agentic AI Foundation to develop open-source agent standards. MCP becomes the dominant protocol with 97M+ monthly SDK downloads.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2026</div>
+        <div class="timeline-content">
+          <h3>Google launches Chrome auto-browse and publishes SAGE</h3>
+          <p>Gemini-powered autonomous browsing ships to Chrome. SAGE research paper trains agents that chain 4.9 search steps per query.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Mar 2026</div>
+        <div class="timeline-content">
+          <h3>Bot traffic surpasses human traffic</h3>
+          <p>Automated traffic hits 51% of all web traffic. AI bot visits jump from 1:200 human visits (Q1 2025) to 1:31 (Q4 2025). CTR from AI platforms to publishers collapses to 0.27%.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER CTA -->
-<section class="footer-cta">
-  <h2>The Web Has a New User.<br>Is Your Brand Ready?</h2>
-  <p>Start with the overview. Understand the shift. Then measure where you stand with Semrush.</p>
-  <a href="flagship-article.html" class="cta-green">Start Reading</a>
-  <div class="awards-row">
-    <span class="award-badge">G2 #1 SEO Tool</span>
-    <span class="award-badge">TrustRadius Top Rated</span>
-    <span class="award-badge">Search Engine Land Award</span>
-    <span class="award-badge">Martech Breakthrough</span>
+
+<!-- ===========================
+     SEMRUSH PRODUCT SECTION — DARK
+     =========================== -->
+<section class="product-section">
+  <div class="product-inner">
+    <div class="product-headline">
+      <div class="section-label">How Semrush Fits In</div>
+      <h2>Win the AI Visibility Battle While<br>the Agentic Web Develops</h2>
+      <p>Semrush One directly addresses the AI visibility challenge that's actionable today. The discovery battle is happening in ChatGPT, Perplexity, Gemini, and Google AI Mode right now — and Semrush helps you track it and optimize for it.</p>
+    </div>
+
+    <div class="primary-solution">
+      <span class="primary-badge">Primary Solution</span>
+      <h3>Semrush One</h3>
+      <p>The all-in-one platform for AI visibility, SEO, and digital marketing — built for teams who need to win discovery across every channel.</p>
+      <a href="#" class="cta-primary">Explore Semrush One →</a>
+
+      <div class="product-features-grid">
+        <div class="product-feature">
+          <div class="product-feature-icon pfi-visibility">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+          </div>
+          <h4>AI Visibility Reports</h4>
+          <p>Track brand mentions and citations across ChatGPT, Perplexity, Gemini, and Google AI Mode — the platforms where AI-driven discovery is already happening.</p>
+          <span class="toolkit-tag">AI Visibility Toolkit</span>
+        </div>
+        <div class="product-feature">
+          <div class="product-feature-icon pfi-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+          </div>
+          <h4>Brand Performance</h4>
+          <p>Benchmark competitive AI visibility and sentiment, helping teams understand their share of AI-driven recommendations against the competition.</p>
+          <span class="toolkit-tag">AI Visibility Toolkit</span>
+        </div>
+        <div class="product-feature">
+          <div class="product-feature-icon pfi-citations">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
+          </div>
+          <h4>Citations Tracker</h4>
+          <p>Shows which URLs get cited, what queries trigger citations, and citation trends by platform — so you know exactly where you're winning and losing.</p>
+          <span class="toolkit-tag">AI Visibility Toolkit</span>
+        </div>
+        <div class="product-feature">
+          <div class="product-feature-icon pfi-keywords">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h4>Keyword Research & Strategy</h4>
+          <p>Identifies semantic landscape and intent clusters that inform both traditional ranking and AI retrieval patterns — the groundwork for both web layers.</p>
+          <span class="toolkit-tag">SEO Toolkit</span>
+        </div>
+        <div class="product-feature">
+          <div class="product-feature-icon pfi-audit">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+          </div>
+          <h4>Site Audit</h4>
+          <p>Checks technical health including crawlability and robots.txt configuration for AI crawlers — ensuring the machine-facing layer can access your content.</p>
+          <span class="toolkit-tag">SEO Toolkit</span>
+        </div>
+        <div class="product-feature">
+          <div class="product-feature-icon pfi-webmcp">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+          </div>
+          <h4>WebMCP Implementation</h4>
+          <p>Semrush clients help implement WebMCP to make your site's capabilities directly callable by agents. That means developer work on how browsers let AI access your site.</p>
+          <span class="toolkit-tag">Not in scope (yet)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Also relevant -->
+    <div class="also-relevant">
+      <div class="also-relevant-label">Also Relevant for Your Stack</div>
+      <div class="also-relevant-grid">
+        <div class="also-card">
+          <div class="also-card-header">
+            <span class="also-badge also-badge-enterprise">Enterprise</span>
+            <h4>Enterprise AIO</h4>
+          </div>
+          <p>Scale AI visibility tracking across multiple brands and regions with sentiment analysis and stakeholder reporting while WebMCP matures.</p>
+          <ul class="also-card-features">
+            <li>AI visibility across ChatGPT, Perplexity, Gemini, Claude</li>
+            <li>Custom reporting for leadership stakeholders</li>
+            <li>Multi-brand and multi-region dashboards</li>
+          </ul>
+          <a href="#">Learn more →</a>
+        </div>
+        <div class="also-card">
+          <div class="also-card-header">
+            <span class="also-badge also-badge-intelligence">Intelligence</span>
+            <h4>Traffic & Market Toolkit</h4>
+          </div>
+          <p>As AI-mediated discovery changes referral patterns, market intelligence helps teams understand competitive shifts before they show up in revenue.</p>
+          <ul class="also-card-features">
+            <li>Benchmark traffic source composition</li>
+            <li>Identify early signals of AI-referral shifts</li>
+            <li>Monitor competitor content launches with EyeOn</li>
+          </ul>
+          <a href="#">Learn more →</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+
+<!-- ===========================
+     BOTTOM CTA
+     =========================== -->
+<section class="bottom-cta">
+  <h2>See how your brand shows up in<br><span class="cta-highlight">ChatGPT and Perplexity.</span></h2>
+  <p>Benchmark your AI share of voice while the agentic web develops. The brands measuring AI visibility today will be the ones winning when agents go mainstream.</p>
+  <div class="cta-row">
+    <a href="#" class="cta-primary">Measure Your AI Visibility Today</a>
+    <a href="#" class="cta-ghost">See Semrush One</a>
+  </div>
+  <p class="cta-subtext">No credit card required · Free trial available</p>
+  <div class="trust-metrics">
+    <div class="trust-metric">
+      <div class="tm-number">10M+</div>
+      <div class="tm-label">Marketing professionals<br>trust Semrush</div>
+    </div>
+    <div class="trust-metric">
+      <div class="tm-number">4.5</div>
+      <div class="tm-label">Stars on G2<br>and Trustpilot</div>
+    </div>
+    <div class="trust-metric">
+      <div class="tm-number">4</div>
+      <div class="tm-label">AI platforms tracked: ChatGPT,<br>Perplexity, Gemini, AI Mode</div>
+    </div>
+    <div class="trust-metric">
+      <div class="tm-number">191K+</div>
+      <div class="tm-label">Views on WebMCP<br>announcement</div>
+    </div>
+  </div>
+</section>
+
 
 <!-- FOOTER -->
 <div class="footer">
@@ -1177,8 +1513,9 @@
 
 <!-- INTERNAL NOTE -->
 <div class="internal-note">
-  <strong>Internal Draft</strong> — Semrush Agentic Search Hub Concept &middot; Michael Ofei, March 2026<br>
-  For review by Andrew Warden, Leigh McKenzie, and the Owned Media team
+  <strong>Internal Draft v2</strong> — Semrush Agentic Search Hub &middot; Michael Ofei, March 2026<br>
+  For review by Leigh McKenzie and the Owned Media team<br>
+  <span style="color: var(--purple); font-weight: 600;">Context section presented as two options (A &amp; B) for Leigh's input</span>
 </div>
 
 </body>
