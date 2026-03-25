@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Search Spectrum — Evolution Comparison (For Leigh)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F8F6FF;
+    color: #191C1F;
+    padding: 60px 40px;
+  }
+
+  .page-header {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .page-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #6A35FF;
+    margin-bottom: 12px;
+  }
+
+  .page-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #191C1F;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .section {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 48px;
+    border: 1px solid #E8E8E8;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #6A35FF;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #191C1F;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  /* Side-by-side comparison layout */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 0;
+    align-items: start;
+  }
+
+  .comp-side {
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .comp-original {
+    background: #F5F5F5;
+    border: 1px solid #E8E8E8;
+  }
+
+  .comp-evolved {
+    background: #F8F6FF;
+    border: 1px solid #D4C5FF;
+  }
+
+  .comp-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #6A35FF;
+    padding-top: 40px;
+  }
+
+  .comp-header {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid;
+  }
+
+  .comp-original .comp-header {
+    color: #888;
+    border-color: #CCC;
+  }
+
+  .comp-evolved .comp-header {
+    color: #6A35FF;
+    border-color: #6A35FF;
+  }
+
+  .comp-item {
+    margin-bottom: 16px;
+  }
+
+  .comp-item:last-child { margin-bottom: 0; }
+
+  .comp-item-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .comp-item-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #191C1F;
+    line-height: 1.4;
+  }
+
+  .comp-item-note {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  /* Layer-by-layer comparison table */
+  .layer-compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+
+  .layer-compare th {
+    background: #191C1F;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  .layer-compare th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+
+  .layer-compare th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+
+  .layer-compare td {
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-bottom: 1px solid #F0F0F0;
+    vertical-align: top;
+  }
+
+  .layer-compare tr:last-child td {
+    border-bottom: none;
+  }
+
+  .layer-compare .col-aspect {
+    font-weight: 600;
+    color: #191C1F;
+    background: #FAFAFA;
+    width: 160px;
+  }
+
+  .layer-compare .col-original {
+    color: #555;
+    background: #F9F9F9;
+  }
+
+  .layer-compare .col-evolved {
+    color: #191C1F;
+    background: #FDFBFF;
+  }
+
+  .change-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .tag-new { background: #E8F5E9; color: #2E7D32; }
+  .tag-renamed { background: #FFF3E0; color: #E65100; }
+  .tag-refined { background: #F0EBFF; color: #6A35FF; }
+
+  /* Lever badges */
+  .lever-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .badge-discoverability { background: #E8F5E9; color: #2E7D32; }
+  .badge-accuracy { background: #FFF3E0; color: #E65100; }
+  .badge-trust { background: #F0EBFF; color: #6A35FF; }
+  .badge-readiness { background: #191C1F; color: #FFF; }
+
+  /* Summary callout */
+  .summary-callout {
+    padding: 24px;
+    background: linear-gradient(135deg, #F8F6FF, #F0EBFF);
+    border-radius: 12px;
+    margin-top: 32px;
+  }
+
+  .summary-callout h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #191C1F;
+  }
+
+  .summary-callout p, .summary-callout li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #191C1F;
+  }
+
+  .summary-callout ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .summary-callout li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .summary-callout li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6A35FF;
+  }
+
+  /* Spectrum visual mini (for side-by-side) */
+  .mini-spectrum {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .mini-layer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #FFF;
+    border: 1px solid #E8E8E8;
+  }
+
+  .mini-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #FFF;
+    flex-shrink: 0;
+  }
+
+  .mini-layer:nth-child(1) .mini-num { background: #D4C5FF; color: #6A35FF; }
+  .mini-layer:nth-child(2) .mini-num { background: #A78BFA; }
+  .mini-layer:nth-child(3) .mini-num { background: #8B5CF6; }
+  .mini-layer:nth-child(4) .mini-num { background: #6A35FF; }
+
+  .mini-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #191C1F;
+    flex: 1;
+  }
+
+  .mini-lever {
+    font-size: 11px;
+    color: #888;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-label">Internal Reference</div>
+  <div class="page-title">The Agentic Search Spectrum: What Changed and Why</div>
+  <div class="page-subtitle">A side-by-side comparison of the original Agentic Complexity Spectrum and the version adapted for the "What Is Agentic Search?" article. The framework and substance are unchanged. The adaptations are focused on making it accessible for a public audience — simpler naming, clearer cumulative structure, and language that works for marketers encountering the concept for the first time.</div>
+</div>
+
+
+<!-- ==========================================
+     SECTION 1: HIGH-LEVEL COMPARISON
+     ========================================== -->
+
+<div class="section">
+  <div class="section-label">Overview</div>
+  <div class="section-title">What changed at a glance</div>
+
+  <div class="comparison">
+    <div class="comp-side comp-original">
+      <div class="comp-header">Leigh's Original (Glossary v2)</div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Framework name</div>
+        <div class="comp-item-value">The Agentic Complexity Spectrum</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Layers</div>
+        <div class="comp-item-value">Layer 1–4 (numbered)</div>
+        <div class="comp-item-note">Retrieve + Synthesize, Compare + Recommend, Research + Plan, Act + Transact</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Decisive factor label</div>
+        <div class="comp-item-value">"What matters most for your brand"</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Cumulative model</div>
+        <div class="comp-item-value">Implied by layer numbering</div>
+        <div class="comp-item-note">Mentioned in the closing paragraph but not built into each layer</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Layer 4 decisive factor</div>
+        <div class="comp-item-value">Brand Trust</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">SEO / ASO connection</div>
+        <div class="comp-item-value">"How the Layers Map to ASO" table</div>
+        <div class="comp-item-note">Maps layers to "Decisive ASO Layer"</div>
+      </div>
+    </div>
+
+    <div class="comp-arrow">→</div>
+
+    <div class="comp-side comp-evolved">
+      <div class="comp-header">Evolved Version (Article v3)</div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Framework name</div>
+        <div class="comp-item-value">The Agentic Search Spectrum <span class="change-tag tag-renamed">Renamed</span></div>
+        <div class="comp-item-note">Dropped "Complexity" — it's implied by "spectrum"</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Layers</div>
+        <div class="comp-item-value">Ask, Compare, Plan, Act <span class="change-tag tag-renamed">Renamed</span></div>
+        <div class="comp-item-note">Single-word names describing the user's level of delegation. Technical descriptions kept as subtitles.</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Decisive factor label</div>
+        <div class="comp-item-value">"What becomes decisive" <span class="change-tag tag-refined">Refined</span></div>
+        <div class="comp-item-note">Avoids implying that only this factor matters at each layer</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Cumulative model</div>
+        <div class="comp-item-value">Explicit at every layer <span class="change-tag tag-new">New</span></div>
+        <div class="comp-item-note">"Each layer builds on the one before it" stated upfront. Each layer references what carries forward.</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">Layer 4 decisive factor</div>
+        <div class="comp-item-value">Brand Trust + Agent Readiness <span class="change-tag tag-new">New</span></div>
+        <div class="comp-item-note">Added the "can the agent actually transact with you?" dimension</div>
+      </div>
+
+      <div class="comp-item">
+        <div class="comp-item-label">SEO / ASO connection</div>
+        <div class="comp-item-value">SEO as foundation, ASO as extension <span class="change-tag tag-refined">Refined</span></div>
+        <div class="comp-item-note">SEO runs across all layers. ASO extends into Layers 2–4. Brand Visibility is the outcome.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================
+     SECTION 2: LAYER-BY-LAYER COMPARISON
+     ========================================== -->
+
+<div class="section">
+  <div class="section-label">Layer-by-Layer</div>
+  <div class="section-title">How each layer evolved</div>
+  <div class="section-desc">The core behaviors at each layer are unchanged. What evolved is the naming, the cumulative framing, and the specificity of what becomes decisive.</div>
+
+  <table class="layer-compare">
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Leigh's Original</th>
+        <th>Evolved Version</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Layer 1 -->
+      <tr>
+        <td class="col-aspect" rowspan="4" style="vertical-align: middle; border-right: 3px solid #D4C5FF;">
+          Layer 1<br>
+          <span style="font-size: 11px; color: #888; font-weight: 400;">Retrieve + Synthesize</span>
+        </td>
+        <td class="col-original"><strong>Name:</strong> Layer 1: Retrieve + Synthesize</td>
+        <td class="col-evolved"><strong>Name:</strong> Ask <span class="change-tag tag-renamed">Renamed</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>User framing:</strong> None</td>
+        <td class="col-evolved"><strong>User framing:</strong> "The user asks a question. The agent answers it." <span class="change-tag tag-new">New</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Decisive:</strong> Findability — page-level authority, relevance signals, structured data</td>
+        <td class="col-evolved"><strong>Decisive:</strong> Discoverability — page-level authority, relevance signals, structured data, technical health <span class="change-tag tag-refined">Refined</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Cumulative:</strong> Not stated</td>
+        <td class="col-evolved"><strong>Cumulative:</strong> Foundation layer — everything here carries forward</td>
+      </tr>
+
+      <!-- Layer 2 -->
+      <tr>
+        <td class="col-aspect" rowspan="4" style="vertical-align: middle; border-right: 3px solid #A78BFA;">
+          Layer 2<br>
+          <span style="font-size: 11px; color: #888; font-weight: 400;">Compare + Recommend</span>
+        </td>
+        <td class="col-original"><strong>Name:</strong> Layer 2: Compare + Recommend</td>
+        <td class="col-evolved"><strong>Name:</strong> Compare <span class="change-tag tag-renamed">Renamed</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>User framing:</strong> None</td>
+        <td class="col-evolved"><strong>User framing:</strong> "The user wants a judgment call. The agent evaluates options." <span class="change-tag tag-new">New</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Decisive:</strong> Brand Accuracy — outdated pricing, inconsistent entity data, unclear positioning</td>
+        <td class="col-evolved"><strong>Decisive:</strong> Brand Accuracy — same specifics + generalized principle: "The agent checks what you say against what independent sources say" <span class="change-tag tag-refined">Refined</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Cumulative:</strong> Not stated</td>
+        <td class="col-evolved"><strong>Cumulative:</strong> "Discoverability got you into the comparison. Accuracy determines whether it favors you."</td>
+      </tr>
+
+      <!-- Layer 3 -->
+      <tr>
+        <td class="col-aspect" rowspan="4" style="vertical-align: middle; border-right: 3px solid #8B5CF6;">
+          Layer 3<br>
+          <span style="font-size: 11px; color: #888; font-weight: 400;">Research + Plan</span>
+        </td>
+        <td class="col-original"><strong>Name:</strong> Layer 3: Research + Plan</td>
+        <td class="col-evolved"><strong>Name:</strong> Plan <span class="change-tag tag-renamed">Renamed</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>User framing:</strong> None</td>
+        <td class="col-evolved"><strong>User framing:</strong> "The user delegates research. The agent builds a strategy." <span class="change-tag tag-new">New</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Decisive:</strong> Brand Accuracy + Brand Trust — consistent messaging, positive sentiment, third-party endorsements</td>
+        <td class="col-evolved"><strong>Decisive:</strong> Brand Trust (with accuracy still running) — sharpened the distinction: accuracy keeps you in the set, trust tips the recommendation. Named specific signals: review sentiment, expert endorsements, press coverage, cross-source corroboration <span class="change-tag tag-refined">Refined</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Cumulative:</strong> Not stated</td>
+        <td class="col-evolved"><strong>Cumulative:</strong> "Accuracy keeps you in the consideration set — that's the Layer 2 work, still running. Trust is what tips the recommendation."</td>
+      </tr>
+
+      <!-- Layer 4 -->
+      <tr>
+        <td class="col-aspect" rowspan="4" style="vertical-align: middle; border-right: 3px solid #6A35FF;">
+          Layer 4<br>
+          <span style="font-size: 11px; color: #888; font-weight: 400;">Act + Transact</span>
+        </td>
+        <td class="col-original"><strong>Name:</strong> Layer 4: Act + Transact</td>
+        <td class="col-evolved"><strong>Name:</strong> Act <span class="change-tag tag-renamed">Renamed</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>User framing:</strong> None</td>
+        <td class="col-evolved"><strong>User framing:</strong> "The user delegates execution. The agent follows through." <span class="change-tag tag-new">New</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Decisive:</strong> Brand Trust — cross-source corroboration, positive sentiment, third-party validation</td>
+        <td class="col-evolved"><strong>Decisive:</strong> Agent Readiness (with trust still running) — added the "can the agent actually act on its recommendation?" dimension. Machine-readable data, online booking/checkout, protocol readiness. <span class="change-tag tag-new">New</span></td>
+      </tr>
+      <tr>
+        <td class="col-original"><strong>Cumulative:</strong> Mentioned in closing: "Findability gets you into the retrieval set. Brand accuracy gets you represented correctly."</td>
+        <td class="col-evolved"><strong>Cumulative:</strong> "Everything from previous layers still applies. Discoverability gets you in. Accuracy represents you correctly. Trust earns the recommendation. Readiness lets the agent follow through."</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ==========================================
+     SECTION 3: VISUAL COMPARISON
+     ========================================== -->
+
+<div class="section">
+  <div class="section-label">Visual Comparison</div>
+  <div class="section-title">The spectrum side by side</div>
+
+  <div class="comparison">
+    <div class="comp-side comp-original">
+      <div class="comp-header">Original Naming</div>
+      <div class="mini-spectrum">
+        <div class="mini-layer">
+          <div class="mini-num">1</div>
+          <div class="mini-name">Retrieve + Synthesize</div>
+          <div class="mini-lever">Findability</div>
+        </div>
+        <div class="mini-layer">
+          <div class="mini-num">2</div>
+          <div class="mini-name">Compare + Recommend</div>
+          <div class="mini-lever">Brand Accuracy</div>
+        </div>
+        <div class="mini-layer">
+          <div class="mini-num">3</div>
+          <div class="mini-name">Research + Plan</div>
+          <div class="mini-lever">Accuracy + Trust</div>
+        </div>
+        <div class="mini-layer">
+          <div class="mini-num">4</div>
+          <div class="mini-name">Act + Transact</div>
+          <div class="mini-lever">Brand Trust</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-arrow">→</div>
+
+    <div class="comp-side comp-evolved">
+      <div class="comp-header">Evolved Naming</div>
+      <div class="mini-spectrum">
+        <div class="mini-layer">
+          <div class="mini-num">1</div>
+          <div class="mini-name">Ask</div>
+          <div class="mini-lever"><span class="lever-badge badge-discoverability" style="font-size: 10px; padding: 3px 8px;">Discoverability</span></div>
+        </div>
+        <div class="mini-layer">
+          <div class="mini-num">2</div>
+          <div class="mini-name">Compare</div>
+          <div class="mini-lever"><span class="lever-badge badge-accuracy" style="font-size: 10px; padding: 3px 8px;">Brand Accuracy</span></div>
+        </div>
+        <div class="mini-layer">
+          <div class="mini-num">3</div>
+          <div class="mini-name">Plan</div>
+          <div class="mini-lever"><span class="lever-badge badge-trust" style="font-size: 10px; padding: 3px 8px;">Brand Trust</span></div>
+        </div>
+        <div class="mini-layer">
+          <div class="mini-num">4</div>
+          <div class="mini-name">Act</div>
+          <div class="mini-lever"><span class="lever-badge badge-readiness" style="font-size: 10px; padding: 3px 8px;">Agent Readiness</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================
+     SECTION 4: WHY THESE CHANGES
+     ========================================== -->
+
+<div class="section">
+  <div class="section-label">Rationale</div>
+  <div class="section-title">Why we made these changes</div>
+
+  <div class="summary-callout">
+    <h3>What we kept</h3>
+    <ul>
+      <li>The four-layer structure and escalation model — untouched</li>
+      <li>The core behaviors at each layer (retrieve, compare, plan, act) — untouched</li>
+      <li>The prompt-based examples that make each layer concrete</li>
+      <li>The mapping to ASO layers (Discoverability, Accuracy, Trust)</li>
+      <li>The principle that complexity escalates in two dimensions: steps and evaluative authority</li>
+    </ul>
+  </div>
+
+  <div class="summary-callout" style="margin-top: 16px;">
+    <h3>What we changed and why</h3>
+    <ul>
+      <li><strong>Simpler layer names (Ask, Compare, Plan, Act).</strong> The original verb pairs (Retrieve + Synthesize) describe agent behavior accurately but require cognitive overhead. The simplified names describe the user's delegation level — immediately understandable without explanation. "Most brands are at Ask and Compare" is a sentence someone says in a meeting.</li>
+      <li><strong>Explicit cumulative model.</strong> The original implied that each layer builds on the previous (the closing paragraph mentions it). The evolved version makes it structural — every layer explicitly references what carries forward. This preempts the editorial objection: "doesn't accuracy matter at every layer?"</li>
+      <li><strong>"What becomes decisive" instead of "What matters most."</strong> "What matters most" implies exclusivity. "What becomes decisive" communicates that all signals matter, but the tipping factor shifts as complexity scales.</li>
+      <li><strong>Agent Readiness at Layer 4.</strong> The original has Brand Trust as the sole decisive factor at Layer 4. The evolved version adds Agent Readiness — can the agent actually transact with you? Trust earns the recommendation. Readiness earns the conversion. This fills a real gap: a brand can be highly trusted but technically inaccessible to agents.</li>
+      <li><strong>User-perspective framing for each layer.</strong> Added one-line descriptions from the user's point of view ("The user asks a question. The agent answers it."). This makes the layers immediately relatable without reading the technical description.</li>
+      <li><strong>SEO + ASO + Brand Visibility integrated.</strong> The original maps to "Decisive ASO Layer." The evolved version positions SEO as the foundation across all layers, ASO as the extension into Layers 2–4, and Brand Visibility as the outcome. This gives readers the vocabulary and connects to Semrush's positioning.</li>
+    </ul>
+  </div>
+
+  <div class="summary-callout" style="margin-top: 16px;">
+    <h3>What this means for the AI Search OS</h3>
+    <p>If this naming lands, the course modules could map directly to the spectrum layers: Ask, Compare, Plan, Act. Each module teaches the signals that become decisive at that layer, building on the previous. The simplified names make the course structure immediately navigable — and the cumulative model gives students a clear progression path.</p>
+  </div>
+</div>
+
+</body>
+</html>
