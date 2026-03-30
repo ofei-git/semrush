@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Four Pillars of Brand Visibility</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #FAFAFA;
+            color: #191C1F;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #191C1F;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #555;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* Trust North Star Section */
+        .north-star {
+            text-align: center;
+            margin-bottom: 64px;
+            padding: 48px 40px;
+            background: linear-gradient(135deg, #F8F5FF 0%, #F0EBFF 100%);
+            border-radius: 16px;
+            border: 1px solid #E8E0FF;
+        }
+
+        .north-star-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: #6A35FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .north-star-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .north-star h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #191C1F;
+        }
+
+        .north-star p {
+            font-size: 16px;
+            color: #555;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Pillars Grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        .pillar-card {
+            background: white;
+            border-radius: 12px;
+            padding: 36px;
+            border: 1px solid #E5E5E5;
+            position: relative;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .pillar-card.foundation {
+            grid-column: 1 / -1;
+            background: #FAFBFF;
+            border-color: #D4C8FF;
+        }
+
+        .pillar-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            margin-bottom: 8px;
+        }
+
+        .pillar-card.foundation .pillar-number {
+            color: #6A35FF;
+        }
+
+        .pillar-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #191C1F;
+            margin-bottom: 4px;
+        }
+
+        .pillar-question {
+            font-size: 15px;
+            font-style: italic;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .pillar-description {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .pillar-owner {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6A35FF;
+            background: #F4F0FF;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .pillar-owner svg {
+            width: 14px;
+            height: 14px;
+            fill: #6A35FF;
+        }
+
+        .foundation-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: white;
+            background: #6A35FF;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        /* Dependency Flow */
+        .dependency-section {
+            margin-bottom: 64px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #191C1F;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .dependency-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E5E5E5;
+        }
+
+        .dep-node {
+            text-align: center;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .dep-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.3;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .dep-circle.discover { background: #6A35FF; }
+        .dep-circle.clarity { background: #8B5CF6; }
+        .dep-circle.authority { background: #A78BFA; }
+        .dep-circle.trust {
+            background: linear-gradient(135deg, #6A35FF 0%, #4F1FCC 100%);
+            width: 130px;
+            height: 130px;
+            font-size: 15px;
+            border: 4px solid #E8E0FF;
+        }
+
+        .dep-arrow {
+            font-size: 24px;
+            color: #C4B5FD;
+            flex-shrink: 0;
+            padding: 0 8px;
+        }
+
+        .dep-label {
+            font-size: 12px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        /* Diagnostic Section */
+        .diagnostic-section {
+            margin-bottom: 64px;
+        }
+
+        .diagnostic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .diagnostic-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #E5E5E5;
+        }
+
+        .diagnostic-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #191C1F;
+            margin-bottom: 8px;
+        }
+
+        .diagnostic-card .scenario {
+            font-size: 14px;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .diagnostic-card .diagnosis {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .gap-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-right: 6px;
+        }
+
+        .gap-tag.weak {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        .gap-tag.strong {
+            background: #F0FDF4;
+            color: #16A34A;
+        }
+
+        /* EEAT Mapping */
+        .eeat-section {
+            margin-bottom: 64px;
+        }
+
+        .eeat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .eeat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px 24px;
+            border: 1px solid #E5E5E5;
+            text-align: center;
+        }
+
+        .eeat-from {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .eeat-arrow-down {
+            font-size: 18px;
+            color: #C4B5FD;
+            margin: 6px 0;
+        }
+
+        .eeat-to {
+            font-size: 15px;
+            font-weight: 700;
+            color: #6A35FF;
+        }
+
+        .eeat-description {
+            font-size: 13px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* Tagline */
+        .tagline {
+            text-align: center;
+            padding: 48px 40px;
+            background: #191C1F;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .tagline p {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.8;
+        }
+
+        .tagline span {
+            color: #C4B5FD;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-label">Semrush AI Search OS</div>
+        <h1>The Four Pillars of Brand Visibility</h1>
+        <p>Brand visibility in AI search rests on four pillars. Each answers a different question about your brand's readiness. Together, they determine whether AI systems find you, understand you, take you seriously, and trust you enough to act on your behalf.</p>
+    </div>
+
+    <!-- Trust as North Star -->
+    <div class="north-star">
+        <div class="north-star-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        </div>
+        <h2>Every Pillar Feeds Brand Trust</h2>
+        <p>Trust is the outcome, not just a layer. Discoverability, Clarity, and Authority are the inputs that determine whether AI systems have enough confidence to recommend your brand or act on its behalf. All four pillars are necessary. If any one is weak, the whole structure is compromised.</p>
+    </div>
+
+    <!-- The Four Pillars -->
+    <div class="pillars-grid">
+
+        <!-- Discoverability — Foundation -->
+        <div class="pillar-card foundation">
+            <div class="pillar-number">Foundation Pillar</div>
+            <div class="pillar-name">Brand Discoverability <span class="foundation-badge">Prerequisite</span></div>
+            <div class="pillar-question">Can AI systems find and retrieve your content?</div>
+            <div class="pillar-description">The floor for everything else. Without discoverability, the other pillars have nothing to operate on. SEO fundamentals do the heavy lifting: page-level authority, technical health, relevance signals, crawlability. ASO raises the bar with structured data, entity disambiguation, passage-level extractability, and agentic protocol readiness (WebMCP, UCP, ACP). These signals determine whether AI systems can <em>use</em> your content, not just index it.</div>
+            <div class="pillar-owner">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                SEO / Technical / Content
+            </div>
+        </div>
+
+        <!-- Clarity -->
+        <div class="pillar-card">
+            <div class="pillar-number">Pillar</div>
+            <div class="pillar-name">Brand Clarity</div>
+            <div class="pillar-question">Does AI understand your brand correctly?</div>
+            <div class="pillar-description">Once AI finds you, can it accurately represent what you do? Entity clarity, product positioning, and consistent messaging across owned and third-party sources must be managed as a unified signal. When sources contradict each other, AI synthesizes the inconsistency. This is where PMM and brand teams converge with content.</div>
+            <div class="pillar-owner">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                PMM / Brand
+            </div>
+        </div>
+
+        <!-- Authority -->
+        <div class="pillar-card">
+            <div class="pillar-name">Brand Authority</div>
+            <div class="pillar-question">Does your brand appear qualified to be included?</div>
+            <div class="pillar-description">AI checks what everyone else says about you, not just what you say about yourself. Expert associations, third-party mentions, comparative visibility, and consistent presence across the broader information ecosystem determine whether you enter the consideration set at all.</div>
+            <div class="pillar-owner">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                Digital PR / Thought Leadership / Ecosystem Presence
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Diagnostic Examples -->
+    <div class="diagnostic-section">
+        <div class="section-header">
+            <h2>Diagnose Your Gaps</h2>
+            <p>The pillars are not a sequence to follow. They're a diagnostic. Find where your brand is weakest and address it.</p>
+        </div>
+        <div class="diagnostic-grid">
+            <div class="diagnostic-card">
+                <h3>The Invisible Expert</h3>
+                <div class="scenario">"We have great reviews and press coverage, but AI never mentions us."</div>
+                <div class="diagnosis">Strong trust signals, but AI can't find your content in the first place. Your pages may lack structured data, have JavaScript rendering issues, or insufficient passage-level extractability.</div>
+                <span class="gap-tag weak">Discoverability gap</span>
+                <span class="gap-tag strong">Trust is strong</span>
+            </div>
+            <div class="diagnostic-card">
+                <h3>The Misrepresented Brand</h3>
+                <div class="scenario">"AI mentions us, but gets our positioning wrong or recommends us for the wrong use cases."</div>
+                <div class="diagnosis">Discoverability is working, but your entity data is inconsistent across sources. Your pricing page, G2 profile, LinkedIn, and product docs are telling different stories. AI synthesizes the confusion.</div>
+                <span class="gap-tag strong">Discoverability is strong</span>
+                <span class="gap-tag weak">Clarity gap</span>
+            </div>
+            <div class="diagnostic-card">
+                <h3>The Unknown Contender</h3>
+                <div class="scenario">"Our messaging is tight and consistent, but AI doesn't include us in comparison prompts."</div>
+                <div class="diagnosis">Clarity is strong, but the broader ecosystem doesn't validate your position. Limited third-party mentions, few expert associations, low comparative visibility. AI doesn't see you as a category player.</div>
+                <span class="gap-tag strong">Clarity is strong</span>
+                <span class="gap-tag weak">Authority gap</span>
+            </div>
+            <div class="diagnostic-card">
+                <h3>The Risky Recommendation</h3>
+                <div class="scenario">"AI includes us in research and comparisons but hedges when recommending us for high-stakes decisions."</div>
+                <div class="diagnosis">Discoverable, clear, and authoritative — but trust signals are weak. Mixed reviews, inconsistency between brand claims and third-party feedback, limited cross-source corroboration. The agent isn't confident enough to stake its recommendation on you.</div>
+                <span class="gap-tag strong">Authority is strong</span>
+                <span class="gap-tag weak">Trust gap</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- EEAT Mapping -->
+    <div class="eeat-section">
+        <div class="section-header">
+            <h2>The EEAT Parallel</h2>
+            <p>EEAT was Google's quality framework for human evaluators. The Four Pillars are the equivalent framework for machine evaluators in the agentic search era.</p>
+        </div>
+        <div class="eeat-grid">
+            <div class="eeat-card">
+                <div class="eeat-from">Experience</div>
+                <div class="eeat-arrow-down">&#8595;</div>
+                <div class="eeat-to">Brand Discoverability</div>
+                <div class="eeat-description">Has this brand shown up in the real world? First-party data and practitioner content make it retrievable.</div>
+            </div>
+            <div class="eeat-card">
+                <div class="eeat-from">Expertise</div>
+                <div class="eeat-arrow-down">&#8595;</div>
+                <div class="eeat-to">Brand Clarity</div>
+                <div class="eeat-description">Does the entity demonstrate deep knowledge? Entity clarity and topical depth form the unified signal.</div>
+            </div>
+            <div class="eeat-card">
+                <div class="eeat-from">Authoritativeness</div>
+                <div class="eeat-arrow-down">&#8595;</div>
+                <div class="eeat-to">Brand Authority</div>
+                <div class="eeat-description">Is this brand recognized by others? External validation extends into the broader information ecosystem.</div>
+            </div>
+            <div class="eeat-card">
+                <div class="eeat-from">Trust</div>
+                <div class="eeat-arrow-down">&#8595;</div>
+                <div class="eeat-to">Brand Trust</div>
+                <div class="eeat-description">The highest bar. Sentiment, corroboration, and reputation consistency — the most important factor in both frameworks.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tagline -->
+    <div class="tagline">
+        <p>
+            <span>Discoverability</span> gets you found.<br>
+            <span>Clarity</span> gets you understood.<br>
+            <span>Authority</span> gets you considered.<br>
+            <span>Trust</span> gets you chosen.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Semrush AI Search OS &middot; Brand Visibility Framework &middot; Internal Document &middot; V4, March 2026
+    </div>
+
+</div>
+
+</body>
+</html>
