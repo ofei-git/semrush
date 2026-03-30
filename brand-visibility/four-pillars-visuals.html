@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Visibility Framework — Visual Concepts</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F5F5;
+            color: #191C1F;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 48px 40px 32px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .concepts-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .concept {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #E5E5E5;
+        }
+
+        .concept-label {
+            padding: 20px 28px;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .concept-label h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #191C1F;
+        }
+
+        .concept-label p {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .concept-canvas {
+            padding: 40px;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* ======================== */
+        /* CONCEPT 1: EEAT VENN     */
+        /* ======================== */
+
+        .venn-container {
+            position: relative;
+            width: 420px;
+            height: 440px;
+        }
+
+        .venn-title {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            margin-bottom: 16px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .venn-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .venn-circle.discover {
+            width: 190px;
+            height: 190px;
+            background: rgba(106, 53, 255, 0.08);
+            border: 2px solid rgba(106, 53, 255, 0.25);
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .venn-circle.clarity {
+            width: 190px;
+            height: 190px;
+            background: rgba(139, 92, 246, 0.08);
+            border: 2px solid rgba(139, 92, 246, 0.25);
+            top: 80px;
+            left: 20px;
+        }
+
+        .venn-circle.authority {
+            width: 190px;
+            height: 190px;
+            background: rgba(167, 139, 250, 0.08);
+            border: 2px solid rgba(167, 139, 250, 0.25);
+            top: 80px;
+            right: 20px;
+        }
+
+        .venn-center {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: #6A35FF;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -45%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            z-index: 10;
+            box-shadow: 0 4px 24px rgba(106, 53, 255, 0.3);
+        }
+
+        .venn-center .v-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .venn-center .v-sub {
+            font-size: 10px;
+            color: rgba(255,255,255,0.75);
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        .venn-circle .v-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #191C1F;
+            position: relative;
+            z-index: 5;
+        }
+
+        .venn-circle .v-sub {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+            max-width: 120px;
+            line-height: 1.3;
+            position: relative;
+            z-index: 5;
+        }
+
+        .venn-circle.discover .v-name,
+        .venn-circle.discover .v-sub {
+            transform: translateY(30px);
+        }
+
+        .venn-circle.clarity .v-name,
+        .venn-circle.clarity .v-sub {
+            transform: translate(-20px, -25px);
+        }
+
+        .venn-circle.authority .v-name,
+        .venn-circle.authority .v-sub {
+            transform: translate(20px, -25px);
+        }
+
+        .venn-outcome {
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ======================== */
+        /* CONCEPT 2: TEMPLE        */
+        /* ======================== */
+
+        .temple-container {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .temple-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            margin-bottom: 20px;
+        }
+
+        .temple-roof {
+            width: 380px;
+            background: #191C1F;
+            color: white;
+            text-align: center;
+            padding: 20px 24px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        .temple-roof::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-bottom: 30px solid #191C1F;
+        }
+
+        .temple-roof .t-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .temple-roof .t-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+
+        .temple-capstone {
+            width: 380px;
+            background: #6A35FF;
+            color: white;
+            text-align: center;
+            padding: 18px 24px;
+            position: relative;
+        }
+
+        .temple-capstone .t-name {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .temple-capstone .t-sub {
+            font-size: 10px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 3px;
+        }
+
+        .temple-capstone-badge {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .temple-columns {
+            display: flex;
+            width: 380px;
+            gap: 4px;
+        }
+
+        .temple-column {
+            flex: 1;
+            background: #F4F0FF;
+            border: 2px solid #E8E0FF;
+            text-align: center;
+            padding: 28px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .temple-column .t-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #191C1F;
+        }
+
+        .temple-column .t-sub {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        .temple-foundation {
+            width: 380px;
+            background: #6A35FF;
+            color: white;
+            text-align: center;
+            padding: 18px 24px;
+            border-radius: 0 0 8px 8px;
+            position: relative;
+        }
+
+        .temple-foundation .t-name {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .temple-foundation .t-sub {
+            font-size: 10px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 3px;
+        }
+
+        .temple-foundation-badge {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* ======================== */
+        /* CONCEPT 3: CONCENTRIC    */
+        /* ======================== */
+
+        .concentric-container {
+            position: relative;
+            width: 420px;
+            height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .concentric-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+        }
+
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ring-discover {
+            width: 380px;
+            height: 380px;
+            background: rgba(106, 53, 255, 0.04);
+            border: 2px solid rgba(106, 53, 255, 0.15);
+        }
+
+        .ring-clarity {
+            width: 280px;
+            height: 280px;
+            background: rgba(106, 53, 255, 0.07);
+            border: 2px solid rgba(106, 53, 255, 0.2);
+        }
+
+        .ring-authority {
+            width: 180px;
+            height: 180px;
+            background: rgba(106, 53, 255, 0.11);
+            border: 2px solid rgba(106, 53, 255, 0.28);
+        }
+
+        .ring-trust {
+            width: 100px;
+            height: 100px;
+            background: #6A35FF;
+            box-shadow: 0 4px 24px rgba(106, 53, 255, 0.3);
+        }
+
+        .ring-trust .r-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .ring-label {
+            position: absolute;
+            font-size: 12px;
+            font-weight: 700;
+            color: #191C1F;
+        }
+
+        .ring-sublabel {
+            position: absolute;
+            font-size: 9px;
+            color: #888;
+        }
+
+        .rl-discover {
+            top: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rs-discover {
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rl-clarity {
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rs-clarity {
+            top: 106px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rl-authority {
+            top: 148px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rs-authority {
+            top: 164px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .concentric-outcome {
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+        }
+
+        .concentric-arrow {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #C4B5FD;
+            font-size: 14px;
+        }
+
+        .ca-1 { top: 62px; }
+        .ca-2 { top: 120px; }
+        .ca-3 { top: 178px; }
+
+        /* ======================== */
+        /* CONCEPT 4: SHIELD/TABLE  */
+        /* ======================== */
+
+        .table-concept {
+            width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .table-concept-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            margin-bottom: 20px;
+        }
+
+        .surface {
+            width: 380px;
+            background: #191C1F;
+            color: white;
+            text-align: center;
+            padding: 20px 24px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .surface .s-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .surface .s-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+
+        .legs-container {
+            width: 380px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .leg {
+            width: 72px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .leg-bar {
+            width: 4px;
+            height: 60px;
+            background: #D4C8FF;
+            position: relative;
+        }
+
+        .leg-bar.trust-bar {
+            width: 6px;
+            background: #6A35FF;
+            height: 60px;
+        }
+
+        .leg-node {
+            width: 72px;
+            background: #F4F0FF;
+            border: 2px solid #E8E0FF;
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .leg-node.trust-node {
+            background: #6A35FF;
+            border-color: #6A35FF;
+        }
+
+        .leg-node .l-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: #191C1F;
+            line-height: 1.2;
+        }
+
+        .leg-node.trust-node .l-name {
+            color: white;
+        }
+
+        .leg-node .l-icon {
+            font-size: 9px;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        .leg-node.trust-node .l-icon {
+            color: rgba(255,255,255,0.7);
+            font-size: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .table-base {
+            width: 380px;
+            text-align: center;
+            padding: 16px;
+        }
+
+        .table-base p {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* ======================== */
+        /* CONCEPT 5: EQUATION      */
+        /* ======================== */
+
+        .concept.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .equation-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .eq-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .eq-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 12px;
+        }
+
+        .eq-circle.discover {
+            background: rgba(106, 53, 255, 0.06);
+            border: 2px solid rgba(106, 53, 255, 0.2);
+        }
+
+        .eq-circle.clarity {
+            background: rgba(106, 53, 255, 0.09);
+            border: 2px solid rgba(106, 53, 255, 0.25);
+        }
+
+        .eq-circle.authority {
+            background: rgba(106, 53, 255, 0.12);
+            border: 2px solid rgba(106, 53, 255, 0.3);
+        }
+
+        .eq-circle.trust {
+            background: #6A35FF;
+            border: 2px solid #6A35FF;
+            box-shadow: 0 4px 20px rgba(106, 53, 255, 0.25);
+        }
+
+        .eq-circle.result {
+            background: #191C1F;
+            border: 2px solid #191C1F;
+            width: 140px;
+            height: 140px;
+        }
+
+        .eq-circle .eq-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #191C1F;
+        }
+
+        .eq-circle.trust .eq-name,
+        .eq-circle.result .eq-name {
+            color: white;
+        }
+
+        .eq-circle .eq-sub {
+            font-size: 9px;
+            color: #777;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        .eq-circle.trust .eq-sub {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .eq-circle.result .eq-sub {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .eq-operator {
+            font-size: 24px;
+            font-weight: 300;
+            color: #C4B5FD;
+        }
+
+        .eq-badge {
+            margin-top: 8px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            background: #F4F0FF;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        .eq-badge.keystone {
+            background: #6A35FF;
+            color: white;
+        }
+
+        .eq-badge.dark {
+            background: #191C1F;
+            color: white;
+        }
+
+        /* ======================== */
+        /* CONCEPT 6: SIMPLE STACK  */
+        /* ======================== */
+
+        .stack-container {
+            width: 360px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stack-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6A35FF;
+            margin-bottom: 20px;
+        }
+
+        .stack-row {
+            width: 100%;
+            padding: 22px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #E8E0FF;
+            margin-bottom: -1px;
+        }
+
+        .stack-row:first-of-type {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .stack-row:last-of-type {
+            border-radius: 0 0 10px 10px;
+        }
+
+        .stack-row.trust-row {
+            background: #6A35FF;
+            border-color: #6A35FF;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .stack-row.discover-row {
+            background: #F8F6FF;
+        }
+
+        .stack-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stack-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #6A35FF;
+            flex-shrink: 0;
+        }
+
+        .stack-row.trust-row .stack-dot {
+            background: white;
+        }
+
+        .stack-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #191C1F;
+        }
+
+        .stack-row.trust-row .stack-name {
+            color: white;
+        }
+
+        .stack-question {
+            font-size: 11px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .stack-row.trust-row .stack-question {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .stack-badge {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .stack-badge.keystone {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .stack-badge.foundation {
+            background: #E8E0FF;
+            color: #6A35FF;
+        }
+
+        .stack-connector {
+            width: 2px;
+            height: 12px;
+            background: #E8E0FF;
+            margin: 0 auto;
+        }
+
+        .stack-outcome {
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .stack-outcome-box {
+            display: inline-block;
+            background: #191C1F;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .stack-outcome-sub {
+            font-size: 10px;
+            color: #999;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>Four Pillars of Brand Visibility — Visual Concepts</h1>
+    <p>Six approaches to visualising the framework. Pick the one that teaches best.</p>
+</div>
+
+<div class="concepts-grid">
+
+    <!-- CONCEPT 1: EEAT Venn -->
+    <div class="concept">
+        <div class="concept-label">
+            <h2>Concept 1: EEAT Venn</h2>
+            <p>Mirrors Google's EEAT diagram. Trust at the center where all three overlap. Familiar to the SEO audience.</p>
+        </div>
+        <div class="concept-canvas">
+            <div class="venn-container">
+                <div class="venn-title">Brand Visibility</div>
+                <div class="venn-circle discover">
+                    <span class="v-name">Discoverability</span>
+                    <span class="v-sub">Can they find you?</span>
+                </div>
+                <div class="venn-circle clarity">
+                    <span class="v-name">Clarity</span>
+                    <span class="v-sub">Do they understand you?</span>
+                </div>
+                <div class="venn-circle authority">
+                    <span class="v-name">Authority</span>
+                    <span class="v-sub">Do others validate you?</span>
+                </div>
+                <div class="venn-center">
+                    <span class="v-name">Trust</span>
+                    <span class="v-sub">The keystone</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 2: Temple -->
+    <div class="concept">
+        <div class="concept-label">
+            <h2>Concept 2: Temple</h2>
+            <p>Discoverability is the foundation. Clarity and Authority are the pillars. Trust is the capstone. Brand Visibility is the roof.</p>
+        </div>
+        <div class="concept-canvas">
+            <div class="temple-container">
+                <div class="temple-label">The Four Pillars of Brand Visibility</div>
+                <div class="temple-roof">
+                    <span class="t-name">Brand Visibility</span>
+                    <span class="t-sub">The outcome</span>
+                </div>
+                <div class="temple-capstone">
+                    <span class="t-name">Brand Trust</span>
+                    <span class="t-sub">Will AI confidently recommend or act on your brand?</span>
+                    <span class="temple-capstone-badge">Keystone</span>
+                </div>
+                <div class="temple-columns">
+                    <div class="temple-column">
+                        <span class="t-name">Brand Clarity</span>
+                        <span class="t-sub">Do they understand you correctly?</span>
+                    </div>
+                    <div class="temple-column">
+                        <span class="t-name">Brand Authority</span>
+                        <span class="t-sub">Do others validate your position?</span>
+                    </div>
+                </div>
+                <div class="temple-foundation">
+                    <span class="t-name">Brand Discoverability</span>
+                    <span class="t-sub">Can AI systems find and retrieve your content?</span>
+                    <span class="temple-foundation-badge">Foundation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 3: Concentric Rings -->
+    <div class="concept">
+        <div class="concept-label">
+            <h2>Concept 3: Concentric Rings</h2>
+            <p>Trust at the center, each ring represents a wider sphere of brand signals. Communicates that Trust is what everything converges toward.</p>
+        </div>
+        <div class="concept-canvas">
+            <div class="concentric-container">
+                <div class="concentric-title">Brand Visibility</div>
+                <div class="ring ring-discover"></div>
+                <div class="ring ring-clarity"></div>
+                <div class="ring ring-authority"></div>
+                <div class="ring ring-trust">
+                    <span class="r-name">Trust</span>
+                </div>
+                <span class="ring-label rl-discover">Discoverability</span>
+                <span class="ring-sublabel rs-discover">The foundation</span>
+                <span class="ring-label rl-clarity">Clarity</span>
+                <span class="ring-sublabel rs-clarity">Understood correctly</span>
+                <span class="ring-label rl-authority">Authority</span>
+                <span class="ring-sublabel rs-authority">Validated by others</span>
+                <span class="concentric-arrow ca-1">&darr;</span>
+                <span class="concentric-arrow ca-2">&darr;</span>
+                <span class="concentric-arrow ca-3">&darr;</span>
+                <span class="concentric-outcome">Every ring converges toward Trust</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 4: Table Legs -->
+    <div class="concept">
+        <div class="concept-label">
+            <h2>Concept 4: Table</h2>
+            <p>Four legs hold up Brand Visibility. Trust is the strongest leg — remove it and everything tips. Simple, literal, effective.</p>
+        </div>
+        <div class="concept-canvas">
+            <div class="table-concept">
+                <div class="table-concept-label">The Four Pillars of Brand Visibility</div>
+                <div class="surface">
+                    <span class="s-name">Brand Visibility</span>
+                    <span class="s-sub">The outcome all four pillars support</span>
+                </div>
+                <div class="legs-container">
+                    <div class="leg">
+                        <div class="leg-bar"></div>
+                        <div class="leg-node">
+                            <span class="l-name">Discover-ability</span>
+                            <span class="l-icon">Find you</span>
+                        </div>
+                    </div>
+                    <div class="leg">
+                        <div class="leg-bar"></div>
+                        <div class="leg-node">
+                            <span class="l-name">Clarity</span>
+                            <span class="l-icon">Understand you</span>
+                        </div>
+                    </div>
+                    <div class="leg">
+                        <div class="leg-bar"></div>
+                        <div class="leg-node">
+                            <span class="l-name">Authority</span>
+                            <span class="l-icon">Validate you</span>
+                        </div>
+                    </div>
+                    <div class="leg">
+                        <div class="leg-bar trust-bar"></div>
+                        <div class="leg-node trust-node">
+                            <span class="l-name">Trust</span>
+                            <span class="l-icon">Keystone</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-base">
+                    <p>Remove any leg and the surface wobbles. Remove Trust and it collapses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 5: Equation (full width) -->
+    <div class="concept full-width">
+        <div class="concept-label">
+            <h2>Concept 5: Equation</h2>
+            <p>Clean, linear, modern. Shows the pillars as additive components that produce Brand Visibility. Trust is visually elevated as the keystone.</p>
+        </div>
+        <div class="concept-canvas">
+            <div class="equation-container">
+                <div class="eq-block">
+                    <div class="eq-circle discover">
+                        <span class="eq-name">Discoverability</span>
+                        <span class="eq-sub">Can they find you?</span>
+                    </div>
+                    <span class="eq-badge">Foundation</span>
+                </div>
+                <span class="eq-operator">+</span>
+                <div class="eq-block">
+                    <div class="eq-circle clarity">
+                        <span class="eq-name">Clarity</span>
+                        <span class="eq-sub">Do they understand you?</span>
+                    </div>
+                </div>
+                <span class="eq-operator">+</span>
+                <div class="eq-block">
+                    <div class="eq-circle authority">
+                        <span class="eq-name">Authority</span>
+                        <span class="eq-sub">Do others validate you?</span>
+                    </div>
+                </div>
+                <span class="eq-operator">+</span>
+                <div class="eq-block">
+                    <div class="eq-circle trust">
+                        <span class="eq-name">Trust</span>
+                        <span class="eq-sub">Will AI act on your behalf?</span>
+                    </div>
+                    <span class="eq-badge keystone">Keystone</span>
+                </div>
+                <span class="eq-operator">=</span>
+                <div class="eq-block">
+                    <div class="eq-circle result">
+                        <span class="eq-name">Brand Visibility</span>
+                        <span class="eq-sub">Found, understood, considered, chosen</span>
+                    </div>
+                    <span class="eq-badge dark">Outcome</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCEPT 6: Simple Stack -->
+    <div class="concept full-width">
+        <div class="concept-label">
+            <h2>Concept 6: Stack</h2>
+            <p>Minimal, presentation-ready. Trust at the top as the keystone, Discoverability at the base as the foundation, everything feeds into Brand Visibility. Works well in slides.</p>
+        </div>
+        <div class="concept-canvas">
+            <div class="stack-container">
+                <div class="stack-label">The Four Pillars of Brand Visibility</div>
+                <div class="stack-row trust-row">
+                    <div class="stack-left">
+                        <div class="stack-dot"></div>
+                        <span class="stack-name">Brand Trust</span>
+                    </div>
+                    <span class="stack-question">Will AI confidently act on your brand?</span>
+                    <span class="stack-badge keystone">Keystone</span>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-left">
+                        <div class="stack-dot"></div>
+                        <span class="stack-name">Brand Authority</span>
+                    </div>
+                    <span class="stack-question">Do others validate your position?</span>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-left">
+                        <div class="stack-dot"></div>
+                        <span class="stack-name">Brand Clarity</span>
+                    </div>
+                    <span class="stack-question">Does AI understand you correctly?</span>
+                </div>
+                <div class="stack-row discover-row">
+                    <div class="stack-left">
+                        <div class="stack-dot"></div>
+                        <span class="stack-name">Brand Discoverability</span>
+                    </div>
+                    <span class="stack-question">Can AI find and retrieve your content?</span>
+                    <span class="stack-badge foundation">Foundation</span>
+                </div>
+                <div class="stack-outcome">
+                    <div class="stack-outcome-box">Brand Visibility</div>
+                    <div class="stack-outcome-sub">Discoverability gets you found. Clarity gets you understood. Authority gets you considered. Trust gets you chosen.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
